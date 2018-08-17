@@ -1,0 +1,22 @@
+@import "../../static/css/common.scss";
+.content {
+	width: 1200px;
+	margin: 0 auto;
+	& .platform {
+		font-size: 16px;
+		margin: 22px 0 0;
+		& span {
+			color: $smallColor;
+			margin: 0 22px 0 0;
+			& b {
+				font-size: 36px;
+				color: $hoverColor;
+				font-weight: normal;
+			}
+		}
+		& a{
+			color: $smallColor;
+			margin:  0 0 0 80px;
+		}
+	}
+}

@@ -1,0 +1,34 @@
+.carousel {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	.ant-carousel {
+		.slick-slide {
+			float: left;
+		}
+		.slick-dots {
+			position: absolute;
+			bottom: 20px;
+			left: 50%;
+			margin: 0 0 0 -44px;
+			& li {
+				float: left;	
+				&.slick-active {
+					& button {
+						opacity: 1;
+					}
+				}		    
+			    & button {
+			    	background: #fff;
+				    opacity: .14;
+				    margin: 0 0 0 10px;
+			    	width: 44px;
+			    	height: 3px;
+			    	font-size: 0;
+			    	border: none;
+			    }
+			}
+		}
+	}
+	
+}
