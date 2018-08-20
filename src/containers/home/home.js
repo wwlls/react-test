@@ -27,8 +27,19 @@ class Home extends React.Component {
 	}
 
 	componentDidMount() {
-		Utils.postRequest('/home').then((res) => {
-	      console.log(res);
+		// Utils.getRequest('/mall/api/CRH-MALLB001', {
+	 //      adv_location: 'mall_index'
+	 //    }, 'm1002').then((res) => {
+	 //      this.setState({
+	 //        imageUrl: res.resultList.length > 0 ? res.resultList[0].image_url : ''
+	 //      });
+	 //    });
+
+		Utils.postRequest('carouselList').then((res) => {
+	      	console.log(res);
+	      	this.setState({
+	      		carouselList: res
+	      	})
 	    });
 		let investMoneyTotal = this.state.investMoneyTotal;
 		console.log(investMoneyTotal)

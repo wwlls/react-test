@@ -10,6 +10,7 @@ const Utils = {
     mockStr: 用来模拟数据时，区分不同请求
   */
   getRequest(url, params= {}, mockStr = '') {
+    alert(2)
     const urlOrigin = url.split('api/')[1];
     if (Config.mock) {
       const urlCode = url.match(/-(\w*)/)[1];
@@ -31,23 +32,22 @@ const Utils = {
     // if (this.getCookie("ZSSESSIONID")) {
     //   data['access_token'] = this.getCookie("ZSSESSIONID");
     // }
-    data = {access_token: "5cab30a0-04f4-44b4-a7c6-9937e6f5e833",
-                          device_type: 3,
-                          method: "login/checkMobile",
-                          mobile: "13666666666",
-                          nonce: "KNYpatKWHWdBErc5rzZywN8ant5wnR5E",
-                          sign: "876dd88122e6a376cd0906b73c14b081",
-                          sign_type: 1,
-                          timestamp: 1533199781284,
-                          version: "1.0"};
+    // data = {access_token: "5cab30a0-04f4-44b4-a7c6-9937e6f5e833",
+    //                       device_type: 3,
+    //                       method: "login/checkMobile",
+    //                       mobile: "13666666666",
+    //                       nonce: "KNYpatKWHWdBErc5rzZywN8ant5wnR5E",
+    //                       sign: "876dd88122e6a376cd0906b73c14b081",
+    //                       sign_type: 1,
+    //                       timestamp: 1533199781284,
+    //                       version: "1.0"};
     if (Config.mock) {
-      alert(1)
-      const urlCode = url.match(/-(\w*)/)[1];
-      console.log(urlCode)
+      //match(/-(\w*)/)[1];  
+      const urlCode = url;
+      console.log(url)
       // 返回一个数组[status, data, headers]
       this.mockAdapter.onPost(url).reply(200, mockData[urlCode]);
     }
-
     return axios.post(url, data);
   },
   setStorage(key, value) {

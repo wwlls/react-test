@@ -1,8 +1,8 @@
 const config = {
   	title: '测试',
   	port: 8081, // 部署环境的默认接口
-  	//api: 'http://test.huayingbaolicai.com:8006', // 外网测试环境
-  	mock: false,
+  	api: 'http://test.huayingbaolicai.com:8006', // 外网测试环境
+  	mock: true,
 	version : '1.0',
 	server_domain : '/api/',
 	app_key : '123655675',

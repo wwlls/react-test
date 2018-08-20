@@ -1,7 +1,9 @@
+import imgbanner1 from "../static/images/common/banner/banner1.jpg";
+import imgbanner2 from "../static/images/common/banner/banner2.jpg";
 const homeData = {
     carouselList: [
-        {img : '../static/images/common/banner/banner1.jpg' , id : 0 , url: 'index'} , 
-        {img : '../static/images/common/banner/banner2.jpg' , id : 1 , url: 'list'}
+        {img : imgbanner1 , id : 0 , url: 'index'} , 
+        {img : imgbanner2 , id : 1 , url: 'list'}
     ]
 }
 
@@ -86,4 +88,4 @@ const homeData = {
 //     }
 // };
 
-// module.exports = homeData;
+module.exports = homeData;
