@@ -14,9 +14,10 @@
 				font-weight: normal;
 			}
 		}
-		& a{
+		& a {
 			color: $smallColor;
-			margin:  0 0 0 80px;
+			vertical-align: bottom;
+			margin: 18px 0 0;
 		}
 	}
 }

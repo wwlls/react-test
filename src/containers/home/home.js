@@ -80,12 +80,14 @@ class Home extends React.Component {
 				<Header />
 				<Carousel carouselList={this.state.carouselList} />
 				<div className="content">
-					<div className="platform">
-						<span>累积交易额<b>{parseFloat(this.state.investMoneyTotal).toFixed(2)}</b>{this.state.unit}</span>
-						<span>累计注册数<b>{this.state.person}</b>人</span>
-						<span>为用户累计赚取收益<b>{parseFloat(this.state.totalProfit).toFixed(2)}</b>{this.state.unit}</span>
-						<span>安全运营时间<b>{this.state.day}</b>天</span>
-						<a href="">更多数据<Icon type="ouble-right" /></a>
+					<div className="platform clear">
+						<div className="floatL">
+							<span>累积交易额<b>{parseFloat(this.state.investMoneyTotal).toFixed(2)}</b>{this.state.unit}</span>
+							<span>累计注册数<b>{this.state.person}</b>人</span>
+							<span>为用户累计赚取收益<b>{parseFloat(this.state.totalProfit).toFixed(2)}</b>{this.state.unit}</span>
+							<span>安全运营时间<b>{this.state.day}</b>天</span>
+						</div>
+						<a className="floatR" href="">更多数据<Icon type="loading" /></a>
 					</div>
 				</div>
 				<div>

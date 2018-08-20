@@ -28,7 +28,8 @@ module.exports = {
               options: {
                 cacheDirectory: true,
                 presets: ['env', 'react'],
-                plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }], 'syntax-dynamic-import']
+                plugins: [['import', { libraryName: 'antd', style: 'css' }], 'syntax-dynamic-import']
+                //plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }], 'syntax-dynamic-import']
               }
             }]
           },
