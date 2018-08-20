@@ -87,7 +87,7 @@ class Home extends React.Component {
 							<span>为用户累计赚取收益<b>{parseFloat(this.state.totalProfit).toFixed(2)}</b>{this.state.unit}</span>
 							<span>安全运营时间<b>{this.state.day}</b>天</span>
 						</div>
-						<a className="floatR" href="">更多数据<Icon type="loading" /></a>
+						<a className="floatR" href="">更多数据<Icon type="double-right" /></a>
 					</div>
 				</div>
 				<div>

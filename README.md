@@ -18,3 +18,12 @@ node server		# 打包以后进行自测
 删除node_modules所有包命令 
 先下载 npm install rimraf -g
 接着 rimraf node_modules
+
+```
+node-sass安装失败，可用淘宝镜像下载
+
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+cnpm install node-sass --save-dev
+
+```

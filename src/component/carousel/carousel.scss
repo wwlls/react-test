@@ -1,3 +1,4 @@
+@import "../../static/css/common.scss";
 .carousel {
 	position: relative;
 	width: 100%;
@@ -30,5 +31,39 @@
 			}
 		}
 	}
-	
+	& .banner {
+		width: 1200px;
+		margin: 0 auto;
+		position: relative;
+	}
+	& .subBanner {
+		background-color: #fff;
+		width: 305px;
+		height: 257px;
+		padding: 24px 0;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		z-index: 8;
+		& p {
+			color: $blockColor;
+			&.one {
+				font-size: 18px;
+			}
+			&.two {
+				font-size: 36px;
+				color: $hoverColor;
+			}
+			&.three {
+				padding: 0 0 6px;
+				& img {
+					width: 100px;
+					height: 100px;
+				}
+			}
+			&.four {
+				font-size: 12px;
+			}
+		}
+	}
 }
