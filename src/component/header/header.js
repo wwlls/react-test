@@ -2,10 +2,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Affix } from 'antd';
-import imgPhone from "../../static/images/common/header/phone.png";
-import imgWx from "../../static/images/common/header/wx.png";
-import imgQq from "../../static/images/common/header/qq.png";
-import imgApp from "../../static/images/common/header/app.png";
 import imgLogo from "../../static/images/common/header/logo.png";
 import imgHover1 from "../../static/images/common/header/hover1.png";
 import imgHover2 from "../../static/images/common/header/hover2.png";
@@ -73,16 +69,16 @@ export default class Header extends React.Component {
                 <nav className="loginbar">
                     <div className="subLoginbar">
                         <div className="subLoginbarLeft">
-                            <img className="phone" src={imgPhone} />
+                            <b className="phone"></b>
                             客服热线： 400-1190-717（工作时间 09:00-21:00）
-                            <img onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)} source='wx' className="wx" src={imgWx} />
-                            <img onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)}  source='qq' className="qq" src={imgQq} />
+                            <b className="weChat" onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)} source='wx'></b>
+                            <b className="qq" onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)}  source='qq'></b>
                         </div>
                         <div className="subLoginbarRight">
                             <a href="javascript:;">注册</a>
                             <i>/</i>
                             <a href="javascript:;">登录</a>
-                            <img onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)} source='app' src={imgApp} />
+                            <b className="app" onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)} source='app'></b>
                             <span className="one">手机客户端</span>
                             <span className="two">市场有风险，出借需谨慎</span>
                         </div>
