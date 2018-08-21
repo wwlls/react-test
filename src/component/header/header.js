@@ -67,7 +67,7 @@ export default class Header extends React.Component {
         return (
             <div className="header" onMouseLeave={this.handleMouseOut.bind(this)} source='news'>
                 <nav className="loginbar">
-                    <div className="subLoginbar">
+                    <div className="subLoginbar layout">
                         <div className="subLoginbarLeft">
                             <b className="phone"></b>
                             客服热线： 400-1190-717（工作时间 09:00-21:00）
@@ -88,7 +88,7 @@ export default class Header extends React.Component {
                     </div>
                 </nav>
                 <Affix offsetTop={this.state.top}>
-                    <div className="nav">
+                    <div className="nav layout">
                         <div className="navClear">
                             <div className="logo">
                                 <img src={imgLogo} />

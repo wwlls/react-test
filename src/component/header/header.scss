@@ -7,8 +7,6 @@
 	.subLoginbar {
 		font-size: 14px;
 		color: $smallColor;
-		width: 1200px;
-		margin: 0 auto;
 		position: relative;
 		.subLoginbarLeft {
 			float: left;
@@ -97,8 +95,6 @@
 	z-index: 9;
 }
 .nav {
-	width: 1200px;
-	margin: 0 auto;
 	height: 80px;
 	.navClear {
 		display: inline-block;

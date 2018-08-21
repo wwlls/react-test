@@ -6,6 +6,10 @@
 	.ant-carousel {
 		.slick-slide {
 			float: left;
+			& img {
+				width: 100%;
+				height: 100%;
+			}
 		}
 		.slick-dots {
 			position: absolute;
@@ -32,8 +36,6 @@
 		}
 	}
 	& .banner {
-		width: 1200px;
-		margin: 0 auto;
 		position: relative;
 	}
 	& .subBanner {
@@ -43,7 +45,7 @@
 		padding: 24px 0;
 		position: absolute;
 		right: 0;
-		bottom: 0;
+		bottom: 5px;
 		z-index: 8;
 		& p {
 			color: $blockColor;
@@ -57,8 +59,8 @@
 			&.three {
 				padding: 0 0 6px;
 				& img {
-					width: 100px;
-					height: 100px;
+					width: 120px;
+					height: 120px;
 				}
 			}
 			&.four {

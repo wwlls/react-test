@@ -2,11 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Utils from '../../utils';
-import { Icon } from 'antd';
+import CountUp from 'react-countup';
+import { Icon, Row, Col } from 'antd';
 import Header from '../../component/header/header';
 import Carousel from '../../component/carousel/carousel';
+import BackTop from '../../component/backTop/backTop';
 import imgbanner1 from "../../static/images/common/banner/banner1.jpg";
 import imgbanner2 from "../../static/images/common/banner/banner2.jpg";
+import info1 from "../../static/images/home/info1.png";
+import info2 from "../../static/images/home/info2.png";
+import info3 from "../../static/images/home/info3.png";
+import info4 from "../../static/images/home/info4.png";
 import "./home.scss";
 
 class Home extends React.Component {
@@ -22,7 +28,7 @@ class Home extends React.Component {
     		unit: '元',
     		person: 12200,
     		totalProfit: 100000,	
-    		day: '',
+    		day: 365,
 	    };
 	}
 
@@ -79,16 +85,63 @@ class Home extends React.Component {
 			<div className="home">
 				<Header />
 				<Carousel carouselList={this.state.carouselList} />
-				<div className="content">
+				<div className="content layout">
 					<div className="platform clear">
 						<div className="floatL">
-							<span>累积交易额<b>{parseFloat(this.state.investMoneyTotal).toFixed(2)}</b>{this.state.unit}</span>
-							<span>累计注册数<b>{this.state.person}</b>人</span>
-							<span>为用户累计赚取收益<b>{parseFloat(this.state.totalProfit).toFixed(2)}</b>{this.state.unit}</span>
-							<span>安全运营时间<b>{this.state.day}</b>天</span>
+							<ul className="clear">
+								<li className="floatL">
+									累积交易额
+									<CountUp start={0} end={parseFloat(this.state.investMoneyTotal)} decimals={2} duration={4}>
+									</CountUp>
+									{this.state.unit}
+								</li>
+								<li className="floatL">
+									累计注册数
+									<CountUp start={0} end={parseFloat(this.state.person)} duration={4}>
+									</CountUp>
+									人
+								</li>
+								<li className="floatL">
+									为用户累计赚取收益
+									<CountUp start={0} end={parseFloat(this.state.totalProfit)} decimals={2} duration={4}>
+									</CountUp>
+									{this.state.unit}
+								</li>
+								<li className="floatL">
+									安全运营时间
+									<CountUp start={0} end={parseFloat(this.state.day)} duration={4}>
+									</CountUp>
+									天
+								</li>
+							</ul>
 						</div>
 						<a className="floatR" href="">更多数据<Icon type="double-right" /></a>
 					</div>
+				</div>
+				<div className="line"></div>
+				<div className="info layout textC">
+					<Row gutter={16}>
+	                    <Col md={6}>
+	                    	<img src={info1} />
+	                        <h3>银行存管</h3>
+	                        <p>所有资金均在银行完成</p>
+	                    </Col>
+	                    <Col md={6}>
+	                    	<img src={info2} />
+	                        <h3>普惠金融</h3>
+	                        <p>专注小额分散的消费金融</p>
+	                    </Col>
+	                    <Col md={6}>
+	                    	<img src={info3} />
+	                        <h3>专业风控</h3>
+	                        <p>完善的风控体系和贷后管理</p>
+	                    </Col>
+	                    <Col md={6}>
+	                    	<img src={info4} />
+	                        <h3>实力雄厚</h3>
+	                        <p>支氏集团控股</p>
+	                    </Col>
+	                </Row>
 				</div>
 				<div>
 					<ul>
@@ -142,6 +195,8 @@ class Home extends React.Component {
 						<li>1</li>
 					</ul>
 				</div>
+
+				<BackTop />
 			</div>
 		)
 	}

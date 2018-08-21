@@ -31,7 +31,7 @@ export default class Banner extends React.Component {
                         })
                     }  
                 </Carousel>
-                <div className="banner">
+                <div className="banner layout">
                     <div className="subBanner textC">
                         <p className="one">借贷双方约定利率</p>
                         <p className="two">8.5%-12.0%</p>
