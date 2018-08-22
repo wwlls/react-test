@@ -1,0 +1,42 @@
+@import "../../static/css/common.scss";
+.subNav {
+	float: right;
+	& ul{
+		display: inline-block;
+		border-bottom: none;
+		box-shadow: none;
+		& li {
+			float: left;
+			padding: 0 12px;
+			margin: 0 0 0 20px;
+			position: relative;
+			& a {
+				font-size: 18px;
+				color: $blockColor !important;
+				height: 90px;
+				line-height: 80px;
+				display: inline-block;
+			}
+			&.ant-menu-item-selected {
+				color: $hoverColor;
+				text-decoration: none;
+				height: 80px;
+				border-bottom: 4px solid $hoverColor !important;
+				& a {
+					color: $hoverColor !important;
+				}
+			}
+			&.ant-menu-item-active {
+				& a {
+					height: 80px;
+					border-bottom: 4px solid $hoverColor !important;
+					color: $hoverColor !important;
+					&:hover {
+						color: $hoverColor;
+					}	
+				}
+			}
+			
+		}
+	}
+}

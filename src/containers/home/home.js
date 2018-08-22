@@ -123,8 +123,8 @@ class Home extends React.Component {
 					<Row gutter={16}>
 	                    <Col md={6}>
 	                    	<img src={info1} />
-	                        <h3>银行存管</h3>
-	                        <p>所有资金均在银行完成</p>
+	                        <h3>实时透明</h3>
+	                        <p>全面信息披露制度</p>
 	                    </Col>
 	                    <Col md={6}>
 	                    	<img src={info2} />

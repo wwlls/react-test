@@ -18,6 +18,7 @@ class Lend extends React.Component {
 		return (
 			<div className="home">
 				<Header />
+				1
 			</div>
 		)
 	}

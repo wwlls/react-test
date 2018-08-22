@@ -1,0 +1,18 @@
+@import "../../static/css/common.scss";
+.ant-dropdown-menu {
+	background: none;
+	box-shadow: none;
+	padding: 0;
+	& .ant-dropdown-menu-item {
+		padding: 0;
+		& img {
+			margin: 0 0 0 -55px;
+			&.hover3 {
+				margin: 0 0 0 -65px;
+			}
+		}
+	}
+	& .ant-dropdown-menu-item-active {
+		background: none;
+	}
+}
