@@ -20,6 +20,11 @@ export default class nav extends React.Component {
             current: e.key,
         });
     }
+
+    componentDidMount() {
+
+    }
+    
     render() {
         return (
             <Menu

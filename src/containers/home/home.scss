@@ -25,7 +25,32 @@
 	height: 1px;
 	margin: 10px 0 30px;
 }
-.info {
+.hot {
+	& b {
+		background-image: url(../../static/images/home/info.png);
+    	background-repeat: no-repeat;
+    	display: inline-block;
+    	&.info1 {
+    		width: 54px; 
+    		height: 59px;
+    		background-position: -87px -89px;
+    	}
+    	&.info2 {
+    		width: 64px; 
+    		height: 59px;
+    		background-position: -10px -10px;
+    	}
+    	&.info3 {
+    		width: 57px; 
+    		height: 59px;
+    		background-position: -10px -89px;
+    	}
+    	&.info4 {
+    		width: 64px; 
+    		height: 59px;
+    		background-position: -94px -10px;
+    	}
+	}
 	& h3 {
 		font-size: 22px;
 		color: $bigColor;
@@ -33,5 +58,25 @@
 	& p {
 		font-size: 16px;
 		color: $smallColor;
+	}
+}
+.downLoad {
+	position: relative;
+	& img {
+		width: 100%;
+	}
+	& a {
+		position: absolute;
+		width: 100px;
+		height: 44px;
+		display: inline-block;
+		&.android  {
+			top: 62%;
+			right: 40%;
+		}
+		&.ios {
+			top: 62%;
+			right: 32%;
+		}
 	}
 }

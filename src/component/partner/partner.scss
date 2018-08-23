@@ -1,0 +1,17 @@
+@import "../../static/css/common.scss";
+.partner {
+	width: 1162px;
+	height: 162px;
+	padding: 18px;
+	border: 1px solid $borderColor;
+	& h5 {
+		font-size: 18px;
+		color: $bigColor;
+		& img {
+			width: 26px;
+			height: 22px;
+			vertical-align: middle;
+			margin: -5px 10px 0 0;
+		}
+	}
+}

@@ -31,19 +31,19 @@
 			cursor: default;
 		}
 	}
-	& .app {
+	& .appTop {
 		background-position: 0 0;
 	    &:hover {
 	    	background-position: 0 -40px;
 	    }
 	}
-	& .wechat {
+	& .wechatTop {
 		background-position: 0 -80px;
 	    &:hover {
 	    	background-position: 0 -120px;
 	    }
 	}
-	& .custom {
+	& .customTop {
 		background-position: 0 -160px;
 	    &:hover {
 	    	background-position: 0 -200px;

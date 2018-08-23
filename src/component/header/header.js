@@ -55,7 +55,7 @@ export default class Header extends React.Component {
                     <div className="nav layout">
                         <div className="navClear">
                             <div className="logo">
-                                <img src={imgLogo} />
+                                <img src={imgLogo} alt="logo" />
                             </div>
                             <div className="subNav">
                                 <ul>
