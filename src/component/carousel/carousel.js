@@ -9,7 +9,6 @@ export default class Banner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
         };
     }
 
@@ -18,11 +17,10 @@ export default class Banner extends React.Component {
     }
 
     render() {
-        const { carouselList } = this.props
-        console.log(carouselList)
+        const { carouselList } = this.props;
         return (
-            <div className="carousel">
-                <Carousel dots autoplay>
+            <div className={"carousel " + this.props.carousel}>
+                <Carousel dots>
                     {
                         carouselList.map(function (item) {
                             return (
@@ -35,7 +33,7 @@ export default class Banner extends React.Component {
                         })
                     }  
                 </Carousel>
-                <div className="banner layout">
+                <div className="banner layout" style={{display:this.props.open}}>
                     <div className="subBanner textC">
                         <p className="one">借贷双方约定利率</p>
                         <p className="two">8.5%-12.0%</p>

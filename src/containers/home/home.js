@@ -83,7 +83,7 @@ class Home extends React.Component {
 		return (
 			<div className="home">
 				<Header />
-				<Carousel carouselList={this.state.carouselList} />
+				<Carousel carouselList={this.state.carouselList} carousel="indexList" open="block" />
 				<div className="content layout">
 					<div className="platform clear">
 						<div className="floatL">

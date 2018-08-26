@@ -1,17 +1,17 @@
 @import "../../static/css/common.scss";
-.carousel {
+.indexList {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
-	.ant-carousel {
-		.slick-slide {
+	& .ant-carousel {
+		& .slick-slide {
 			float: left;
 			& img {
 				width: 100%;
 				height: 100%;
 			}
 		}
-		.slick-dots {
+		& .slick-dots {
 			position: absolute;
 			bottom: 20px;
 			left: 50%;
@@ -65,6 +65,48 @@
 			}
 			&.four {
 				font-size: 12px;
+			}
+		}
+	}
+}
+.partnerList {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	& .ant-carousel {
+		& .slick-track {
+			width: 220px;
+			height: 100px;
+			float: left;
+			& .slick-slide {
+				float: left;
+				& img {
+					vertical-align: middle;
+					
+				}
+			}
+			.slick-dots {
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				margin: 0 0 0 -44px;
+				& li {
+					float: left;	
+					&.slick-active {
+						& button {
+							opacity: 1;
+						}
+					}		    
+				    & button {
+				    	background: #fff;
+					    opacity: .14;
+					    margin: 0 0 0 10px;
+				    	width: 44px;
+				    	height: 3px;
+				    	font-size: 0;
+				    	border: none;
+				    }
+				}
 			}
 		}
 	}
