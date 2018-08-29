@@ -16,20 +16,6 @@
 		-ms-transition: background-position .3s;
 		-o-moz-transition: background-position .3s;
 		-webkit-moz-transition: background-position .3s;
-		& .backTopApp {
-			position: absolute;
-			bottom: 0;
-			left: -153px;
-			width: 150px;
-			height: 150px;
-			border: 1px solid #eeeeee;
-			border-radius: 1px;
-			background: #fff;
-			color: #000;
-			text-align: center;
-			font-size: 12px;
-			cursor: default;
-		}
 	}
 	& .appTop {
 		background-position: 0 0;
@@ -54,5 +40,27 @@
 	    &:hover {
 	    	background-position: 0 -280px;
 	    }
+	}
+}
+.ant-tooltip-placement-left .ant-tooltip-arrow, .ant-tooltip-placement-leftTop .ant-tooltip-arrow, .ant-tooltip-placement-leftBottom .ant-tooltip-arrow {
+	border: none;
+}
+.ant-tooltip-inner {
+	background: none;
+	& img {
+		width: 130px;
+		height: 130px;
+	}
+	& ul li {
+		margin: 0 0 20px;
+		& p {
+			color: #333;
+			text-align: left;
+		}
+	}
+	& p {
+		font-size: 12px;
+		color: #000;
+		text-align: center;
 	}
 }

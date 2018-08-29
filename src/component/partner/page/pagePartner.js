@@ -1,106 +1,101 @@
 import React from "react";
 
-export default class partner extends React.Component {
+export default class pagePartner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            interval:3000,
-              autoPlay:true,
-              defaultActiveIndex:0,
-              direction:'right'
+            interval:100,
+            autoPlay:true,
+            defaultActiveIndex:0,
+            direction:'right',
+            boxWidth: '',
+            outerWidth: '220',
         };
     }
 
-    getInitialState(){
-        return{
-          activeIndex:this.props.defaultActiveIndex?this.props.defaultActiveIndex:0,
-          direction:this.props.direction?this.props.direction:'right'
-        }
-      }
+    playRight(indexIn) {
+        let childrenLength  = this.props.children.length;
+        let outerWidth = this.state.outerWidth;
+        this.setState({
+            boxWidth: outerWidth * childrenLength + 'px',
+            thisWidth: '-' + outerWidth * indexIn + 'px',
+        })
+        this.setState({
+            defaultActiveIndex: indexIn
+        })
+    }
+    playLeft(indexIn) {
+        console.log(indexIn)
+        let childrenLength  = this.props.children.length;
+        console.log(childrenLength)
+        let outerWidth = this.state.outerWidth;
+        console.log(outerWidth)
+        this.setState({
+            boxWidth: outerWidth * childrenLength + 'px',
+            thisWidth: '-' + outerWidth * indexIn + 'px',
+        })
+        this.setState({
+            defaultActiveIndex: indexIn
+        })
+    }
+
+    // autoPlay(){
+    //     if(this.state.autoPlay){
+    //         let oldIndex = this.state.defaultActiveIndex;
+    //         alert(oldIndex)
+    //         if(this.state.direction === "right"){
+    //             this.timeOuter = setInterval(this.playRight(oldIndex+1),100);
+    //         }else if(this.state.direction === "left"){
+    //             this.timeOuter = setInterval(this.playLeft(oldIndex-1),this.state.interval);
+    //         }
+    //     }
+    // }
 
     componentDidMount() {
-        this.autoPlay();
+        let oldIndex = this.state.defaultActiveIndex;
+            if(this.state.direction === "right"){
+                this.timeOuter = setInterval(this.playRight(oldIndex+1),this.state.interval);
+            }else if(this.state.direction === "left"){
+                this.timeOuter = setInterval(this.playLeft(oldIndex-1),this.state.interval);
+            }
+    }
+
+    left() {
+        clearInterval(this.timeOuter);
+        let oldIndex = this.state.defaultActiveIndex;
+        this.playLeft(oldIndex-1);
+        //this.autoPlay();
+    }
+    right() {
+        clearInterval(this.timeOuter);
+        let oldIndex = this.state.defaultActiveIndex;
+        console.log(oldIndex)
+        this.playRight(oldIndex+1);
+        //this.autoPlay();
     }
     
-    componentWillUnmount(){
-        clearInterval(this.timeOuter);
-      }
-      autoPlay(){
-        if(this.props.autoPlay){
-          if(this.props.direction==="right"){
-            this.timeOuter=setInterval(this.playRight,this.props.interval);
-          }else if(this.props.direction==="left"){
-            this.timeOuter=setInterval(this.playLeft,this.props.interval);
-          }
-        }
-      }
-      playRight(indexIn){
-          let index=indexIn?indexIn:this.state.activeIndex+1;
-          console.log(index);
-          if(index>this.props.number-1){
-            index=0;
-          }
-          this.setState({
-            activeIndex:index
-          })
-      }
-      playLeft(indexIn){
-          let index=indexIn?indexIn:this.state.activeIndex-1;
-          console.log(index);
-          if(index<0){
-            index=this.props.number-1;
-          }
-          this.setState({
-            activeIndex:index
-          })
-      }
-      position(){
-        switch (this.state.activeIndex){
-          case 0:return "onePosition" ;
-          case 1:return "twoPosition" ;
-          case 2:return "therePosition" ;
-          case 3:return "fourPosition";
-        }
-      }
-      left() {
-       clearInterval(this.timeOuter);
-        let oldIndex=this.props.activeIndex;
-        this.playLeft(oldIndex+1);
-        this.autoPlay();
-      }
-      right(){
-        clearInterval(this.timeOuter);
-        let oldIndex=this.props.activeIndex;
-        this.playRight(oldIndex-1);
-        this.autoPlay();
-      }
-
     render() {
-    	let{
-            interval,
-            autoPlay,
-            activeIndex,
-            defaultActiveIndex,
-            direction,
-            number,
-            boxStyle
-        } = this.props;
+        const box = {
+            width : this.state.boxWidth,
+            marginLeft : this.state.thisWidth,
+        }
         return (                
-        	<div  className={boxStyle} >
-                <span className="leftIcon" onClick={this.left}>left</span>
-                <span className="rightIcon" onClick={this.right}>right</span>
-                    <ul className={this.position()}>
-                    	{
-					        this.props.children.map((item,index) =>{
-					            return (
-					                <li className="boxStyleLi" key={index}>
-					                    <img src={item.img} alt="partner" />
-					                </li>
-					            )
-					        })
-					    }
-
-                    </ul>
+        	<div className="pagePartner">
+                <span className="leftIcon pagePartnerIcon" onClick={this.left.bind(this)}></span>
+                <span className="rightIcon pagePartnerIcon" onClick={this.right.bind(this)}></span>
+                <ul className="pagePartnerUl clear" style={box}>
+                	{
+				        this.props.children.map((item,index) =>{
+				            return (
+				                <li className="floatL" key={index} style={{width : this.state.outerWidth + 'px'}}>
+                                    <div className="pagePartnerDiv">
+				                        <img src={item.img} alt="partner" />
+                                    </div>
+				                </li>
+				            )
+				        })
+				    }
+                </ul>
             </div>
         );
     }

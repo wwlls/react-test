@@ -19,7 +19,7 @@ export default class partner extends React.Component {
         clearInterval(this.timer);
         this.state.stop = false;
         this.timer = setInterval(function() {
-            var count = this.state.count;
+            let count = this.state.count;
             this.state.liked = false;
             count -= 1;
             this.setState({

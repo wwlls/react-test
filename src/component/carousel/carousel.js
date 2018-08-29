@@ -1,7 +1,7 @@
 /** 走马灯 **/
 import React from "react";
 import { Carousel } from 'antd';
-import download from "../../static/images/common/download/app.png";
+import download from "../../static/images/common/app.png";
 import "./carousel.scss";
 
 

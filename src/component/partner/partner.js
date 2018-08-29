@@ -35,7 +35,7 @@ export default class partner extends React.Component {
         return (
             <div className="partner layout">
                	<h5><img src={partnerIcon} alt="合作单位" />合作单位</h5>
-               <PagePartner children={this.state.children} interval={100} number={4} boxStyle="pagePartner" interval={4000} />
+               <PagePartner children={this.state.children} />
             </div>
         );
     }

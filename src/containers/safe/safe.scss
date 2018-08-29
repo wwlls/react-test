@@ -1,0 +1,127 @@
+@import "../../static/css/common.scss";
+.ant-tabs-bar {
+	border-bottom: 1px solid $borderColor;
+}
+.ant-tabs-nav {
+	width: 100%;
+	& .ant-tabs-ink-bar {
+		background: none;
+	}
+	& .ant-tabs-tab {
+		font-size: 18px;
+		color: $bigColor;
+		width: 25%;
+		text-align: center;
+		padding: 30px 0;
+		margin: 0;
+		&:hover {
+			color: $hoverColor;
+		}
+	}
+	& .ant-tabs-tab-active {
+		font-size: 18px;
+		color: $hoverColor;
+	}
+}
+.page {
+	margin: 60px 0 0;
+	& .column {
+		margin: 0 0 45px;
+		& h4 {
+			font-size: 26px;
+			color: $bigColor;
+		}
+		& h5 {
+			font-size: 22px;
+			color: $bigColor;
+			margin: 0 0 60px;
+		}
+		& p {
+			font-size: 18px;
+			color: $bigColor;
+			line-height: 30px;
+			& span {
+				color: $hrefColor;
+			}
+			& i {
+				background-image: url(../../static/images/safe/smallIcon.png);
+		    	background-repeat: no-repeat;
+		    	width: 27px;
+		    	height: 24px;
+		    	display: inline-block;
+		    	vertical-align: middle;
+		    	margin: -6px 16px 0 0;
+			}
+			& b {
+				font-size: 22px;
+				font-weight: normal;
+			}
+			&.size {
+				margin: 40px 0 0;
+			}
+		}
+		& img {
+			&.safeImg1 {
+				width: 934px;
+			}
+			&.safeImg2 {
+				width: 722px;
+				margin: 60px 0 0;
+			}
+			&.safeImg3 {
+				width: 918px;
+				margin: 60px 0 0;
+			}
+			&.safeImg4 {
+				width: 832px;
+				margin: 60px 0 0;
+			}
+			&.safeImg5 {
+				width: 958px;
+				margin: 60px 0 0;
+			}
+			&.safeImg6 {
+				width: 1001px;
+				margin: 60px 0 0;
+			}
+		}
+		& .ant-col-md-12 {
+			margin: 0 0 94px;
+			& b {
+				background-image: url(../../static/images/safe/imgIcon.png);
+		    	background-repeat: no-repeat;
+		    	display: inline-block;
+		    	margin: 0 0 44px;
+		    	height: 140px;
+		    	width: 127px;
+		    	vertical-align: middle;
+		    	&.info1 {
+		    		 width: 129px; 
+		    		 height: 128px;
+		    		 background-position: -10px -10px;
+		    	}
+		    	&.info2 {
+		    		 background-position: -317px -10px;
+		    	}
+		    	&.info3 {
+		    		 width: 136px; 
+		    		 height: 115px;
+		    		 background-position: -10px -158px;
+		    	}
+		    	&.info4 {
+		    		 width: 138px; 
+		    		 height: 116px;
+		    		 background-position: -159px -10px;
+		    	}
+			}
+			& p {
+				font-size: 14px;
+				color: $smallColor;
+				line-height: 18px;
+			}
+		}
+		& .bottom {
+			margin: 0;
+		}
+	}
+}

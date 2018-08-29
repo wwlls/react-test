@@ -9,9 +9,9 @@ import Carousel from '../../component/carousel/carousel';
 import Partner from '../../component/partner/partner';
 import Footer from '../../component/footer/footer';
 import BackTop from '../../component/backTop/backTop';
-import imgbanner1 from "../../static/images/common/banner/banner1.jpg";
-import imgbanner2 from "../../static/images/common/banner/banner2.jpg";
-import downLoadApp from "../../static/images/home/downLoad.png";
+import imgbanner1 from '../../static/images/common/banner/banner1.jpg';
+import imgbanner2 from '../../static/images/common/banner/banner2.jpg';
+import downLoadApp from '../../static/images/home/downLoad.png';
 import "./home.scss";
 
 class Home extends React.Component {
@@ -81,7 +81,7 @@ class Home extends React.Component {
 
 	render() {
 		return (
-			<div className="home">
+			<div className="container">
 				<Header />
 				<Carousel carouselList={this.state.carouselList} carousel="indexList" open="block" />
 				<div className="content layout">
