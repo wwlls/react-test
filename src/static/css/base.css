@@ -75,6 +75,10 @@ h1,h2,h3,h4,h5,p {
     width: 1200px;
     margin: 0 auto;
 }
+.tabContant {
+    width: 1000px;
+    margin: 0 auto;
+}
 @keyframes rotate {
     0%      {transform: rotate(0deg);left:0px;}
     100%    {transform: rotate(360deg);left:0px;}

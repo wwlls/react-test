@@ -25,7 +25,8 @@
 	}
 }
 .page {
-	margin: 60px 0 0;
+	width: 1000px;
+	margin: 60px auto 0;
 	& .column {
 		margin: 0 0 45px;
 		& h4 {
@@ -197,7 +198,7 @@
 			margin: 0;
 		}
 		& ul {
-			margin: 0 180px;
+			margin: 0 110px;
 			& li {
 				height: 360px;
 				overflow: hidden;
@@ -226,5 +227,12 @@
 				}
 			}
 		}
+	}
+	& .aboutData {
+		width: 998px;
+		margin: 15px 0 0;
+	    padding: 30px 0;
+	    border: 1px solid $borderColor;
+	    display: inline-block;
 	}
 }
