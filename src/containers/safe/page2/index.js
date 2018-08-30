@@ -1,10 +1,15 @@
 import React from "react";
-
+import safeImg3 from '../../../static/images/safe/img3.png';
+import safeImg4 from '../../../static/images/safe/img4.png';
+import safeImg5 from '../../../static/images/safe/img5.png';
 
 export default class page1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            safeImg3: safeImg3,
+            safeImg4: safeImg4,
+            safeImg5: safeImg5,
         };
     }
 
@@ -19,19 +24,19 @@ export default class page1 extends React.Component {
                     <p>
                         <i></i><b>借款审核</b> — 严格的贷前审核流程，从源头控制贷款风险
                     </p>
-                    <img className="safeImg3" src={this.props.safeImg3} alt="风险管理" />
+                    <img className="safeImg3" src={this.state.safeImg3} alt="风险管理" />
                 </section>
                 <section className="column">
                     <p>
                         <i></i><b>小额分散</b> — 小额贷款、出借分散，极大降低出借风险
                     </p>
-                    <img className="safeImg4" src={this.props.safeImg4} alt="风险管理" />
+                    <img className="safeImg4" src={this.state.safeImg4} alt="风险管理" />
                 </section>
                 <section className="column">
                     <p>
                         <i></i><b>违约风险控制</b> — 贷后维护，逾期还款催收机制
                     </p>
-                    <img className="safeImg5" src={this.props.safeImg5} alt="风险管理" />
+                    <img className="safeImg5" src={this.state.safeImg5} alt="风险管理" />
                 </section>
                 <section className="column">
                     <p>

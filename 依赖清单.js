@@ -20,29 +20,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-import": "^1.8.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "cross-env": "^5.2.0",
-    "css-loader": "^0.28.11",
-    "express-http-proxy": "^1.2.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.9.1",
-    "postcss-pxtorem": "^4.0.1",
-    "sass-loader": "^7.0.3",
-    "style-loader": "^0.21.0",
-    "svg-sprite-loader": "^3.8.0",
-    "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^3.0.0", // Webpack 核心
-    "webpack-dev-server": "^2.11.2" // Webpack小型服务器（server.js中用这个来搭建开发环境所需的服务）
-  },
   "dependencies": {
     "antd-mobile": "^2.2.2",
     "autoprefixer": "^8.6.4",
@@ -60,6 +37,7 @@
     "precss": "^3.1.2",
     "qs": "^6.5.2",
     "react": "^16.4.1",
+    "react-bmap": "^1.0.80", //依赖百度地图
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
@@ -68,5 +46,29 @@
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack-cli": "^3.0.8"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-import": "^1.8.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.2.0",
+    "css-loader": "^0.28.11",
+    "express-http-proxy": "^1.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.1",
+    "postcss-pxtorem": "^4.0.1",
+    "react-countup": "^4.0.0-alpha.6",  //数字从0滚动
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "svg-sprite-loader": "^3.8.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^3.0.0", // Webpack 核心
+    "webpack-dev-server": "^2.11.2" // Webpack小型服务器（server.js中用这个来搭建开发环境所需的服务）
   }
 }

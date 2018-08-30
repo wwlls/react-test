@@ -29,6 +29,9 @@ export default class Header extends React.Component {
         })
  
     }  
+    
+    componentDidMount() {
+    }
 
     render() {
         return (
@@ -63,32 +66,32 @@ export default class Header extends React.Component {
                                     <li><NavLink to="/lend">我要出借</NavLink></li>
                                     <li><NavLink to="/safe">安全保障</NavLink></li>
                                     <li onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)} source='news'>
-                                        <NavLink to="/information">信息披露</NavLink>
+                                        <NavLink to="/about">信息披露</NavLink>
                                         <div className="selectNav" style={{display:this.state.open}}>
                                             <ol>
                                                 <li>
-                                                    <a href="#/list">关于华赢宝</a>
+                                                    <a href="#/about?id=1">关于华赢宝</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:;">团队介绍</a>
+                                                    <a href="#/about?id=2">团队介绍</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:;">业务介绍</a>
+                                                    <a href="#/about?id=3">业务介绍</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:;">运营数据</a>
+                                                    <a href="#/about?id=4">运营数据</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:;">媒体报道</a>
+                                                    <a href="#/about?id=5">媒体报道</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:;">公司动态</a>
+                                                    <a href="#/about?id=6">公司动态</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:;">从业机构信息</a>
+                                                    <a href="#/about?id=7">从业机构信息</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:;">相关法律法规披露</a>
+                                                    <a href="#/about?id=8">相关法律法规披露</a>
                                                 </li>
                                             </ol>
                                         </div>

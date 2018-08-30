@@ -1,10 +1,14 @@
 import React from "react";
 import { Icon, Row, Col } from 'antd';
+import safeImg1 from '../../../static/images/safe/img1.png';
+import safeImg2 from '../../../static/images/safe/img2.png';
 
 export default class page1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            safeImg1: safeImg1,
+            safeImg2: safeImg2,
         };
     }
 
@@ -22,28 +26,28 @@ export default class page1 extends React.Component {
                 </section>
                 <section className="column textC">
                     <h5 className="textL">银行存管流程图</h5>
-                    <img className="safeImg1" src={this.props.safeImg1} alt="银行存管" />
+                    <img className="safeImg1" src={this.state.safeImg1} alt="银行存管" />
                 </section>
                 <section className="column textC">
                     <h5>为什么要接银行存管？</h5>
                     <Row gutter={0}>
                         <Col md={12}>
-                            <b className="info1"></b>
+                            <b className="bank info1"></b>
                             <p>对客户身份及交易授权进行认证</p>
                             <p>防止网贷机构非法挪用客户资金</p>
                         </Col>
                         <Col md={12}>
-                            <b className="info2"></b>
+                            <b className="bank info2"></b>
                             <p>对客户身份及交易授权进行认证</p>
                             <p>防止网贷机构非法挪用客户资金</p>
                         </Col>
                         <Col md={12} className="bottom">
-                            <b className="info3"></b>
+                            <b className="bank info3"></b>
                             <p>对客户身份及交易授权进行认证</p>
                             <p>防止网贷机构非法挪用客户资金</p>
                         </Col>
                         <Col md={12} className="bottom">
-                            <b className="info4"></b>
+                            <b className="bank info4"></b>
                             <p>对客户身份及交易授权进行认证</p>
                             <p>防止网贷机构非法挪用客户资金</p>
                         </Col>
@@ -54,7 +58,7 @@ export default class page1 extends React.Component {
                     <p className="textL">
                         银行全程存管用户资金，提升资金安全，避免了平台跑路、资金池以及资金往来不透明的风险。
                     </p>
-                    <img className="safeImg2" src={this.props.safeImg2} alt="资金存管优势" />
+                    <img className="safeImg2" src={this.state.safeImg2} alt="资金存管优势" />
                 </section>
                 <section className="column">
                     <h5 className="textC">什么是银行存管？</h5>

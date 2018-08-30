@@ -5,6 +5,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Home from '../containers/home/home';
 import Lend from '../containers/lend/lend';
 import Safe from '../containers/safe/safe';
+import About from '../containers/about/about';
 
 
 //test
@@ -23,6 +24,7 @@ class RouterMap extends Component {
                 <Route path="/home" exact component={ Home } />
                 <Route path="/lend" exact component={ Lend } />
                 <Route path="/safe" exact component={ Safe } />
+                <Route path="/about" exact component={ About } />
 
                 <Route path="/index" exact component={ Index } />
                 <Route path="/member" exact component={ Member } />

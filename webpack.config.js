@@ -102,6 +102,9 @@ module.exports = {
     resolve: {
       extensions: [".js", ".jsx", ".less", ".css", ".scss"] //后缀名自动补全
     },
+    externals:{
+        'BMap':'BMap',   //百度地图引入
+    },
     devServer: {
         historyApiFallback: true,
         inline: true, //当源文件改变时会自动刷新页面

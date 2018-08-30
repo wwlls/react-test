@@ -1,14 +1,21 @@
 import React from "react";
-
+import Map from '../../../component/map/map';
+import safeImg6 from '../../../static/images/safe/img6.jpg';
+import safeImg7 from '../../../static/images/safe/img7.png';
+import safeImg9 from '../../../static/images/safe/img9.jpg';
 
 export default class page1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            safeImg6: safeImg6,
+            safeImg7: safeImg7,
+            safeImg9: safeImg9,
         };
     }
 
     componentDidMount() {
+        
     }
     
     render() {
@@ -37,7 +44,44 @@ export default class page1 extends React.Component {
                     <p>
                         集团矿产资源板块通过拍卖方式取得了位于杭州市西湖区石矿的经营权，该石矿在有效经营期内的总销售额可达8亿元左右，目前日均销售额保持在100万元左右。        
                     </p>
-                    <img className="safeImg6" src={this.props.safeImg6} alt="集团业务" />
+                    <img className="safeImg6" src={this.state.safeImg6} alt="集团业务" />
+                </section>
+                <section className="column">
+                    <p>
+                        <i></i><b>固定资产  自有办公物业 </b>
+                    </p>
+                    <p className="size">
+                        华赢宝作为互联网企业，并不是轻资产运营，公司运营总部位于集团办公大楼内，是行业内极少数有自己独栋办公大楼的互联网金融公司，华赢宝安全稳健性远高于其他租办公室运营的轻资产互联网金融公司，
+                    </p>
+                    <p>
+                        滨江办公楼：2栋        
+                    </p>
+                    <p>
+                        总层数：1栋10层，1栋5层
+                    </p>
+                    <p>
+                        总面积：15000m2
+                    </p>
+                    <p>
+                        总价值：评估价2亿元
+                    </p>
+                    <p>
+                        位置：杭州市滨江区信诚路33号支氏控股大厦
+                    </p>
+                    <p>
+                        优势：商业黄金地段、交通便利
+                    </p>
+                    <img className="safeImg7" src={this.state.safeImg7} alt="固定资产" />
+                    <Map />
+                </section>
+                <section className="column">
+                    <p>
+                        <i></i><b>股东上市公司背景 </b>
+                    </p>
+                    <p className="size">
+                        杭州华赢宝网络科技有限公司具备香港主板上市企业背景,隶属于支氏控股集团有限公司。支氏控股集团在2 0 1 7 年斥资3 亿元完成对香港主板上市公司高锐中国物联(HK.01682)的股权收购，控股并改名华隆金控，并已着手开展资本运作，增资扩股，整合装入集团旗下优质资产，提高集团综合实力和品牌影响力。
+                    </p>
+                    <img className="safeImg9" src={this.state.safeImg9} alt="集团业务" />
                 </section>
             </div>
         );

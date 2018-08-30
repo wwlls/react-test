@@ -1,0 +1,230 @@
+@import "../../static/css/common.scss";
+.tabs{
+	.ant-tabs-bar {
+		border-bottom: 1px solid $borderColor;
+	}
+	.ant-tabs-nav {
+		width: 100%;
+		& .ant-tabs-ink-bar {
+			background: none;
+		}
+		& .ant-tabs-tab {
+			font-size: 18px;
+			color: $bigColor;
+			text-align: center;
+			padding: 30px 0;
+			margin: 0;
+			&:hover {
+				color: $hoverColor;
+			}
+		}
+		& .ant-tabs-tab-active {
+			font-size: 18px;
+			color: $hoverColor;
+		}
+	}
+}
+.page {
+	margin: 60px 0 0;
+	& .column {
+		margin: 0 0 45px;
+		& h4 {
+			font-size: 26px;
+			color: $bigColor;
+			&.safeH5  {
+				margin: 0 0 60px; 
+			}
+		}
+		& h5 {
+			font-size: 22px;
+			color: $bigColor;
+			margin: 0 0 60px;
+		}
+		& p {
+			font-size: 18px;
+			color: $bigColor;
+			line-height: 30px;
+			& span {
+				color: $hrefColor;
+			}
+			& i {
+				background-image: url(../../static/images/safe/smallIcon.png);
+		    	background-repeat: no-repeat;
+		    	width: 27px;
+		    	height: 24px;
+		    	display: inline-block;
+		    	vertical-align: middle;
+		    	margin: -6px 16px 0 0;
+			}
+			& b {
+				font-size: 22px;
+				font-weight: normal;
+			}
+			& em {
+				color: $hoverColor;
+				font-style: normal;
+			}
+			&.size {
+				margin: 40px 0 0;
+			}
+		}
+		& img {
+			&.safeImg1 {
+				width: 934px;
+			}
+			&.safeImg2 {
+				width: 722px;
+				margin: 60px 0 0;
+			}
+			&.safeImg3 {
+				width: 918px;
+				margin: 60px 0 0;
+			}
+			&.safeImg4 {
+				width: 832px;
+				margin: 60px 0 0;
+			}
+			&.safeImg5 {
+				width: 958px;
+				margin: 60px 0 0;
+			}
+			&.safeImg6 {
+				width: 1001px;
+				margin: 60px 0 0;
+			}
+			&.safeImg7 {
+				width: 1003px;
+				margin: 60px 0 0;
+			}
+			&.safeImg9 {
+				width: 1001px;
+				margin: 60px 0 0;
+			}
+			&.aboutImg9 {
+				width: 800px;
+				margin: 60px 0 0;
+			}
+		}
+		& .ant-col-md-12 {
+			margin: 0 0 94px;
+			& b {
+				&.bank {
+					background-image: url(../../static/images/safe/imgIcon.png);
+			    	background-repeat: no-repeat;
+			    	display: inline-block;
+			    	margin: 0 0 44px;
+			    	height: 140px;
+			    	width: 127px;
+			    	vertical-align: middle;
+				}
+				&.info1 {
+		    		 width: 129px; 
+		    		 height: 128px;
+		    		 background-position: -10px -10px;
+		    	}
+		    	&.info2 {
+		    		 background-position: -317px -10px;
+		    	}
+		    	&.info3 {
+		    		 width: 136px; 
+		    		 height: 115px;
+		    		 background-position: -10px -158px;
+		    	}
+		    	&.info4 {
+		    		 width: 138px; 
+		    		 height: 116px;
+		    		 background-position: -159px -10px;
+		    	}
+				&.safeBank {
+					background-image: url(../../static/images/safe/safeIcon.png);
+			    	background-repeat: no-repeat;
+			    	display: inline-block;
+			    	margin: 0 0 44px;
+			    	width: 146px; 
+			    	height: 146px;
+			    	vertical-align: middle;
+				}
+		    	&.safe1 {
+		    		 background-position: -352px -10px;
+		    	}
+		    	&.safe2 {
+		    		 background-position: -10px -198px;
+		    	}
+		    	&.safe3 {
+		    		 background-position: -10px -10px;
+		    	}
+		    	&.safe4 {
+		    		 background-position: -176px -10px;
+		    	}
+		    	&.about {
+			    	background-repeat: no-repeat;
+			    	width: 314px;
+			    	height: 402px;
+			    	display: inline-block;
+		    	}
+		    	&.about1 {
+					background-image: url(../../static/images/about/img1.jpg);
+		    	}
+		    	&.about2 {
+					background-image: url(../../static/images/about/img2.jpg);
+		    	}
+		    	&.about3 {
+					background-image: url(../../static/images/about/img3.jpg);
+		    	}
+		    	&.about4 {
+					background-image: url(../../static/images/about/img4.jpg);
+		    	}
+			}
+			& h3 {
+				font-size: 26px;
+				color: $bigColor;
+				margin: 0 0 25px;
+			}
+			& h2 {
+				font-size: 18px;
+				color: $bigColor;
+			}
+			& p {
+				font-size: 16px;
+				color: $smallColor;
+				line-height: 24px;
+				width: 40%;
+				margin: 0 auto;
+				text-align: left;
+			}
+		}
+		& .bottom {
+			margin: 0;
+		}
+		& ul {
+			margin: 0 180px;
+			& li {
+				height: 360px;
+				overflow: hidden;
+				margin: 50px 0;
+				& img {
+					width: 215px;
+				}
+				& dl {
+					width: 440px;
+					margin: 50px 0 0;
+					& dt {
+						font-size: 18px;
+						color: $bigColor;
+						& span {
+							font-size: 22px;
+							border-bottom: 2px solid $hoverColor;
+							margin: 0 24px 0 0;
+						}
+					}
+					& dd {
+						margin: 45px 0 0;
+						font-size: 18px;
+						color: $bigColor;
+						line-height: 30px;
+					}
+				}
+			}
+		}
+	}
+}
