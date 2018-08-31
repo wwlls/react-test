@@ -20,7 +20,7 @@ export default class Banner extends React.Component {
         const { carouselList } = this.props;
         return (
             <div className={"carousel " + this.props.carousel}>
-                <Carousel dots>
+                <Carousel dots autoplay>
                     {
                         carouselList.map(function (item) {
                             return (

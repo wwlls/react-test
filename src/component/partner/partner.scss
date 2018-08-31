@@ -24,21 +24,18 @@
         & .pagePartnerUl {
             width: 200%;
             overflow: hidden;
-            transition: all 1s ease;
-            -webkit-transition: all 1s ease;
-            -moz-transition: all 1s ease;
-            -ms-transition: all 1s ease;
-            -o-transition: all 1s ease;
             & li {
                 width: 220px;
                 height: 100px;
                 text-align: center;
+                & .slick-list {
+                    overflow: visible;
+                }
                 & .pagePartnerDiv {
                     width: 220px;
                     height: 100px;
                     clear: both;
-                    display: block;
-                    display:table-cell;
+                    padding: 15px 0;
                     vertical-align:middle;
                     text-align:center;
                     padding: 0 ;
