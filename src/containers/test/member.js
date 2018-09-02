@@ -28,8 +28,8 @@ export default class Member extends React.Component {
         return (
             <div className="page page-Member">
                 <p>member页面</p>
-                <Input type="password" />
-                <Input type="date" />
+                <Input type="password" name="password" placeholder="请输入手机号" />
+                <Input type="date" name="date" placeholder="请输入手机号" />
                 <Button handleSame={this.handleOne.bind(this)} text="11" />
                 <Button handleSame={this.handleTwo.bind(this)} text="22" />
                 <CountDown />

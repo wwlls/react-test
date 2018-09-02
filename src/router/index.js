@@ -6,6 +6,8 @@ import Home from '../containers/home/home';
 import Lend from '../containers/lend/lend';
 import Safe from '../containers/safe/safe';
 import About from '../containers/about/about';
+import Login from '../containers/login/login';
+import Register from '../containers/register/register';
 
 
 //test
@@ -25,6 +27,8 @@ class RouterMap extends Component {
                 <Route path="/lend" exact component={ Lend } />
                 <Route path="/safe" exact component={ Safe } />
                 <Route path="/about" exact component={ About } />
+                <Route path="/login" exact component={ Login } />
+                <Route path="/register" exact component={ Register } />
 
                 <Route path="/index" exact component={ Index } />
                 <Route path="/member" exact component={ Member } />

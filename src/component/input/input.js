@@ -17,7 +17,7 @@ export default class partner extends React.Component {
     
     render() {
         return (
-            <Input type={this.props.type} placeholder="Basic usage" />
+            <Input type={this.props.type} name={this.props.name} minLength={this.props.minLength} maxLength={this.props.maxLength} placeholder={this.props.placeholder} />
         );
     }
 }

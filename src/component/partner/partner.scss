@@ -12,7 +12,7 @@
 			width: 26px;
 			height: 22px;
 			vertical-align: middle;
-			margin: -5px 10px 0 0;
+			margin: -5px 10px 0 18px;
 		}
 	}
     & .pagePartner {
@@ -24,6 +24,7 @@
         & .pagePartnerUl {
             width: 200%;
             overflow: hidden;
+            margin: 0 0 0 40px;
             & li {
                 width: 220px;
                 height: 100px;
@@ -35,7 +36,8 @@
                     width: 220px;
                     height: 100px;
                     clear: both;
-                    padding: 15px 0;
+                    display: block;
+                    display: table-cell;
                     vertical-align:middle;
                     text-align:center;
                     padding: 0 ;

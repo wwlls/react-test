@@ -85,7 +85,7 @@ export default class backTop extends React.Component {
                     <p>
                         <img src={keep} alt="备案号图标" />
                         <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010802005885">浙公网安备：33010402000327</a>
-                        &nbsp浙ICP备16046593号-1&nbsp ICP经营许可证编号：浙B2-20171023
+                        <span>浙ICP备16046593号-1</span>ICP经营许可证编号：浙B2-20171023
                     </p>
                 </div>
             </div>

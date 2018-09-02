@@ -1,0 +1,37 @@
+@import "../../static/css/common.scss";
+.login {
+	background-color: $bgColor;
+	& .subLogin {
+		padding: 20px 0 40px;
+		& .bgLogin {
+			background-color: #fff;
+			& h4 {
+				font-size: 18px;
+				color: $bigColor;
+				padding: 15px 0 11px 20px;
+				border-bottom: 1px solid $borderColor;
+				& span {
+					background-color: $leftColor;
+				    width: 4px;
+				    height: 16px;
+				    display: inline-block;
+				    margin: -3px 8px 0 0;
+				    vertical-align: middle;
+				}
+			}
+			& .submit {
+				margin: 80px 0 0;
+				& h5 {
+					font-size: 18px;
+					color: $bigColor;
+					padding: 0 0 14px;
+				}
+				& p {
+					font-size: 14px;
+					color: $bigColor;
+					padding: 0 0 38px;
+				}
+			}
+		}
+	}
+}

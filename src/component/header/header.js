@@ -29,7 +29,15 @@ export default class Header extends React.Component {
         })
  
     }  
+
+    goRegister() {
+        window.location.hash='#/register'
+    }
     
+    goLogin() {
+        window.location.hash='#/login'
+    }
+
     componentDidMount() {
     }
 
@@ -45,9 +53,9 @@ export default class Header extends React.Component {
                             <Dropdown name="qq" />
                         </div>
                         <div className="subLoginbarRight">
-                            <a href="javascript:;">注册</a>
+                            <a onClick={this.goRegister.bind(this)} href="javascript:;">注册</a>
                             <i>/</i>
-                            <a href="javascript:;">登录</a>
+                            <a onClick={this.goLogin.bind(this)} href="javascript:;">登录</a>
                             <Dropdown name="app" />
                             <span className="one">手机客户端</span>
                             <span className="two">市场有风险，出借需谨慎</span>
@@ -64,7 +72,7 @@ export default class Header extends React.Component {
                                 <ul>
                                     <li><NavLink to="/home">首页</NavLink></li>
                                     <li><NavLink to="/lend">我要出借</NavLink></li>
-                                    <li><NavLink to="/safe">安全保障</NavLink></li>
+                                    <li><NavLink to="/safe">稳健发展</NavLink></li>
                                     <li onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)} source='news'>
                                         <NavLink to="/about">信息披露</NavLink>
                                         <div className="selectNav" style={{display:this.state.open}}>
