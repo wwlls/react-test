@@ -40,12 +40,15 @@ class Home extends React.Component {
 	 //      });
 	 //    });
 
-		Utils.postRequest('carouselList').then((res) => {
-	      	console.log(res);
-	      	this.setState({
+	 	let data = {};
+		let callback = function(res) {
+			console.log(res)
+			this.setState({
 	      		carouselList: res
 	      	})
-	    });
+		}
+		Utils.postRequest('carouselList',data ,callback);
+		
 		let investMoneyTotal = this.state.investMoneyTotal;
 		console.log(investMoneyTotal)
 		let totalProfit = this.state.totalProfit;

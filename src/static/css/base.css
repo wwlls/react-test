@@ -4,7 +4,18 @@
   -webkit-tap-highlight-color: transparent; /* 覆盖IOS上用户点击连接时的默认高亮颜色 */
   outline: none;
 }
-
+input::-webkit-input-placeholder { /* WebKit browsers */ 
+        color: #979CB2; 
+} 
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+        color: #979CB2; 
+} 
+input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+        color: #979CB2; 
+} 
+input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+        color: #979CB2; 
+}
 body {
     font-family: "Microsoft Yahei", "PingFang SC";
     position: relative;

@@ -5,6 +5,7 @@
 		padding: 20px 0 40px;
 		& .bgLogin {
 			background-color: #fff;
+			padding: 0 0 240px;
 			& h4 {
 				font-size: 18px;
 				color: $bigColor;
@@ -30,6 +31,53 @@
 					font-size: 14px;
 					color: $bigColor;
 					padding: 0 0 38px;
+				}
+				& .ant-form-item {
+				    transition: margin 0.15s steps(1);
+				    & .ant-col-sm-9 {
+						margin: 0 16px 0 0;
+						& .ant-form-item-required {
+							color: $bigColor;
+							&:before {
+								content: '';
+							}
+						}	
+					}
+					& .ant-col-sm-14 {
+						text-align: left;
+						& input {
+						    font-size: 16px;
+							width: 375px;
+							height: 36px;
+							line-height: 36px;
+						    border: 1px solid $borderColor;
+						    &:focus {
+						    	box-shadow: none;
+						    }
+						}
+					}
+					& .ant-checkbox-wrapper {
+						margin: 0 0 0 60px;
+						& .ant-checkbox-checked {
+							vertical-align: middle;
+							margin: -0.2rem 0 0;
+						}
+					}
+				}
+				& .submitBtn {
+					& .ant-btn-primary {
+						font-size: 16px;
+					    color: #fff;
+					    background-color: #EF7A46;
+					    width: 320px;
+					    height: 40px;
+					    line-height: 40px;
+					    border: none;
+					    border-radius: 4px;
+					    -webkit-border-radius: 4px;
+					    -o-border-radius: 4px;
+					    -moz-border-radius: 4px;
+					}
 				}
 			}
 		}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import axios from 'axios';
 // import { Toast } from 'antd-mobile';
-import { Modal } from 'antd';
+import { message } from 'antd';
 import { Provider } from 'react-redux';
 import promise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
@@ -29,7 +29,7 @@ axios.interceptors.request.use((axiosConfig) => {
   }
   return axiosConfig;
 }, (error) => {
-  Modal.info('参数格式错误', 1);
+  message.info('参数格式错误', 1);
   return Promise.reject(error);
 });
 
@@ -40,13 +40,13 @@ axios.interceptors.response.use((response) => {
   }
   //如果接口返回error_no不为0，就需要错误提示
   if (response.data.error_no && parseInt(response.data.error_no, 10) !== 0) {
-    Modal.info(response.data.error_info, 2);
+    message.info(response.data.error_info, 2);
     return new Promise(() => {});
   }
 
   return response.data;
 }, (error) => {
-  Modal.offline('网络传输错误', 1);
+  message.info('参数格式错误', 1);
   return Promise.reject(error);
 });
 
