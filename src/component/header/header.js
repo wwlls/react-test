@@ -18,23 +18,23 @@ export default class Header extends React.Component {
     }
 
 
-    handleMouseUserOver(event) {
+    handleMouseUserOver = (event) => {
         this.setState({
             open: 'block',
         }) 
     }
-    handleMouseOut() {
+    handleMouseOut = () => {
         this.setState({
             open: 'none',
         })
  
     }  
 
-    goRegister() {
+    goRegister = () => {
         window.location.hash='#/register'
     }
     
-    goLogin() {
+    goLogin = () => {
         window.location.hash='#/login'
     }
 

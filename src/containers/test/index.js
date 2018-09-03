@@ -40,7 +40,7 @@ class Index extends React.Component {
         }
         <Button>按钮</Button>
         <img src={ImgTest} />
-        <div className="btn" onClick={this.goOther.bind(this)} data-name={"姓名"}>获取数据跳转页面</div>
+        <div className="btn" onClick={this.goOther} data-name={"姓名"}>获取数据跳转页面</div>
       </div>
 
     );

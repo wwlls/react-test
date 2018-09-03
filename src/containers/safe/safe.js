@@ -42,7 +42,7 @@ class Safe extends React.Component {
 	    }
 	}
 
-	callback(key) {
+	callback = (key) => {
 		this.props.history.push('/safe?id=' + key);
 	}
 
@@ -53,7 +53,7 @@ class Safe extends React.Component {
 				<Header />
 				<SubBanner safeBanner={this.state.safeBanner} />
 				<div className="safe layout">
-					<Tabs panes={this.state.panes} id={this.state.id} callback={this.callback.bind(this)} />
+					<Tabs panes={this.state.panes} id={this.state.id} callback={this.callback} />
 				</div>
 				<Footer />
 				<BackTop />

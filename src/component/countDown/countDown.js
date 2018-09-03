@@ -15,7 +15,7 @@ export default class partner extends React.Component {
         };
     }
 
-    handleClick() {
+    handleClick = () => {
         clearInterval(this.timer);
         this.state.stop = false;
         this.timer = setInterval(function() {
@@ -47,7 +47,7 @@ export default class partner extends React.Component {
         let text = this.state.stop ? this.state.size : this.state.count + 's';
         console.log(text)
         return (
-            <Button handleSame={this.handleClick.bind(this)} text={text} disabled={this.state.disabled} />
+            <Button handleSame={this.handleClick} text={text} disabled={this.state.disabled} />
         );
     }
 }

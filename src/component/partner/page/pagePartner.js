@@ -11,12 +11,12 @@ export default class pagePartner extends React.Component {
     componentDidMount() {
     }
 
-    next() {
+    next = () => {
         let partnerCarousel = this.refs.partnerCarousel;
         partnerCarousel.next()
     }
 
-    prev() {
+    prev = () => {
         let partnerCarousel = this.refs.partnerCarousel;
         partnerCarousel.prev()
     }
@@ -24,8 +24,8 @@ export default class pagePartner extends React.Component {
     render() {
         return (   
             <div className="pagePartner">   
-                <span className="leftIcon pagePartnerIcon" onClick={this.prev.bind(this)}></span>
-                <span className="rightIcon pagePartnerIcon" onClick={this.next.bind(this)}></span>          
+                <span className="leftIcon pagePartnerIcon" onClick={this.prev}></span>
+                <span className="rightIcon pagePartnerIcon" onClick={this.next}></span>          
                 <div className="pagePartnerBanner">
                     <ul className="pagePartnerUl clear">
                         <li className="floatL">

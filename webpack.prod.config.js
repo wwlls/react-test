@@ -27,10 +27,10 @@ module.exports = {
             test: /\.jsx?$/,
             exclude: /node_modules/,
             use: [{
-              loader: 'babel-loader',
+              loader: 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-0',
               options: {
                 cacheDirectory: true,
-                presets: ['env', 'react'],
+                presets: ['env', 'react', 'es2015', 'stage-0'],
                 plugins: [['import', { libraryName: 'antd', style: 'css' }], 'syntax-dynamic-import']
                 //plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }], 'syntax-dynamic-import']
               }

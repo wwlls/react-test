@@ -10,7 +10,7 @@ class List extends React.Component {
     };
   }
 
-  goMember() {
+  goMember = () => {
     alert(1)
     this.props.history.push('/member');
   }
@@ -19,7 +19,7 @@ class List extends React.Component {
     return (
       <div className="page page-list">
         <p>list页面</p>
-        <p onClick={this.goMember.bind(this)}>跳转到member页面</p>
+        <p onClick={this.goMember}>跳转到member页面</p>
       {
         this.state.imageUrl ?
           <img src={Config.api + this.state.imageUrl} />

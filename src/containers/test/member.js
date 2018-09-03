@@ -10,12 +10,12 @@ export default class Member extends React.Component {
         };
     }
 
-    handleOne() {
+    handleOne = () => {
         alert(1)
         clearInterval(this.timer)
     }
 
-    handleTwo() {
+    handleTwo = () => {
         alert(2)
     }
 
@@ -27,8 +27,8 @@ export default class Member extends React.Component {
         return (
             <div className="page page-Member">
                 <p>member页面</p>
-                <Button handleSame={this.handleOne.bind(this)} text="11" />
-                <Button handleSame={this.handleTwo.bind(this)} text="22" />
+                <Button handleSame={this.handleOne} text="11" />
+                <Button handleSame={this.handleTwo} text="22" />
                 <CountDown />
              </div>
         );

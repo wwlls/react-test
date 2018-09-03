@@ -14,7 +14,7 @@ export default class nav extends React.Component {
         };
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         console.log(e);
         this.setState({
             current: e.key,
@@ -28,7 +28,7 @@ export default class nav extends React.Component {
     render() {
         return (
             <Menu
-                onClick={this.handleClick.bind(this)}
+                onClick={this.handleClick}
                 selectedKeys={[this.state.current]}
                 mode="horizontal"
             >

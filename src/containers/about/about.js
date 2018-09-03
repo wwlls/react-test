@@ -51,7 +51,7 @@ class About extends React.Component {
 	    }
 	 }
 
-	callback(key) {
+	callback = (key) =>	 {
 		this.props.history.push('/about?id=' + key);
 	}
 
@@ -61,7 +61,7 @@ class About extends React.Component {
 				<Header />
 				<SubBanner safeBanner={this.state.safeBanner} />
 				<div className="about layout">
-					<Tabs panes={this.state.panes} id={this.state.id} callback={this.callback.bind(this)} />
+					<Tabs panes={this.state.panes} id={this.state.id} callback={this.callback} />
 				</div>
 				<Footer />
 				<BackTop />
