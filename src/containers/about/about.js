@@ -29,8 +29,8 @@ class About extends React.Component {
 		      { title: '团队介绍', content: <Page2 />, key: '2' },
 		      { title: '业务介绍', content: <Page3 />, key: '3' },
 		      { title: '运营数据', content: <Page4 />, key: '4' },
-		      { title: '媒体报道', content: <Page4 />, key: '5' },
-		      { title: '公司动态', content: <Page5 />, key: '6' },
+		      { title: '媒体报道', content: <Page5 />, key: '5' },
+		      { title: '公司动态', content: <Page6 />, key: '6' },
 		      { title: '从业机构信息', content: <Page7 />, key: '7' },
 		      { title: '相关法律法规披露', content: <Page8 />, key: '8' },
 		    ],
@@ -49,8 +49,9 @@ class About extends React.Component {
 		    	id: nextPropsId,
 		    })
 	    }
-	 }
+	}
 
+	//切换回调
 	callback = (key) =>	 {
 		this.props.history.push('/about?id=' + key);
 	}

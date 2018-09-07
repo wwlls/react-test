@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Form, Checkbox, Input, Button, Row, Col } from 'antd';
+import { Form, Checkbox, Input, Button, Row, Col, Icon } from 'antd';
 import Utils from '../../utils/index';
 import Tools from '../../utils/tools';
 import Header from '../../component/header/header';
@@ -19,6 +19,7 @@ class LoginForm extends React.Component {
 	    };
 	}
 
+	//form提交数据
 	handleSubmit = (e) => {
 	    e.preventDefault();
 	    this.props.form.validateFields((err, values) => {
@@ -31,27 +32,41 @@ class LoginForm extends React.Component {
 
 	componentDidMount() {
 		let data = {};
+		data.mobile = 13666606473;
 		let callback = function(res) {
 			console.log(res)
 		}
 		Utils.postRequest('/api/login/checkMobile',data ,callback);
 
-		//初始化
-		// let phone = this.refs.phone;
-		// phone.fouce
 	}
 
+	//验证手机号
 	checkPhone = (rule, value, callback) => {
+		const form = this.props.form;	
 		if(!(Tools.isMobile(value)) || value.length !== 11) {
-            callback("手机号码有误");
+            callback("手机号码输入有误");
+        } else {
+   //      	let data = {};
+   //      	data.mobile = value;
+			// let callback = function(res) {
+			// 	console.log(res)
+			// }
+			// Utils.postRequest('/api/login/checkMobile',data ,callback);
+	            callback();
+	            //form.validateFields(['password'], { force: true });
+	            //form.getFieldDecorator(['mobile'],{validateTrigger: 'onChange'});
+	        }
+	}
+
+	//验证密码
+	checkPassword = (rule, value, callback) => {
+		const form = this.props.form;	
+		if(value.length < 6 || value.length > 16) {
+            callback("请输入6位到16位的密码");
         } else {
             callback();
+            //form.getFieldDecorator(['password'],{validateTrigger: 'onChange'});
         }
-	    // const { validateFields } = this.props.form
-	    // if (value) {
-	    //   // validateFields([''])
-	    // }
-	    // callback()
 	}
 
 	render() {
@@ -63,7 +78,7 @@ class LoginForm extends React.Component {
 		    },
 		    wrapperCol: {
 		        xs: { span: 24 },
-		        sm: { span: 14 },
+		        sm: { span: 8 },
 		    },
 	    };
 		return (
@@ -90,6 +105,9 @@ class LoginForm extends React.Component {
 								            	{ validator: this.checkPhone },
 								            	// { max: 11, message: '不是有效的手机号!' }, 
 								        	],
+								        	validateFirst: true,
+								        	// trigger: 'onBlur',
+								        	//validateTrigger: 'onBlur'
 								        })(
 							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength="11" placeholder="请输入手机号" />
 							         	 )}
@@ -102,27 +120,26 @@ class LoginForm extends React.Component {
 							          	{getFieldDecorator('password', {
 							            	rules: [
 							            		{ required: true, whitespace : true, message: '请输入密码' },
-							            		{ min: 6, max: 16, message: '密码输入有误'}
+							            		//{ min: 6, max: 16, message: '密码输入有误'},
+							            		{ validator: this.checkPassword },
 							            	],
+							            	validateFirst: true,
+							            	// trigger: 'onChange',
+							            	//validateTrigger: 'onBlur'
 							          	})(
 							            <Input type="password" name="password" minLength="6" maxLength="16" placeholder="请输入密码" />
 							          )}
 							        </FormItem>
-							        <FormItem
-							        	{...formItemLayout}
-							        >
-							          	{getFieldDecorator('remember', {
-								            valuePropName: 'checked',
-								            initialValue: true,
-							          	})(
-							            	<Checkbox>您的信息已使用128位SGC加密技术，保护数据传输安全</Checkbox>
-							          	)}
-							          	<div className="submitBtn textC">
+							        <FormItem>
+							        	<div className="remember">
+									        <Icon type="exclamation-circle" theme="twoTone" />您的信息已使用128位SGC加密技术，保护数据传输安全
+								        </div>
+							        	<div className="submitBtn textC">
 								          	<Button type="primary" htmlType="submit" className="login-form-button">
 								            	立即登录
 								          	</Button>
 							          	</div>
-						          		<Link to="/register">忘记密码？</Link>
+						          		<Link to="/forget">忘记密码？</Link>
 							        </FormItem>
 								</Form>
 							</section>

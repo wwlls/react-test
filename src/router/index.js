@@ -8,6 +8,7 @@ import Safe from '../containers/safe/safe';
 import About from '../containers/about/about';
 import Login from '../containers/login/login';
 import Register from '../containers/register/register';
+import Forget from '../containers/forget/forget';
 
 
 //test
@@ -29,6 +30,7 @@ class RouterMap extends Component {
                 <Route path="/about" exact component={ About } />
                 <Route path="/login" exact component={ Login } />
                 <Route path="/register" exact component={ Register } />
+                <Route path="/forget" exact component={ Forget } />
 
                 <Route path="/index" exact component={ Index } />
                 <Route path="/member" exact component={ Member } />

@@ -227,6 +227,19 @@
 				}
 			}
 		}
+		& ol {
+			& li {
+			    border-bottom: 1px solid $borderColor;
+				padding: 0 0 40px;
+				margin: 0 0 45px;
+				& p {
+					color: $smallColor;
+					& a {
+						color: $bigColor;
+					}
+				}
+			}
+		}
 	}
 	& .aboutData {
 		width: 998px;

@@ -17,9 +17,9 @@ export default class page1 extends React.Component {
     render() {
         return (
             <div className="page">
-               <section className="column">
-                    <h4 className="textC">业务介绍</h4>
-                    <p className="size">
+                <section className="column">
+                    <h5 className="textC">业务介绍</h5>
+                    <p>
                         <i></i><b>资产安全</b>
                     </p>
                     <p className="size">

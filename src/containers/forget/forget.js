@@ -9,11 +9,11 @@ import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import BackTop from '../../component/backTop/backTop';
 import CountDown from '../../component/countDown/countDown';
-import "./register.scss";
+import "./forget.scss";
 
 const FormItem = Form.Item;
 
-class RegisterForm extends React.Component {
+class ForgetForm extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
@@ -98,15 +98,6 @@ class RegisterForm extends React.Component {
         }
 	}
 
-	//验证协议
-	checkRemember = (rule, value, callback) => {
-		if(value === false) {
-			callback("请同意服务协议");
-		} else {
-			callback();
-		}
-	}
-
 	render() {
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
@@ -122,16 +113,14 @@ class RegisterForm extends React.Component {
 		return (
 			<div>
 				<Header />
-				<div className="register">
+				<div className="forget">
 					<div className="layout">
 						<div className="subLogin">
 							<section className="bgLogin">
 								<h4>
-									<span></span>新用户注册
+									<span></span>忘记密码
 								</h4>
 								<Form className="submit textC" onSubmit={this.handleSubmit}>
-									<h5>免费注册华赢宝账户</h5>
-									<p>已有账户？<Link to="/login">登录</Link></p>
 									<FormItem 
 										hasFeedback
 										{...formItemLayout}
@@ -185,33 +174,10 @@ class RegisterForm extends React.Component {
 							            <Input type="password" name="password" minLength="6" maxLength="16" placeholder="请输入密码" />
 							          )}
 							        </FormItem>
-							        <FormItem 
-										{...formItemLayout}
-  										label="邀请码："
-  									>
-							          	{getFieldDecorator('invite', {
-								        })(
-							            	<Input type="text" name="invite" placeholder="请输入验证码(选填)" />
-							         	 )}
-							        </FormItem>
-							        <div className="remember">
-								        <FormItem>
-								          	{getFieldDecorator('remember', {
-								          		valuePropName: 'checked',
-									            initialValue: true,
-								          		rules: [
-								            		{ required: true, message: '请同意服务协议' },
-								            		{ validator: this.checkRemember },
-								            	],
-								          	})(
-								            	<Checkbox>已同意<Link to="" target="_blank">《定存计划服务协议》</Link><Link to="" target="_blank">《用户授权委托书》</Link><Link to="" target="_blank">《风险揭示书》</Link></Checkbox>
-								          	)}
-								        </FormItem>
-							        </div>
 							        <FormItem>
 							        	<div className="submitBtn textC">
 								          	<Button type="primary" htmlType="submit" className="login-form-button">
-								            	注册
+								            	确定
 								          	</Button>
 							          	</div>
 							        </FormItem>
@@ -231,5 +197,5 @@ function mapStateToProps() {
   return {
   };
 }
-const Register = Form.create()(RegisterForm);
-export default  connect(mapStateToProps)(Register)
+const Forget = Form.create()(ForgetForm);
+export default  connect(mapStateToProps)(Forget)

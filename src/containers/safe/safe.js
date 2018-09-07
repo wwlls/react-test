@@ -42,6 +42,7 @@ class Safe extends React.Component {
 	    }
 	}
 
+	//切换回调
 	callback = (key) => {
 		this.props.history.push('/safe?id=' + key);
 	}

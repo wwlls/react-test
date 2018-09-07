@@ -33,21 +33,20 @@
 					padding: 0 0 38px;
 				}
 				& .ant-form-item {
-				    transition: margin 0.15s steps(1);
+				    transition: none;
 				    & .ant-col-sm-9 {
 						margin: 0 16px 0 0;
-						& .ant-form-item-required {
+						& label {
 							color: $bigColor;
 							&:before {
 								content: '';
 							}
 						}	
 					}
-					& .ant-col-sm-14 {
+					& .ant-col-sm-8 {
 						text-align: left;
 						& input {
 						    font-size: 16px;
-							width: 375px;
 							height: 36px;
 							line-height: 36px;
 						    border: 1px solid $borderColor;
@@ -56,12 +55,15 @@
 						    }
 						}
 					}
-					& .ant-checkbox-wrapper {
-						margin: 0 0 0 60px;
-						& .ant-checkbox-checked {
-							vertical-align: middle;
-							margin: -0.2rem 0 0;
-						}
+					& .ant-checkbox {
+						margin: -4px 0 0 60px;
+					}
+				}
+				& .remember {
+					font-size: 14px;
+					color: $smallColor;
+					& i {
+						margin: 0 8px 0 60px;
 					}
 				}
 				& .submitBtn {
