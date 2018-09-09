@@ -20,30 +20,33 @@ const Utils = {
         return axios.get(url, { params });
     },
     postRequest(url, data = {} , callback) {
+        //mock数据
         if (Config.mock) {
             //match(/-(\w*)/)[1];  
             const urlCode = url;
           // 返回一个数组[status, data, headers]
             this.mockAdapter.onPost(url).reply(200, mockData[urlCode]);
+        } else {
+            data = this.setPublic(data);
+            let accessToken = this.getStorage("ZSSESSIONID");
+            if(url != '/token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
+                let tokenData = {};
+                tokenData['app_key'] = Config.app_key;
+                tokenData['device_id'] = Config.device_id;
+                //tokenData = this.setPublic(tokenData);
+                this.postRequest('http://test.huayingbaolicai.com:8006/token/get', tokenData).then(function(res) {
+                    console.log(res)
+                    // if(res )
+                    // axios.post(url, data);
+                })
+                return;
+            }
+            data['sign'] = Utils.createSign(data);
         }
-        data = this.setPublic(data);
-        let accessToken = this.getStorage("ZSSESSIONID");
-        if(url != '/token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
-            let tokenData = {};
-            tokenData['app_key'] = Config.app_key;
-            tokenData['device_id'] = Config.device_id;
-            //tokenData = this.setPublic(tokenData);
-            this.postRequest('/token/get', tokenData).then(function(res) {
-                console.log(res)
-                // if(res )
-                // axios.post(url, data);
-            })
-            return;
-        }
-        data['sign'] = Utils.createSign(data);
         return axios.post(url, data ).then(function(res) {
             console.log(res)
-            if(res) {
+            //全局判断是否有accessToken,登录
+            if(!res) {
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
@@ -60,6 +63,7 @@ const Utils = {
         });
     },
 
+    //公用参数
     setPublic(data) {
         data['timestamp'] = new Date().getTime();
         data['nonce'] = Utils.getRandomString(32);
@@ -72,6 +76,7 @@ const Utils = {
         return data;
     },
 
+    //
     getRandomString(len = 32) {
     /** **默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1*** */
         const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
@@ -82,7 +87,7 @@ const Utils = {
         }
         return pwd;
     },
-
+    //创建签名拼接
     createSign(params) {
         console.log(params)
         let data = "";

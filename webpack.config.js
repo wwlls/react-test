@@ -113,7 +113,10 @@ module.exports = {
         proxy: {
           "/api": {
             target: config.api,
-            changeOrigin: true
+            changeOrigin: true,
+            "pathRewrite": { //这个是个正则匹配
+                "^/api": "/"
+            }
           }
         },
     },

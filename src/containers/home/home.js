@@ -41,7 +41,7 @@ class Home extends React.Component {
 	 //    });
 
 	 	let data = {};
-		let callback = function(res) {
+		let callback = (res) => {
 			console.log(res)
 			this.setState({
 	      		carouselList: res

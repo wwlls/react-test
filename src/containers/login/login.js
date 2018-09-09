@@ -33,10 +33,10 @@ class LoginForm extends React.Component {
 	componentDidMount() {
 		let data = {};
 		data.mobile = 13666606473;
-		let callback = function(res) {
+		let callback = (res) => {
 			console.log(res)
 		}
-		Utils.postRequest('/api/login/checkMobile',data ,callback);
+		Utils.postRequest('/login/checkMobile',data ,callback);
 
 	}
 
