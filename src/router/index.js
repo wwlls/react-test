@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Switch } from 'react-router-dom';
 
 //项目
 import Home from '../containers/home/home';
@@ -22,22 +22,22 @@ import Index from '../containers/test/index';
 class RouterMap extends Component {
   render() {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Switch>
                 <Route path="/home" exact component={ Home } />
-                <Route path="/lend" exact component={ Lend } />
-                <Route path="/safe" exact component={ Safe } />
-                <Route path="/about" exact component={ About } />
-                <Route path="/login" exact component={ Login } />
-                <Route path="/register" exact component={ Register } />
-                <Route path="/forget" exact component={ Forget } />
+                <Route path="/lend" component={ Lend } />
+                <Route path="/safe" component={ Safe } />
+                <Route path="/about" component={ About } />
+                <Route path="/login" component={ Login } />
+                <Route path="/register" component={ Register } />
+                <Route path="/forget" component={ Forget } />
 
-                <Route path="/index" exact component={ Index } />
-                <Route path="/member" exact component={ Member } />
-                <Route path="/list" exact component={ List } />
+                <Route path="/index" component={ Index } />
+                <Route path="/member" component={ Member } />
+                <Route path="/list" component={ List } />
                 <Route path="/*" component={ NotFound } />
             </Switch>
-        </HashRouter>
+        </BrowserRouter>
     );
   }
 }

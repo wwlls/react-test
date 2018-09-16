@@ -2,7 +2,7 @@ import React from "react";
 import aboutImg9 from '../../../static/images/about/img9.png';
 import aboutImg10 from '../../../static/images/about/img10.png';
 
-export default class page1 extends React.Component {
+export default class page3 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

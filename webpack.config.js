@@ -4,7 +4,7 @@ var webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var config = require('./config');
-const PORT = 8085;
+const PORT = 8090;
 const svgDirs = [
   require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
   // path.resolve(__dirname, 'src/svgs'),  // 2. 自己私人的 svg 存放目录
@@ -86,7 +86,7 @@ module.exports = {
     },
     plugins: [
         new OpenBrowserPlugin({
-          url: `http://localhost:${PORT}/#/home`
+          url: `http://localhost:${PORT}/home`
         }),
         new htmlWebpackPlugin({
             title: '华赢宝—支氏控股集团旗下互联网金融平台', //开发环境下项目title
@@ -114,9 +114,9 @@ module.exports = {
           "/api": {
             target: config.api,
             changeOrigin: true,
-            "pathRewrite": { //这个是个正则匹配
-                "^/api": "/"
-            }
+            // "pathRewrite": { //这个是个正则匹配
+            //     "^/api": "/"
+            // }
           }
         },
     },

@@ -93,7 +93,18 @@ const tools = {
         }
         console.log("解谜：", code, c);
         return c;
-    }
+    },
+    //储存书局 
+    setStorage(key, value) {
+        localStorage.setItem(key, value);
+    },
+    // 存的0，取出来0,
+    getStorage(key) {
+        return value;
+    },
+    removeStorage(key) {
+        localStorage.removeItem(key);
+    },
 };
 
 export default tools;

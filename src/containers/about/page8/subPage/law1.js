@@ -1,7 +1,8 @@
 import React from "react";
+
 import { Icon, Row, Col } from 'antd';
 
-export default class page6 extends React.Component {
+export default class law1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,7 +15,7 @@ export default class page6 extends React.Component {
     render() {
         return (
             <div className="page">
-               4
+                1
             </div>
         );
     }

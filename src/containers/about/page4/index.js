@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon, Row, Col, Tooltip } from 'antd';
 
-export default class page1 extends React.Component {
+export default class page4 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

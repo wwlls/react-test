@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from '../../component/header/header';

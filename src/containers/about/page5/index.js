@@ -7,7 +7,7 @@ import aboutNews4 from '../../../static/images/about/news4.png';
 import aboutNews5 from '../../../static/images/about/news5.png';
 import aboutNews6 from '../../../static/images/about/news6.png';
 
-export default class page1 extends React.Component {
+export default class page5 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +20,7 @@ export default class page1 extends React.Component {
     render() {
         return (
             <div className="page">
-               <section className="column">
+                <section className="column">
                     <h5 className="textC">媒体报道</h5>
                     <ol>
                         <li>

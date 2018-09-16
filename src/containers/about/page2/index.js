@@ -3,7 +3,7 @@ import aboutImg6 from '../../../static/images/about/img6.png';
 import aboutImg7 from '../../../static/images/about/img7.png';
 import aboutImg8 from '../../../static/images/about/img8.png';
 
-export default class page1 extends React.Component {
+export default class page2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

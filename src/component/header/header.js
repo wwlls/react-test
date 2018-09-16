@@ -1,6 +1,7 @@
 /** 导航 **/
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { browserHistory } from 'react-router'
 import { Affix } from 'antd';
 import Dropdown from '../dropdown/dropdown';
 import imgLogo from "../../static/images/common/header/logo.png";
@@ -27,15 +28,11 @@ export default class Header extends React.Component {
         this.setState({
             open: 'none',
         })
- 
     }  
 
-    goRegister = () => {
-        window.location.hash='#/register'
-    }
-    
-    goLogin = () => {
-        window.location.hash='#/login'
+    handleText = () => {
+        console.log(this.props.history)
+        //this.props.history.push=('/register');
     }
 
     componentDidMount() {
@@ -53,12 +50,12 @@ export default class Header extends React.Component {
                             <Dropdown name="qq" />
                         </div>
                         <div className="subLoginbarRight">
-                            <a onClick={this.goRegister.bind(this)} href="javascript:;">注册</a>
+                            <Link to="/register">注册</Link>
                             <i>/</i>
-                            <a onClick={this.goLogin.bind(this)} href="javascript:;">登录</a>
+                            <Link to="/login">登录</Link>
                             <Dropdown name="app" />
                             <span className="one">手机客户端</span>
-                            <span className="two">市场有风险，出借需谨慎</span>
+                            <span className="two" onClick={this.handleText.bind(this)}>市场有风险，出借需谨慎</span>
                         </div>
                     </div>
                 </nav>
@@ -73,33 +70,33 @@ export default class Header extends React.Component {
                                     <li><NavLink to="/home">首页</NavLink></li>
                                     <li><NavLink to="/lend">我要出借</NavLink></li>
                                     <li><NavLink to="/safe">稳健发展</NavLink></li>
-                                    <li onMouseOver={this.handleMouseUserOver.bind(this)} onMouseLeave={this.handleMouseOut.bind(this)} source='news'>
+                                    <li onMouseOver={this.handleMouseUserOver} onMouseLeave={this.handleMouseOut} source='news'>
                                         <NavLink to="/about">信息披露</NavLink>
                                         <div className="selectNav" style={{display:this.state.open}}>
                                             <ol>
                                                 <li>
-                                                    <a href="#/about?id=1">关于华赢宝</a>
+                                                    <a href="/about?id=1">关于华赢宝</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#/about?id=2">团队介绍</a>
+                                                    <a href="/about?id=2">团队介绍</a>
                                                 </li>
                                                 <li>
                                                     <a href="#/about?id=3">业务介绍</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#/about?id=4">运营数据</a>
+                                                    <a href="/about?id=4">运营数据</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#/about?id=5">媒体报道</a>
+                                                    <a href="/about?id=5">媒体报道</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#/about?id=6">公司动态</a>
+                                                    <a href="/about?id=6">公司动态</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#/about?id=7">从业机构信息</a>
+                                                    <a href="/about?id=7">从业机构信息</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#/about?id=8">相关法律法规披露</a>
+                                                    <a href="/about?id=8">相关法律法规披露</a>
                                                 </li>
                                             </ol>
                                         </div>

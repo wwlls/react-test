@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-
+const Tools = require('./tools');
 const Config = require('../../config');
 const mockData = require('../data/mockData'); // 财富mock数据
 
@@ -19,7 +19,8 @@ const Utils = {
         params['action'] = urlOrigin;
         return axios.get(url, { params });
     },
-    postRequest(url, data = {} , callback) {
+    postRequest(action, data = {} , callback) {
+        data['action'] = action;
         //mock数据
         if (Config.mock) {
             //match(/-(\w*)/)[1];  
@@ -28,37 +29,41 @@ const Utils = {
             this.mockAdapter.onPost(url).reply(200, mockData[urlCode]);
         } else {
             data = this.setPublic(data);
-            let accessToken = this.getStorage("ZSSESSIONID");
-            if(url != '/token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
+            let accessToken = localStorage.getItem("ZZBSESSIONID");
+            console.log(accessToken)
+            if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
-                //tokenData = this.setPublic(tokenData);
-                this.postRequest('http://test.huayingbaolicai.com:8006/token/get', tokenData).then(function(res) {
+                let callback = function(res) {
                     console.log(res)
-                    // if(res )
-                    // axios.post(url, data);
-                })
+                    let accessToken = JSON.parse(res.body).access_token;
+                    console.log(accessToken)
+                    localStorage.setItem("ZZBSESSIONID" , accessToken);
+                }
+                this.postRequest('token/get', tokenData, callback);
+
                 return;
             }
             data['sign'] = Utils.createSign(data);
         }
-        return axios.post(url, data ).then(function(res) {
-            console.log(res)
-            //全局判断是否有accessToken,登录
-            if(!res) {
+        return axios.post(Config.api + action, data).then(function(res) {
+            if (res.rtn_code == 1009) {// 未登录
+                //localStorage.removeItem(key); 清除手机号
+                this.props.history.push(Config.login_page);
+                return;
+            };
+            if(res.rtn_code == 1002) {
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
-                tokenData = this.setPublic(tokenData);
-                this.postRequest('/token/get', tokenData).then(function(res) {
-                    console.log(res)
-                    // if(res )
-                    // axios.post(url, data);
-                })
+                let callback = function(res) {
+                    let accessToken = JSON.parse(res.body).access_token;
+                    localStorage.setItem("ZZBSESSIONID" , accessToken);
+                }
+                this.postRequest('token/get', tokenData, callback);
                 return;
             }
-            
             callback(res);
         });
     },
@@ -70,13 +75,13 @@ const Utils = {
         data['version'] = Config.version;
         data['sign_type'] = Config.sign_type;
         data['device_type'] = Config.device_type;
-        if (this.getStorage("ZSSESSIONID")) {
-            data['access_token'] = this.getStorage("ZSSESSIONID");
+        if (localStorage.getItem("ZZBSESSIONID")) {
+            data['access_token'] = localStorage.getItem("ZZBSESSIONID");
         }
         return data;
     },
 
-    //
+    //32位请求随机字符串，用于标识签名的唯一性
     getRandomString(len = 32) {
     /** **默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1*** */
         const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
@@ -89,41 +94,24 @@ const Utils = {
     },
     //创建签名拼接
     createSign(params) {
-        console.log(params)
         let data = "";
         let key;
+        let arr = [];
         for(key in params) {
-            var value = params[key]
-            console.log(value)
+            arr.push(key);
+            // data = data + key + "=" + value;
+        }
+        arr.sort();
+        for (var i = 0; i < arr.length; i++) {
+            let key = arr[i];
+            var value = params[key];
             if (data != "")
             data = data + "&";
             data = data + key + "=" + encodeURIComponent(value);
-            // data = data + key + "=" + value;
         }
         data = data + "&key=" + Config.md5_key;
-        console.log(data)
         let md5 = require('md5');
         return md5(data);
-    },
-    //储存书局 
-    setStorage(key, value) {
-        if (typeof value === 'object') {
-            value = JSON.stringify(value);
-        }
-        localStorage.setItem(key, value);
-    },
-    // 存的0，取出来0,
-    getStorage(key) {
-        let value = localStorage.getItem(key);
-        try {
-            value = JSON.parse(localStorage.getItem(key));
-        } catch (e) {
-            console.log('this is not a object');
-        }
-        return value;
-    },
-    removeStorage(key) {
-        localStorage.removeItem(key);
     },
 };
 
