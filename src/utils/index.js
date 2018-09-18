@@ -1,6 +1,5 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-const Tools = require('./tools');
 const Config = require('../../config');
 const mockData = require('../data/mockData'); // 财富mock数据
 
@@ -19,7 +18,7 @@ const Utils = {
         params['action'] = urlOrigin;
         return axios.get(url, { params });
     },
-    postRequest(action, data = {} , callback) {
+    postRequest(action, data = {} , callFuc) {
         data['action'] = action;
         //mock数据
         if (Config.mock) {
@@ -30,19 +29,16 @@ const Utils = {
         } else {
             data = this.setPublic(data);
             let accessToken = localStorage.getItem("ZZBSESSIONID");
-            console.log(accessToken)
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
-                let callback = function(res) {
-                    console.log(res)
+                let callFuc = function(res) {
                     let accessToken = JSON.parse(res.body).access_token;
                     console.log(accessToken)
                     localStorage.setItem("ZZBSESSIONID" , accessToken);
                 }
-                this.postRequest('token/get', tokenData, callback);
-
+                this.postRequest('token/get', tokenData, callFuc);
                 return;
             }
             data['sign'] = Utils.createSign(data);
@@ -50,21 +46,22 @@ const Utils = {
         return axios.post(Config.api + action, data).then(function(res) {
             if (res.rtn_code == 1009) {// 未登录
                 //localStorage.removeItem(key); 清除手机号
-                this.props.history.push(Config.login_page);
+                window.location.href = Config.login_page;
                 return;
             };
             if(res.rtn_code == 1002) {
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
-                let callback = function(res) {
+                let callFuc = function(res) {
                     let accessToken = JSON.parse(res.body).access_token;
+                    console.log(accessToken)
                     localStorage.setItem("ZZBSESSIONID" , accessToken);
                 }
-                this.postRequest('token/get', tokenData, callback);
+                Utils.postRequest('token/get', tokenData, callFuc);
                 return;
             }
-            callback(res);
+            callFuc(res);
         });
     },
 
@@ -112,6 +109,26 @@ const Utils = {
         data = data + "&key=" + Config.md5_key;
         let md5 = require('md5');
         return md5(data);
+    },
+    //储存书局 
+    setStorage(key, value) {
+        if (typeof value === 'object') {
+            value = JSON.stringify(value);
+        }
+        localStorage.setItem(key, value);
+    },
+    // 存的0，取出来0,
+    getStorage(key) {
+        let value = localStorage.getItem(key);
+        try {
+            value = JSON.parse(localStorage.getItem(key));
+        } catch (e) {
+            console.log('this is not a object');
+        }
+        return value;
+    },
+    removeStorage(key) {
+        localStorage.removeItem(key);
     },
 };
 

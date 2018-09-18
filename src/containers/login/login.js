@@ -26,17 +26,13 @@ class LoginForm extends React.Component {
 	    	console.log(err)
 	      	if (!err) {
 	        	console.log('Received values of form: ', values);
+	        	this.props.history.push('/register');
 	      	}
 	    });
 	}
 
 	componentDidMount() {
-		let data = {};
-		data.mobile = 13666606473;
-		let callback = function(res) {
-			console.log(res)
-		}
-		Utils.postRequest('login/checkMobile',data ,callback);
+		
 
 	}
 
@@ -46,16 +42,14 @@ class LoginForm extends React.Component {
 		if(!(Tools.isMobile(value)) || value.length !== 11) {
             callback("手机号码输入有误");
         } else {
-   //      	let data = {};
-   //      	data.mobile = value;
-			// let callback = function(res) {
-			// 	console.log(res)
-			// }
-			// Utils.postRequest('/api/login/checkMobile',data ,callback);
-	            callback();
-	            //form.validateFields(['password'], { force: true });
-	            //form.getFieldDecorator(['mobile'],{validateTrigger: 'onChange'});
-	        }
+            callback();
+            let data = {};
+			data.mobile = value;
+			let callFuc = function(res) {
+				console.log(res)
+			}
+			Utils.postRequest('login/checkMobile',data ,callFuc);
+        }
 	}
 
 	//验证密码

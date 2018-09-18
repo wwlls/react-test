@@ -1,3 +1,5 @@
+import 'core-js/es6/map';
+import 'core-js/es6/set';
 /** 这个文件中封装了一些常用的工具函数 **/
 
 const tools = {
@@ -93,18 +95,7 @@ const tools = {
         }
         console.log("解谜：", code, c);
         return c;
-    },
-    //储存书局 
-    setStorage(key, value) {
-        localStorage.setItem(key, value);
-    },
-    // 存的0，取出来0,
-    getStorage(key) {
-        return value;
-    },
-    removeStorage(key) {
-        localStorage.removeItem(key);
-    },
+    }
 };
 
 export default tools;

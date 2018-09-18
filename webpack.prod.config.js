@@ -12,7 +12,7 @@ const svgDirs = [
 ]
 
 module.exports = {
-    entry: './src/app.js', //相对路径
+    entry: ["babel-polyfill", "./src/app.js"], //相对路径 babel-polyfill转义es6兼容ie浏览器
     output: {
       path: path.resolve(__dirname, 'build'),
       // filename: 'boundle.js'

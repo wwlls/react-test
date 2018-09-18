@@ -20,55 +20,59 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "antd-mobile": "^2.2.2",
-    "autoprefixer": "^8.6.4",
-    "axios": "^0.18.0",
-    "axios-mock-adapter": "^1.15.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "css-loader": "^0.28.11",
-    "eslint": "^5.0.1", // Eslint 代码规范检测器
-    "eslint-loader": "^2.1.0", // Webpack解析器 - 打包时检测代码规范时用
-    "eslint-plugin-react": "^7.10.0", // Eslint插件 - 让Eslint支持检测React语法（JSX）（.eslintrc.json中配置的plugins参数）
-    "express": "^4.16.3", // Node.js框架 - 用于server.js中提供开发环境的服务
-    "file-loader": "^1.1.11", // Webpack解析器 - 解析各类文件时有用，图片、音频、视频等,处理它们的相对路径问题
-    "postcss-flexbugs-fixes": "^3.3.1",
-    "postcss-loader": "^2.1.5", // Webpack解析器 - 用于进一步解析CSS，比如自动添加-webkit-前缀等
-    "precss": "^3.1.2",
-    "qs": "^6.5.2",
-    "react": "^16.4.1",
-    "react-bmap": "^1.0.80", //依赖百度地图
-    "react-dom": "^16.4.1",
+  "dependencies": { 
+    "antd": "^3.7.3",   //antdPC端
+    "antd-mobile": "^2.2.2",    //antd移动端
+    "axios": "^0.18.0",   //Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。
+    "axios-mock-adapter": "^1.15.0",    //axios的模拟调试器，将后台mock数据转义
+    "react": "^16.4.1",     //react核心
+    "react-countup": "^4.0.0-alpha.6",  //数字从0在一定时间内滚动到设置数字
+    "react-dom": "^16.4.1", 
     "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-promise": "^0.6.0",
-    "style-loader": "^0.21.0",
-    "url-loader": "^1.0.1",
-    "webpack-cli": "^3.0.8"
+    "webpack": "^3.0.0",    //webpack核心
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^2.11.2"  // Webpack小型服务器（server.js中用这个来搭建开发环境所需的服务）
   },
   "devDependencies": {
-    "babel": "^6.23.0",
+    "autoprefixer": "^8.6.4",   //自动管理浏览器前缀
+    "babel": "^6.23.0",     
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-import": "^1.8.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-polyfill": "^6.26.0",    //兼容ie浏览器
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
+    "eslint": "^5.0.1",     // Eslint 代码规范检测器
+    "eslint-loader": "^2.1.0",  // Webpack解析器 - 打包时检测代码规范时用
+    "eslint-plugin-react": "^7.10.0",   // Eslint插件 - 让Eslint支持检测React语法（JSX）（.eslintrc.json中配置的plugins参数）
+    "express": "^4.16.3",   // Node.js框架 - 用于server.js中提供开发环境的服务
     "express-http-proxy": "^1.2.0",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.9.1",
+    "md5": "^2.2.1",
+    "node-sass": "^4.9.3",
+    "open-browser-webpack-plugin": "0.0.5",
+    "postcss-flexbugs-fixes": "^3.3.1",
+    "postcss-loader": "^2.1.5",
     "postcss-pxtorem": "^4.0.1",
-    "react-countup": "^4.0.0-alpha.6",  //数字从0滚动
+    "precss": "^3.1.2",
+    "qs": "^6.5.2",     //qs.parse()将URL解析成对象的形式  qs.stringify()将对象 序列化成URL的形式，以&进行拼接
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "svg-sprite-loader": "^3.8.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^3.0.0", // Webpack 核心
-    "webpack-dev-server": "^2.11.2" // Webpack小型服务器（server.js中用这个来搭建开发环境所需的服务）
+    "url-loader": "^1.0.1", 
   }
 }

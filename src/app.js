@@ -10,7 +10,6 @@ import qs from 'qs';
 import RouterMap from './router';
 import reducers from './reducers';
 import Config from '../config';
-import Utils from './utils';
 import './static/css/base.css'
 
 // mock是本地模拟环境，Dev是本地开发环境

@@ -1,7 +1,6 @@
 /** 导航 **/
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import { browserHistory } from 'react-router'
 import { Affix } from 'antd';
 import Dropdown from '../dropdown/dropdown';
 import imgLogo from "../../static/images/common/header/logo.png";
@@ -18,7 +17,6 @@ export default class Header extends React.Component {
         };
     }
 
-
     handleMouseUserOver = (event) => {
         this.setState({
             open: 'block',
@@ -29,11 +27,6 @@ export default class Header extends React.Component {
             open: 'none',
         })
     }  
-
-    handleText = () => {
-        console.log(this.props.history)
-        //this.props.history.push=('/register');
-    }
 
     componentDidMount() {
     }
@@ -55,7 +48,7 @@ export default class Header extends React.Component {
                             <Link to="/login">登录</Link>
                             <Dropdown name="app" />
                             <span className="one">手机客户端</span>
-                            <span className="two" onClick={this.handleText.bind(this)}>市场有风险，出借需谨慎</span>
+                            <span className="two">市场有风险，出借需谨慎</span>
                         </div>
                     </div>
                 </nav>
