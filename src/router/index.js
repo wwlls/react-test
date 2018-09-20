@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 //项目
 import Home from '../containers/home/home';
 import Lend from '../containers/lend/lend';
 import Safe from '../containers/safe/safe';
 import About from '../containers/about/about';
-import Law1 from '../containers/about/page8/subPage/law1';
 import Login from '../containers/login/login';
 import Register from '../containers/register/register';
 import Forget from '../containers/forget/forget';
@@ -29,7 +28,6 @@ class RouterMap extends Component {
                 <Route path="/lend" component={ Lend } />
                 <Route path="/safe" component={ Safe } />
                 <Route path="/about" component={ About } />
-                <Route path="/law1" component={ Law1 } />
                 <Route path="/login" component={ Login } />
                 <Route path="/register" component={ Register } />
                 <Route path="/forget" component={ Forget } />
@@ -38,6 +36,7 @@ class RouterMap extends Component {
                 <Route path="/member" component={ Member } />
                 <Route path="/list" component={ List } />
                 <Route path="/*" component={ NotFound } />
+                <Redirect to="/" />
             </Switch>
         </BrowserRouter>
     );

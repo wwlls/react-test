@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Checkbox, Input, Button, Row, Col, Icon } from 'antd';
@@ -142,6 +142,7 @@ class LoginForm extends React.Component {
 				</div>
 				<Footer />
 				<BackTop />
+				<Prompt when={true} message="你确定要离开当前页面吗？" />
 			</div>
 		)
 	}
