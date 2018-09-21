@@ -27,3 +27,6 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install node-sass --save-dev
 
 ```
+
+执行 npm test 可以运行一次测试
+执行 npm run test:watch 可以让每当文件改变时自动执行测试。

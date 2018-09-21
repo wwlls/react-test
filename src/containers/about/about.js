@@ -8,7 +8,6 @@ import Anchor  from '../../component/anchor/anchor'
 import Footer from '../../component/footer/footer';
 import BackTop from '../../component/backTop/backTop';
 import Tabs from '../../component/tabs/tabs';
-import safeBanner from '../../static/images/safe/safeBanner.jpg';
 import Page1 from "./page1"; // 子页面1
 import Page2 from "./page2"; // 子页面2
 import Page3 from "./page3"; // 子页面3
@@ -23,7 +22,6 @@ class About extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	safeBanner: safeBanner,
 	    	panes : [
 		      { title: '关于华赢宝', content: <Page1 />, key: '1' },
 		      { title: '团队介绍', content: <Page2 />, key: '2' },
@@ -60,7 +58,7 @@ class About extends React.Component {
 		return (
 			<div className="container">
 				<Header />
-				<SubBanner safeBanner={this.state.safeBanner} />
+				<SubBanner />
 				<div className="about layout">
 					<Tabs panes={this.state.panes} id={this.state.id} callback={this.callback} />
 				</div>

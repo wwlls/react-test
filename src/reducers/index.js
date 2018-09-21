@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import imgReducer from './reducer-img';
+import counter from './counter';
 
 const rootReducer = combineReducers({
-  imgSrc: imgReducer
+  imgReducer,
+  counter
 });
 
 export default rootReducer;

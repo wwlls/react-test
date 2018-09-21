@@ -1,0 +1,10 @@
+@import "../../../../static/css/common.scss";
+.law {
+	font-size: 16px;
+	color: $blockColor;
+	padding-bottom: 50px;
+	line-height: 60px;
+	& h5 {
+		font-size: 16px;
+	}
+}

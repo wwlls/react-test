@@ -68,28 +68,28 @@ export default class Header extends React.Component {
                                         <div className="selectNav" style={{display:this.state.open}}>
                                             <ol>
                                                 <li>
-                                                    <a href="/about?id=1">关于华赢宝</a>
+                                                    <Link to="/about?id=1">关于华赢宝</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="/about?id=2">团队介绍</a>
+                                                    <Link to="/about?id=2">团队介绍</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="#/about?id=3">业务介绍</a>
+                                                    <Link to="/about?id=3">业务介绍</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="/about?id=4">运营数据</a>
+                                                    <Link to="/about?id=4">运营数据</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="/about?id=5">媒体报道</a>
+                                                    <Link to="/about?id=5">媒体报道</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="/about?id=6">公司动态</a>
+                                                    <Link to="/about?id=6">公司动态</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="/about?id=7">从业机构信息</a>
+                                                    <Link to="/about?id=7">从业机构信息</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="/about?id=8">相关法律法规披露</a>
+                                                    <Link to="/about?id=8">相关法律法规披露</Link>
                                                 </li>
                                             </ol>
                                         </div>

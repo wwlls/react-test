@@ -1,11 +1,23 @@
 import axios from 'axios';
-
-export const SET_IMG = 'SET_IMG';
-
+import * as test from './actionType';
 
 export function setImg(src) {
   return {
-    type: SET_IMG,
+    type: test.SET_IMG,
     payload: src
   };
+}
+
+export const addNum = (value) => {
+	return {
+		type: test.ADD_NUM,
+		value
+	}
+}
+
+export const removeNum = (value) => {
+	return {
+		type: test.REMOVE_NUM,
+		value
+	}
 }

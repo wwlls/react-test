@@ -59,6 +59,7 @@ const Utils = {
                     localStorage.setItem("ZZBSESSIONID" , accessToken);
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);
+                callFuc(res);
                 return;
             }
             callFuc(res);

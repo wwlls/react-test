@@ -25,6 +25,7 @@
     "antd-mobile": "^2.2.2",    //antd移动端
     "axios": "^0.18.0",   //Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。
     "axios-mock-adapter": "^1.15.0",    //axios的模拟调试器，将后台mock数据转义
+    "prop-types": "^15.6.2", //PropTypes导出一系列验证工具可以确保你接收到的数据是有效的
     "react": "^16.4.1",     //react核心
     "react-countup": "^4.0.0-alpha.6",  //数字从0在一定时间内滚动到设置数字
     "react-dom": "^16.4.1", 

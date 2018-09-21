@@ -8,7 +8,7 @@ import promise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
 import qs from 'qs';
 import RouterMap from './router';
-import reducers from './reducers';
+import reducers from './reducers/index';
 import Config from '../config';
 import './static/css/base.css'
 
