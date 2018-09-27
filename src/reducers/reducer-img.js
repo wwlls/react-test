@@ -1,4 +1,4 @@
-import { SET_IMG } from '../actions/setImg';
+import { SET_IMG } from '../actions';
 
 export default function (state = false, action) {
   switch (action.type) {

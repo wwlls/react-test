@@ -77,10 +77,6 @@ const mapStateToProps = (state) => {
 // 修改redux调用mapDispatchToProps，里面bind绑定对应的方法,这里是setImg
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ setImg, addNum, removeNum }, dispatch);
-    // return {
-    //     addBtn: () => dispatch(addNum),
-    //     removeBtn: () => dispatch(removeNum)
-    // }
 }
 
 // 这个页面不获取redux，所以connect第一个参数为null;
