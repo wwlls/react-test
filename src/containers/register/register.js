@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Form, Checkbox, Input, Button, Row, Col } from 'antd';
+import { Form, Checkbox, Input, Button, Row, Col, message } from 'antd';
+import { checkMobile } from '../../actions';
 import Utils from '../../utils/index';
 import Tools from '../../utils/tools';
 import Header from '../../component/header/header';
@@ -41,34 +42,44 @@ class RegisterForm extends React.Component {
 		let form = this.props.form;
         let value = form.getFieldValue('mobile');
         if((Tools.isMobile(value))) {
-            clearInterval(this.timer);
-            this.state.stop = false;
-            this.setState({
-                disabled: 'disabled'
-            })
-            this.timer = setInterval(function() {
-                let count = this.state.count;
-                this.state.liked = false;
-                count -= 1;
-                this.setState({
-                    count: count
-                });
-                if (count < 1) {
-                    this.state.stop = true;
-                    this.setState({
-                        liked: true,
-                        disabled: '',
-                        text: '重发',
-                        count: 60
-                    });
-    　　　　　　　　clearInterval(this.timer);
-                }
-            }.bind(this), 1000);
+            let data = {};
+            data.mobile = value;
+            data.reason = '注册验证';
+            let callFuc = (res) => {
+            	console.log(res)
+            	this.setTime();
+            }
+            Utils.postRequest('verifyCode/get', data, callFuc);
         } else {
         	form.validateFields(['mobile'], { force: true });
-        }
-         
+        } 
     };
+
+    setTime = () => {
+    	clearInterval(this.timer);
+        this.state.stop = false;
+        this.setState({
+            disabled: 'disabled'
+        })
+        this.timer = setInterval(function() {
+            let count = this.state.count;
+            this.state.liked = false;
+            count -= 1;
+            this.setState({
+                count: count
+            });
+            if (count < 1) {
+                this.state.stop = true;
+                this.setState({
+                    liked: true,
+                    disabled: '',
+                    text: '重发',
+                    count: 60
+                });
+　　　　　　　　clearInterval(this.timer);
+            }
+        }.bind(this), 1000);
+    }
 
 	componentDidMount() {
 	}
@@ -80,10 +91,19 @@ class RegisterForm extends React.Component {
             callback("手机号码输入有误");
         } else {
             callback();
-            // this.setState({
-            // 	mobile: form.getFieldValue('mobile')
-            // 	this.props.form.validateFields(['nickname'], { force: true });
-            // })
+            let data = {};
+			data.mobile = value;
+			let callFuc = function(res) {
+				console.log(res)
+				if(res.rtn_code === 0) {
+					message.info('您的账户已存在，请登录');
+				} else if(res.rtn_code === 10010 || res.rtn_code === 10013) {
+					message.info('您的账户不存在，请注册');
+				} else if(res.rtn_code === 10018) {
+					message.info('您输入的手机号存在风险！请联系客服');
+				}
+			}
+			this.props.checkMobile('login/checkMobile', data, callFuc);
         }
 	}
 
@@ -227,9 +247,13 @@ class RegisterForm extends React.Component {
 	}
 }
 
-function mapStateToProps() {
-  return {
-  };
+const mapStateToProps = (state) => {
+    return {}
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ checkMobile }, dispatch);
+}
+
 const Register = Form.create()(RegisterForm);
-export default  connect(mapStateToProps)(Register)
+export default connect(mapStateToProps , mapDispatchToProps)(Register)

@@ -21,7 +21,6 @@ export default class partner extends React.Component {
 
     render() {
         let text = this.props.stop ? this.props.text : this.props.count + 's';
-        console.log(text)
         return (
             <div className={this.props.getCode} onClick={this.props.habdelGetCode}>
                 <Button disabled={this.props.disabled}>{text}</Button>

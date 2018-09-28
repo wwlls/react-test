@@ -24,16 +24,14 @@ export const removeNum = (value) => {
 	}
 }
 
-
-export const checkMobile = (url, parmas, callFuc) => async(dispatch , getstate) => {
+//检查新老用户
+export const checkMobile = (url, parmas, callFuc) => async(dispatch, getState) => {
 	try {
-		const res = await Utils.postRequest(url, parmas, callFuc);
+		await Utils.postRequest(url, parmas, callFuc);
 	    dispatch({
-	      // 调用dispatch触发对应的reducer，如果不需要把数据存入store，则可以不调用dispatch
-	      type: "test.CHECK_MOBILE",
-	      payload: res
+	      	// 调用dispatch触发对应的reducer，如果不需要把数据存入store，则可以不调用dispatch
+	      	type: "test.CHECK_MOBILE",
 	    });
-	    return res; // 同时也把数据直接返回调用的地方
     } catch (error) {
         message.error("网络错误，请重试");
     }

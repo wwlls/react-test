@@ -6,6 +6,7 @@ import { message } from 'antd';
 import { Provider } from 'react-redux';
 import promise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk'
 import qs from 'qs';
 import RouterMap from './router';
 import reducers from './reducers/index';
@@ -49,7 +50,7 @@ axios.interceptors.response.use((response) => {
   return Promise.reject(error);
 });
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promise, thunkMiddleware)(createStore);
 ReactDom.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <RouterMap />

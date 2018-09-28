@@ -3,6 +3,7 @@ import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Checkbox, Input, Button, Row, Col, Icon } from 'antd';
+import { checkMobile } from '../../actions';
 import Utils from '../../utils/index';
 import Tools from '../../utils/tools';
 import Header from '../../component/header/header';
@@ -32,7 +33,6 @@ class LoginForm extends React.Component {
 	}
 
 	componentDidMount() {
-		
 
 	}
 
@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
 			let callFuc = function(res) {
 				console.log(res)
 			}
-			Utils.postRequest('login/checkMobile',data ,callFuc);
+			this.props.checkMobile('login/checkMobile',data ,callFuc);
         }
 	}
 
@@ -148,9 +148,13 @@ class LoginForm extends React.Component {
 	}
 }
 
-function mapStateToProps() {
-  return {
-  };
+const mapStateToProps = (state) => {
+    return {}
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ checkMobile }, dispatch);
+}
+
 const Login = Form.create()(LoginForm);
-export default  connect(mapStateToProps)(Login)
+export default connect(mapStateToProps , mapDispatchToProps)(Login)
