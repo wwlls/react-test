@@ -24,7 +24,7 @@ export default class page4 extends React.Component {
                                 <Tooltip placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的所有交易总和">
                                     <div className=""></div>
                                     <dl>
-                                        <dt>累计交易总金额（元）</dt>
+                                        <dt>累计交易总金额1（元）</dt>
                                         <dd></dd>
                                     </dl>
                                 </Tooltip>
