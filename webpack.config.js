@@ -100,7 +100,13 @@ module.exports = {
 
     ],
     resolve: {
-      extensions: [".js", ".jsx", ".less", ".css", ".scss"] //后缀名自动补全
+      extensions: [".js", ".jsx", ".less", ".css", ".scss"], //后缀名自动补全
+      alias: {
+        components: __dirname + '/src/component',
+        actions: __dirname + '/src/actions',
+        static: __dirname + '/src/static',
+        utils:__dirname+'/src/utils'
+      },
     },
     externals:{
         'BMap':'BMap',   //百度地图引入

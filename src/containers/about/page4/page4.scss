@@ -1,0 +1,80 @@
+@import "static/css/common.scss";
+.page{
+    .aboutData1{
+        width: 998px;
+        border-left: 1px solid #e0e8ed;
+        border-top: 1px solid #e0e8ed;
+        margin: 15px 0 0;
+        height: 325px;
+    }
+    .te{
+        width: 16.66%;
+        float: left;
+        height: 145px;
+        border-right: 1px solid #e0e8ed;
+        border-bottom: 1px solid #e0e8ed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color:#979CB2;
+        span{
+            color: #EB6430
+        }
+    }
+    .te1{
+        height: 180px;
+        padding: 2%;
+    }
+    .te3{
+        font-size: 20px;
+        color: #474747
+    }
+    .te2{
+        color: #0CC541
+    }
+}
+.page .column p{
+    color: #9B9B9B;
+    font-size: 14px;
+    b{
+        color: #000;
+        margin-right: 2%;
+    }
+}
+.aboutData{
+    .parent1{
+        display: flex;
+        align-items: center;
+        padding-left: 60px !important;
+        margin-bottom: 1%;
+    }
+    .parent{
+        display: flex;
+       padding-left: 60px !important;
+       margin-bottom: 1%;
+        .flex{
+            flex: 1;
+            display: flex;
+            align-items: center;
+          
+        }
+    }
+ dl{
+     display: inline-block;
+     
+     dd{
+         color:#FF8910;
+         font-size: 24px;
+         margin: 0;
+     padding: 0;
+     }
+     dt{
+         color: #9B9B9B;
+         font-size: 14px;
+         margin: 0;
+     padding: 0;
+     }
+ }
+ 
+}

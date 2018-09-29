@@ -41,7 +41,7 @@ export default class page5 extends React.Component {
                                     <img src={aboutNews5} alt="媒体报道" />
                                 </Col>
                                 <Col md={18}>
-                                    <p><Link to="" target="_blank">「华赢宝征文活动」有华赢宝的日子，树桩吐绿，鸟语花香</Link></p>
+                                    <p><Link to="/news" target="_blank">「华赢宝征文活动」有华赢宝的日子，树桩吐绿，鸟语花香</Link></p>
                                     <p>2017年11月08日</p>
                                     <p>《道德经》第四十二章曰：道生一，一生二，二生三，三生万物......拟以此句，喻华赢宝惠泽近二十万出借用户，其意深远。</p>
                                 </Col>
