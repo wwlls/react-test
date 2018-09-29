@@ -19,6 +19,7 @@ import Login from '../containers/login/login';
 import Register from '../containers/register/register';
 import Forget from '../containers/forget/forget';
 
+import News from '../containers/news' 
 
 //test
 import NotFound from '../containers/test/not-found';
@@ -44,6 +45,7 @@ class RouterMap extends Component {
                 <Route path="/law5" component={ Law5 } />
                 <Route path="/law6" component={ Law6 } />
                 <Route path="/login" component={ Login } />
+                <Route path="/news" component={ News } />
                 <Route path="/register" component={ Register } />
                 <Route path="/forget" component={ Forget } />
 
