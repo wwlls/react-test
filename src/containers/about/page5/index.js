@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { Icon, Row, Col } from 'antd';
-import aboutNews2 from '../../../static/images/about/news2.png';
-import aboutNews3 from '../../../static/images/about/news3.png';
-import aboutNews4 from '../../../static/images/about/news4.png';
-import aboutNews5 from '../../../static/images/about/news5.png';
-import aboutNews6 from '../../../static/images/about/news6.png';
+import aboutNews2 from 'static/images/about/news2.png';
+import aboutNews3 from 'static/images/about/news3.png';
+import aboutNews4 from 'static/images/about/news4.png';
+import aboutNews5 from 'static/images/about/news5.png';
+import aboutNews6 from 'static/images/about/news6.png';
 
 export default class page5 extends React.Component {
     constructor(props) {

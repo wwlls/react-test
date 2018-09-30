@@ -1,9 +1,9 @@
 /** 下拉菜单 **/
 import React from "react";
 import { Menu, Dropdown } from 'antd';
-import imgHover1 from "../../static/images/common/header/hover1.png";
-import imgHover2 from "../../static/images/common/header/hover2.png";
-import imgHover3 from "../../static/images/common/header/hover3.png";
+import imgHover1 from "static/images/common/header/hover1.png";
+import imgHover2 from "static/images/common/header/hover2.png";
+import imgHover3 from "static/images/common/header/hover3.png";
 import "./dropdown.scss";
 
 

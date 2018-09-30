@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Header from '../../component/header/header';
-import SubBanner from '../../component/subBanner/subBanner'
-import Anchor  from '../../component/anchor/anchor'
-import Footer from '../../component/footer/footer';
-import BackTop from '../../component/backTop/backTop';
-import Tabs from '../../component/tabs/tabs';
+import Header from 'component/header/header';
+import SubBanner from 'component/subBanner/subBanner'
+import Anchor  from 'component/anchor/anchor'
+import Footer from 'component/footer/footer';
+import BackTop from 'component/backTop/backTop';
+import Tabs from 'component/tabs/tabs';
 import Page1 from "./page1"; // 子页面1
 import Page2 from "./page2"; // 子页面2
 import Page3 from "./page3"; // 子页面3

@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, Row, Col } from 'antd';
-import aboutImg5 from '../../../static/images/about/img5.jpg';
+import aboutImg5 from 'static/images/about/img5.jpg';
 
 export default class page1 extends React.Component {
     constructor(props) {

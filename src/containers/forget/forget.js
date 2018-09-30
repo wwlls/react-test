@@ -3,12 +3,12 @@ import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Checkbox, Input, Button, Row, Col } from 'antd';
-import Utils from '../../utils/index';
-import Tools from '../../utils/tools';
-import Header from '../../component/header/header';
-import Footer from '../../component/footer/footer';
-import BackTop from '../../component/backTop/backTop';
-import CountDown from '../../component/countDown/countDown';
+import Utils from 'utils/index';
+import Tools from 'utils/tools';
+import Header from 'component/header/header';
+import Footer from 'component/footer/footer';
+import BackTop from 'component/backTop/backTop';
+import CountDown from 'component/countDown/countDown';
 import "./forget.scss";
 
 const FormItem = Form.Item;

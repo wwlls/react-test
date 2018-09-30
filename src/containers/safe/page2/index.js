@@ -1,7 +1,7 @@
 import React from "react";
-import safeImg3 from '../../../static/images/safe/img3.png';
-import safeImg4 from '../../../static/images/safe/img4.png';
-import safeImg5 from '../../../static/images/safe/img5.png';
+import safeImg3 from 'static/images/safe/img3.png';
+import safeImg4 from 'static/images/safe/img4.png';
+import safeImg5 from 'static/images/safe/img5.png';
 
 export default class page1 extends React.Component {
     constructor(props) {

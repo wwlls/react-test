@@ -1,6 +1,6 @@
 import React from "react";
-import aboutImg9 from '../../../static/images/about/img9.png';
-import aboutImg10 from '../../../static/images/about/img10.png';
+import aboutImg9 from 'static/images/about/img9.png';
+import aboutImg10 from 'static/images/about/img10.png';
 
 export default class page3 extends React.Component {
     constructor(props) {

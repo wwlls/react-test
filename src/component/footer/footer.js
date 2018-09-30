@@ -1,6 +1,6 @@
 /** 尾部 **/
 import React from "react";
-import keep from "../../static/images/common/footer/place.png";
+import keep from "static/images/common/footer/place.png";
 import "./footer.scss";
 
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon, Row, Col } from 'antd';
-import safeImg1 from '../../../static/images/safe/img1.png';
-import safeImg2 from '../../../static/images/safe/img2.png';
+import safeImg1 from 'static/images/safe/img1.png';
+import safeImg2 from 'static/images/safe/img2.png';
 
 export default class page1 extends React.Component {
     constructor(props) {

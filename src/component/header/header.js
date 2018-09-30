@@ -3,8 +3,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Affix } from 'antd';
 import Dropdown from '../dropdown/dropdown';
-import imgLogo from "../../static/images/common/header/logo.png";
-
+import imgLogo from "static/images/common/header/logo.png";
 import "./header.scss";
 
 export default class Header extends React.Component {

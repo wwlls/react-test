@@ -1,6 +1,6 @@
 /** 其他页面banner图 **/
 import React from "react";
-import safeBanner from '../../static/images/safe/safeBanner.jpg';
+import safeBanner from 'static/images/safe/safeBanner.jpg';
 import "./subBanner.scss";
 
 export default class subBanner extends React.Component {

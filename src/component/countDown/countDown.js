@@ -1,9 +1,7 @@
 /** 60秒倒计时 **/
 import React from "react";
 import { Button } from 'antd'
-import Tools from '../../utils/tools';
 import "./countDown.scss";
-
 
 export default class partner extends React.Component {
     constructor(props) {

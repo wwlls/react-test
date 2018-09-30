@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Utils from '../../utils';
+import Utils from 'utils';
 import CountUp from 'react-countup';
 import { Icon, Row, Col } from 'antd';
-import Header from '../../component/header/header';
-import Carousel from '../../component/carousel/carousel';
-import Partner from '../../component/partner/partner';
-import Footer from '../../component/footer/footer';
-import BackTop from '../../component/backTop/backTop';
-import imgbanner1 from '../../static/images/common/banner/banner1.jpg';
-import imgbanner2 from '../../static/images/common/banner/banner2.jpg';
-import downLoadApp from '../../static/images/home/downLoad.png';
+import Header from 'component/header/header';
+import Carousel from 'component/carousel/carousel';
+import Partner from 'component/partner/partner';
+import Footer from 'component/footer/footer';
+import BackTop from 'component/backTop/backTop';
+import imgbanner1 from 'static/images/common/banner/banner1.jpg';
+import imgbanner2 from 'static/images/common/banner/banner2.jpg';
+import downLoadApp from 'static/images/home/downLoad.png';
 import "./home.scss";
 
 class Home extends React.Component {
