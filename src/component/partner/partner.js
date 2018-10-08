@@ -1,14 +1,14 @@
 /** 合作单位 **/
 import React from "react";
 import PagePartner from './page/pagePartner';
-import partnerIcon from "../../static/images/home/partnerIcon.png";
-import imgpartner1 from "../../static/images/common/partner/partner1.png";
-import imgpartner2 from "../../static/images/common/partner/partner2.png";
-import imgpartner3 from "../../static/images/common/partner/partner3.png";
-import imgpartner4 from "../../static/images/common/partner/partner4.png";
-import imgpartner5 from "../../static/images/common/partner/partner5.png";
-import imgpartner6 from "../../static/images/common/partner/partner6.png";
-import imgpartner7 from "../../static/images/common/partner/partner7.png";
+import partnerIcon from "static/images/home/partnerIcon.png";
+import imgpartner1 from "static/images/common/partner/partner1.png";
+import imgpartner2 from "static/images/common/partner/partner2.png";
+import imgpartner3 from "static/images/common/partner/partner3.png";
+import imgpartner4 from "static/images/common/partner/partner4.png";
+import imgpartner5 from "static/images/common/partner/partner5.png";
+import imgpartner6 from "static/images/common/partner/partner6.png";
+import imgpartner7 from "static/images/common/partner/partner7.png";
 import "./partner.scss";
 
 

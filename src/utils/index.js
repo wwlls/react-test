@@ -44,6 +44,7 @@ const Utils = {
             data['sign'] = Utils.createSign(data);
         }
         return axios.post(Config.api + action, data).then(function(res) {
+            console.log(res)
             if (res.rtn_code == 1009) {// 未登录
                 //localStorage.removeItem(key); 清除手机号
                 window.location.href = Config.login_page;

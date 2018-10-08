@@ -3,12 +3,12 @@ import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Checkbox, Input, Button, Row, Col, Icon } from 'antd';
-import { checkMobile } from '../../actions';
-import Utils from '../../utils/index';
-import Tools from '../../utils/tools';
-import Header from '../../component/header/header';
-import Footer from '../../component/footer/footer';
-import BackTop from '../../component/backTop/backTop';
+import { checkMobile } from 'actions';
+import Utils from 'utils/index';
+import Tools from 'utils/tools';
+import Header from 'component/header/header';
+import Footer from 'component/footer/footer';
+import BackTop from 'component/backTop/backTop';
 import "./login.scss";
 
 const FormItem = Form.Item;

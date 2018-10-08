@@ -1,8 +1,8 @@
 import React from "react";
-import Header from '../../../../component/header/header';
-import SubBanner from '../../../../component/subBanner/subBanner'
-import Footer from '../../../../component/footer/footer';
-import BackTop from '../../../../component/backTop/backTop';
+import Header from 'component/header/header';
+import SubBanner from 'component/subBanner/subBanner'
+import Footer from 'component/footer/footer';
+import BackTop from 'component/backTop/backTop';
 import "./law.scss";
 
 export default class Law2 extends React.Component {

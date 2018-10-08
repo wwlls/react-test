@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Header from '../../component/header/header';
+import Header from 'component/header/header';
 
 class Lend extends React.Component {
 	constructor(props) {

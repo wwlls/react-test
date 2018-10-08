@@ -1,8 +1,8 @@
 import React from "react";
-import Map from '../../../component/map/map';
-import safeImg6 from '../../../static/images/safe/img6.jpg';
-import safeImg7 from '../../../static/images/safe/img7.png';
-import safeImg9 from '../../../static/images/safe/img9.jpg';
+import Map from 'component/map/map';
+import safeImg6 from 'static/images/safe/img6.jpg';
+import safeImg7 from 'static/images/safe/img7.png';
+import safeImg9 from 'static/images/safe/img9.jpg';
 
 export default class page1 extends React.Component {
     constructor(props) {

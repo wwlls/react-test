@@ -1,8 +1,8 @@
 /** 回到顶部 **/
 import React from "react";
 import { BackTop , Tooltip} from 'antd';
-import app from "../../static/images/common/app.png";
-import wechat from "../../static/images/common/wechat.png";
+import app from "static/images/common/app.png";
+import wechat from "static/images/common/wechat.png";
 import "./backTop.scss";
 
 
