@@ -15,12 +15,14 @@
 		}
 	}
 	& .ant-menu {
-		color: $bigColor;
 		& .ant-menu-item {
 			height: 50px;
 			line-height: 50px;
 			border-bottom: 1px solid $bgColor;
 			text-align: center;
+			& a {
+				color: $bigColor;
+			}
 			&:after {
 				left: 0;
 				border-left: 4px solid $leftColor;

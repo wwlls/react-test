@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Utils from 'utils';
@@ -10,7 +10,7 @@ import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
 import "./member.scss";
 
-import MyAsset from './page/myAsset';
+import MyAsset from './page/myAssets';
 import Recharge from './page/recharge';
 import Cash from './page/cash';
 import Capital from './page/capital';
@@ -33,7 +33,6 @@ class Member extends React.Component {
 	}
 
 	render() {
-
 		return (
 			<div className="container">
 				<Header />
@@ -47,16 +46,16 @@ class Member extends React.Component {
 					  	</Breadcrumb>
 					  	<div>
 					  		<Menu />
-					  		<Content style={{margin: '0 16px'}}>
+					  		<div>
 		                        <Switch>
-		                            <Route exact path={'/member'} component={MyAsset} />
-		                            <Route exact path={'/member/recharge'} component={Recharge} />
-		                            <Route exact path={'/member/cash'} component={Cash} />
-		                            <Route exact path={'/member/capital'} component={Capital} />
-		                            <Route exact path={'/member/set'} component={Set} />
-		                            <Route exact path={'/member/coupon'} component={Coupon} />
+		                            <Route path='/member' component={MyAsset} />
+		                            <Route path='/member/recharge' component={Recharge} />
+		                            <Route path='/member/cash' component={Cash} />
+		                            <Route path='/member/capital' component={Capital} />
+		                            <Route path='/member/set' component={Set} />
+		                            <Route path='/member/coupon' component={Coupon} />
 		                        </Switch>
-		                    </Content>
+		                    </div>
 					  	</div>
 					</div>
 				</div>

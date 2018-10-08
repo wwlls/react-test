@@ -19,17 +19,14 @@ export default class Sider extends React.Component {
     } 
 
     componentDidMount() {
-        let path = this.props.location.search;
-        console.log(path)
         this.setMenuOpen(this.props);
-        //console.log(path)
     }
     componentWillReceiveProps(nextProps) {
         this.setMenuOpen(nextProps);
     }
 
     setMenuOpen = props => {
-        let path = this.props.location;
+        const {path} = props;
         console.log(path)
         this.setState({
             //openKey: path.substr(0, path.lastIndexOf('/')),
@@ -46,6 +43,7 @@ export default class Sider extends React.Component {
 
     render() {
         const { current } = this.state;
+        console.log(this.state.current)
         return (
             <div className="menu">
                 <div className="menuHeader">
@@ -66,12 +64,12 @@ export default class Sider extends React.Component {
                     selectedKeys={[current]}
                     mode="inline"
                 >
-                    <Menu.Item key="1">我的资产</Menu.Item>
-                    <Menu.Item key="2">账户充值</Menu.Item>
-                    <Menu.Item key="3"><Link to="/Cash">账户提现</Link></Menu.Item>
-                    <Menu.Item key="4"><Link to="/Capital">资金流水</Link></Menu.Item>
-                    <Menu.Item key="5"><Link to="/Set">账户设置</Link></Menu.Item>
-                    <Menu.Item key="6"><Link to="/Coupon">我的赠券</Link></Menu.Item>
+                    <Menu.Item key="1"><Link to="/member">我的资产</Link></Menu.Item>
+                    <Menu.Item key="2"><Link to="/member/recharge">账户充值</Link></Menu.Item>
+                    <Menu.Item key="3"><Link to="/member/cash">账户提现</Link></Menu.Item>
+                    <Menu.Item key="4"><Link to="/member/capital">资金流水</Link></Menu.Item>
+                    <Menu.Item key="5"><Link to="/member/set">账户设置</Link></Menu.Item>
+                    <Menu.Item key="6"><Link to="/member/coupon">我的赠券</Link></Menu.Item>
                 </Menu>
             </div>
         );

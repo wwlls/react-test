@@ -16,7 +16,7 @@ import Law5 from '../containers/about/page8/subPage/law5';
 import Law6 from '../containers/about/page8/subPage/law6';
 //end about
 //会员中心
-
+import Member from '../containers/member/member';
 import Login from '../containers/login/login';
 import Register from '../containers/register/register';
 import Forget from '../containers/forget/forget';
@@ -44,7 +44,7 @@ class RouterMap extends Component {
                 <Route path="/law4" component={ Law4 } />
                 <Route path="/law5" component={ Law5 } />
                 <Route path="/law6" component={ Law6 } />
-                
+                <Route path="/member" component={ Member } />
                 <Route path="/login" component={ Login } />
                 <Route path="/register" component={ Register } />
                 <Route path="/forget" component={ Forget } />
