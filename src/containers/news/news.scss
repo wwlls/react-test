@@ -1,0 +1,76 @@
+@import "static/css/common.scss";
+.tab7_tt {
+    padding: 50px 0;
+    text-align: center;
+    border-bottom:1px solid #8997B0;
+
+}
+.border_bottom{
+    border-bottom:1px solid #E7EAEF;
+}
+.tab7_tt span{
+    font-size: 24px;
+    color: #222C57;
+    margin-left: 10px;
+}
+.tab7_main{
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+.tab7_main ul li{
+    width: 50%;
+    float: left;
+}
+.tab7_main ul li .tab7_l_span{
+    display:block;
+    width: 146px;
+    font-size: 14px;
+    color: #222C57;
+    float: left;
+}
+.tab7_main ul li .tab7_r_span{
+    font-size: 14px;
+    color: #8997B0;
+    display: block;
+    float: left;
+}
+#diamond {
+    width: 18px;
+    height: 18px;
+    background: #EF7A46;
+    display: inline-block;
+    vertical-align: middle;
+/* Rotate */
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+/* Rotate Origin */
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+} 
+.sign_bg3{
+    width: 100%;
+    border-top: 1px solid #8997B0;
+    border-bottom: 1px solid #8997B0;
+}
+.sign_footer{
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-bottom: 1px solid #E7EAEF;
+    clear: both;
+}
+.sign_footer ul li{
+    float: left;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #8997B0;
+    text-align: center;
+}

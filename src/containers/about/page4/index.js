@@ -173,7 +173,7 @@ export default class page4 extends React.Component {
                 <div className="aboutData">
                     <Row gutter={40}>
                         <Col md={8} className='parent'>
-                            <Tooltip className='flex' placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的所有交易总和">
+                            <Tooltip className='flex' placement="bottomLeft" title=" 在平台借款成功，累计借款人总数（去重）">
                                 
                                 <img src={op7}/>
                                 <dl>
@@ -183,7 +183,7 @@ export default class page4 extends React.Component {
                             </Tooltip>
                         </Col>
                         <Col md={8} className='parent'>
-                            <Tooltip className='flex' placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的借贷交易笔数总和">
+                            <Tooltip className='flex' placement="bottomLeft" title="平台（在借）借款人总数">
                                 
                                 <img src={op7}/>
                                 <dl>
@@ -193,7 +193,7 @@ export default class page4 extends React.Component {
                             </Tooltip>
                         </Col>
                         <Col md={8} className='parent'>
-                            <Tooltip className='flex' placement="bottomLeft" title="借贷余额：在投总额">
+                            <Tooltip className='flex' placement="bottomLeft" title="自平台运营上线起，借款人累计交易总额与累计借款人总数之比">
                           
                                 <img src={op8}/>
                                 <dl>
@@ -204,7 +204,7 @@ export default class page4 extends React.Component {
                                 
                         </Col>
                         <Col md={8} className='parent'>
-                            <Tooltip className='flex' placement="bottomLeft" title="借贷余额笔数：在投总额笔数">
+                            <Tooltip className='flex' placement="bottomLeft" title="最大一单借款人借款余额与累计借款总额之比">
                             <img src={op9}/>
                                 <dl>
                                     <dd>{borrowUserBigMoney}</dd>
@@ -214,7 +214,7 @@ export default class page4 extends React.Component {
                             
                         </Col>
                         <Col md={8} className='parent'>
-                            <Tooltip className='flex' placement="bottomLeft" title="利息余额：在投总额利息">
+                            <Tooltip className='flex' placement="bottomLeft" title="借款最多的前十户借款人的借款余额与累计借款总额之比">
                             <img src={op9}/>
                                 <dl>
                                     <dd>{borrowUserTenMoney}</dd>
@@ -235,7 +235,7 @@ export default class page4 extends React.Component {
             <div className="aboutData">
                 <Row gutter={40}>
                     <Col md={8} className='parent'>
-                        <Tooltip className='flex' placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的所有交易总和">
+                        <Tooltip className='flex' placement="bottomLeft" title=" 在平台出借成功，累计出借人总数（去重）">
                             
                             <img src={op1}/>
                             <dl>
@@ -245,7 +245,7 @@ export default class page4 extends React.Component {
                         </Tooltip>
                     </Col>
                     <Col md={8} className='parent'>
-                        <Tooltip className='flex' placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的借贷交易笔数总和">
+                        <Tooltip className='flex' placement="bottomLeft" title="平台（在投）出借人总数">
                             
                             <img src={op2}/>
                             <dl>
@@ -255,7 +255,7 @@ export default class page4 extends React.Component {
                         </Tooltip>
                     </Col>
                     <Col md={8} className='parent'>
-                        <Tooltip className='flex' placement="bottomLeft" title="借贷余额：在投总额">
+                        <Tooltip className='flex' placement="bottomLeft" title="自平台运营上线起，平台出借人累计交易总额与累计出借人总数之比">
                           
                             <img src={op3}/>
                             <dl>
@@ -266,7 +266,7 @@ export default class page4 extends React.Component {
                             
                     </Col>
                     <Col md={8} className='parent'>
-                        <Tooltip className='flex' placement="bottomLeft" title="借贷余额笔数：在投总额笔数">
+                        <Tooltip className='flex' placement="bottomLeft" title="出借金额最大的出借人出借金额总和与累计出借总额之比">
                         <img src={op4}/>
                             <dl>
                                 <dd>{investCountBigMoney}</dd>
@@ -276,7 +276,7 @@ export default class page4 extends React.Component {
                         
                     </Col>
                     <Col md={8} className='parent'>
-                        <Tooltip className='flex' placement="bottomLeft" title="利息余额：在投总额利息">
+                        <Tooltip className='flex' placement="bottomLeft" title="出借最多的前十户出借人的出借金额总和与累计借款总额之比">
                         <img src={op5}/>
                             <dl>
                                 <dd>{investCountTenMoney}</dd>
@@ -312,7 +312,6 @@ export default class page4 extends React.Component {
                 })
             }
                 
-              
               
             </Row>
         </div>
