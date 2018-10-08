@@ -15,15 +15,15 @@ import Law4 from '../containers/about/page8/subPage/law4';
 import Law5 from '../containers/about/page8/subPage/law5';
 import Law6 from '../containers/about/page8/subPage/law6';
 //end about
+//会员中心
+
 import Login from '../containers/login/login';
 import Register from '../containers/register/register';
 import Forget from '../containers/forget/forget';
 
-import News from '../containers/news' 
-
 //test
 import NotFound from '../containers/test/not-found';
-import Member from '../containers/test/member';
+import TestMember from '../containers/test/member';
 import List from '../containers/test/list';
 import Index from '../containers/test/index';
 
@@ -44,13 +44,13 @@ class RouterMap extends Component {
                 <Route path="/law4" component={ Law4 } />
                 <Route path="/law5" component={ Law5 } />
                 <Route path="/law6" component={ Law6 } />
+                
                 <Route path="/login" component={ Login } />
-                <Route path="/news" component={ News } />
                 <Route path="/register" component={ Register } />
                 <Route path="/forget" component={ Forget } />
 
                 <Route path="/index" component={ Index } />
-                <Route path="/member" component={ Member } />
+                <Route path="/testMember" component={ TestMember } />
                 <Route path="/list" component={ List } />
                 <Route path="/*" component={ NotFound } />
                 <Redirect to="/" />

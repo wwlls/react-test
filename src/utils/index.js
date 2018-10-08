@@ -28,7 +28,8 @@ const Utils = {
             this.mockAdapter.onPost(url).reply(200, mockData[urlCode]);
         } else {
             data = this.setPublic(data);
-            let accessToken = localStorage.getItem("ZZBSESSIONID");
+            let accessToken = Utils.getStorage("ZZBSESSIONID");
+            console.log(accessToken)
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
@@ -36,7 +37,7 @@ const Utils = {
                 let callFuc = function(res) {
                     let accessToken = JSON.parse(res.body).access_token;
                     console.log(accessToken)
-                    localStorage.setItem("ZZBSESSIONID" , accessToken);
+                    Utils.setStorage("ZZBSESSIONID" , accessToken);
                 }
                 this.postRequest('token/get', tokenData, callFuc);
                 return;
@@ -57,7 +58,7 @@ const Utils = {
                 let callFuc = function(res) {
                     let accessToken = JSON.parse(res.body).access_token;
                     console.log(accessToken)
-                    localStorage.setItem("ZZBSESSIONID" , accessToken);
+                    Utils.setStorage("ZZBSESSIONID" , accessToken);
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);
                 callFuc(res);
@@ -74,8 +75,8 @@ const Utils = {
         data['version'] = Config.version;
         data['sign_type'] = Config.sign_type;
         data['device_type'] = Config.device_type;
-        if (localStorage.getItem("ZZBSESSIONID")) {
-            data['access_token'] = localStorage.getItem("ZZBSESSIONID");
+        if (Utils.getStorage("ZZBSESSIONID")) {
+            data['access_token'] = Utils.getStorage("ZZBSESSIONID");
         }
         return data;
     },

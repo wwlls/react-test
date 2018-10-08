@@ -142,7 +142,6 @@ class LoginForm extends React.Component {
 				</div>
 				<Footer />
 				<BackTop />
-				<Prompt when={true} message="你确定要离开当前页面吗？" />
 			</div>
 		)
 	}
@@ -158,3 +157,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Login = Form.create()(LoginForm);
 export default connect(mapStateToProps , mapDispatchToProps)(Login)
+
+
+
+// <Prompt when={true} message="你确定要离开当前页面吗？" />	
