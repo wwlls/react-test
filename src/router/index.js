@@ -22,6 +22,13 @@ import Login from '../containers/login/login';
 import Register from '../containers/register/register';
 import Forget from '../containers/forget/forget';
 
+import News1 from '../containers/news/news1';
+import News2 from '../containers/news/news2'; 
+import News3 from '../containers/news/news3'; 
+import News4 from '../containers/news/news4';
+import News5 from '../containers/news/news5'; 
+import News6 from '../containers/news/news6';  
+
 //test
 import NotFound from '../containers/test/not-found';
 import TestMember from '../containers/test/member';
@@ -47,6 +54,14 @@ class RouterMap extends Component {
                 <Route path="/law6" component={ Law6 } />
                 <Route path="/member" component={ Member } />
                 <Route path="/login" component={ Login } />
+
+                <Route path="/news1" component={ News1 } />
+                <Route path="/news2" component={ News2 } />
+                <Route path="/news3" component={ News3 } />
+                <Route path="/news4" component={ News4 } />
+                <Route path="/news5" component={ News5 } />
+                <Route path="/news6" component={ News6 } />
+
                 <Route path="/register" component={ Register } />
                 <Route path="/forget" component={ Forget } />
 

@@ -1,5 +1,5 @@
 @import "static/css/common.scss";
-.page{
+.page4{
     .aboutData1{
         width: 998px;
         border-left: 1px solid #e0e8ed;
@@ -33,48 +33,49 @@
     .te2{
         color: #0CC541
     }
-}
-.page .column p{
-    color: #9B9B9B;
-    font-size: 14px;
-    b{
-        color: #000;
-        margin-right: 2%;
-    }
-}
-.aboutData{
-    .parent1{
-        display: flex;
-        align-items: center;
-        padding-left: 60px !important;
-        margin-bottom: 1%;
-    }
-    .parent{
-        display: flex;
-       padding-left: 60px !important;
-       margin-bottom: 1%;
-        .flex{
-            flex: 1;
+    .aboutData{
+        .parent1{
             display: flex;
             align-items: center;
-          
+            padding-left: 60px !important;
+            margin-bottom: 1%;
+        }
+        .parent{
+            display: flex;
+           padding-left: 60px !important;
+           margin-bottom: 1%;
+            .flex{
+                flex: 1;
+                display: flex;
+                align-items: center;
+              
+            }
+        }
+     dl{
+         display: inline-block;
+         
+         dd{
+             color:#FF8910;
+             font-size: 24px;
+             margin: 0;
+         padding: 0;
+         }
+         dt{
+             color: #9B9B9B;
+             font-size: 14px;
+             margin: 0;
+         padding: 0;
+         }
+     }
+     
+    }
+    .column p{
+        color: #9B9B9B;
+        font-size: 14px;
+        b{
+            color: #000;
+            margin-right: 2%;
         }
     }
- dl{
-     display: inline-block;
-     
-     dd{
-         color:#FF8910;
-         font-size: 24px;
-         margin: 0;
-     padding: 0;
-     }
-     dt{
-         color: #9B9B9B;
-         font-size: 14px;
-         margin: 0;
-     padding: 0;
-     }
- }
- 
 }
+
