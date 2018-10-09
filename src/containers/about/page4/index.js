@@ -94,7 +94,7 @@ export default class page4 extends React.Component {
       const investCountBigMoney = (infolist.top1InvestMoney / infolist.investMoney).toFixed(2)
       const investCountTenMoney = (infolist.top10InvestMoney / infolist.investMoney).toFixed(2)
         return (
-            <div className="page">
+            <div className="page page4">
                <section className="column">
                     <p>
                         <b>交易数据 </b>截至日期：{this.timestampToTime()}
