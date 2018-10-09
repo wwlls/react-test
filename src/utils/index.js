@@ -126,7 +126,6 @@ const Utils = {
         try {
             value = JSON.parse(localStorage.getItem(key));
         } catch (e) {
-            console.log('this is not a object');
         }
         return value;
     },

@@ -1,20 +1,9 @@
 @import "static/css/common.scss";
 .member {
 	margin: 16px 0 0;
-	& .ant-breadcrumb {
+	& h5 {
 		font-size: 16px;
-		margin: 0 0 20px;
-		& a {
-			color: $smallColor;
-		}
-		& span:first-child {
-			color: $smallColor;
-			& .ant-breadcrumb-separator {
-				display: none;
-			}
-		}
-		& span:last-child {
-			color: $smallColor;
-		}
+		color: $smallColor;
+		margin: 0 8px 0 0;
 	}
 }

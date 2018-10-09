@@ -1,0 +1,14 @@
+@import "static/css/common.scss";
+.ant-breadcrumb {
+	font-size: 16px;
+	margin: 0 0 20px;
+	& a {
+		color: $smallColor;
+	}
+	& span:first-child {
+		color: $smallColor;
+	}
+	& span:last-child {
+		color: $smallColor;
+	}
+}

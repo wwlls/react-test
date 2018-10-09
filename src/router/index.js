@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Router, Route, Switch, Redirect } from 'react-router-dom';
+import history from 'utils/history';
 
 //项目
 import Home from '../containers/home/home';
@@ -32,7 +33,7 @@ import Index from '../containers/test/index';
 class RouterMap extends Component {
   render() {
     return (
-        <BrowserRouter>
+        <Router history={history}>
             <Switch>
                 <Route path="/home" exact component={ Home } />
                 <Route path="/lend" component={ Lend } />
@@ -55,7 +56,7 @@ class RouterMap extends Component {
                 <Route path="/*" component={ NotFound } />
                 <Redirect to="/" />
             </Switch>
-        </BrowserRouter>
+        </Router>
     );
   }
 }
