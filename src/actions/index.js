@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Utils from '../utils';
 import { message } from "antd";
 import * as test from './actionType';
