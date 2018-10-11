@@ -36,12 +36,14 @@ class Member extends React.Component {
 		// }
 		const { location } = this.props;
 		let pathname = location.pathname;
+		console.log(1111,pathname)
 		this.threeSize(pathname);
 	}
 
 	componentWillReceiveProps(nextProps) {
         let pathname = nextProps.location.pathname;
-        this.threeSize(pathname);
+        console.log(pathname)
+        this.threeSize('nextProps ' + pathname);
     }
 
     threeSize = (pathname) => {

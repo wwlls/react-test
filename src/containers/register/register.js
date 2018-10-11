@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { Form, Checkbox, Input, Button, Row, Col, message } from 'antd';
 import { checkMobile } from 'actions';
 import Utils from 'utils/index';
@@ -15,6 +16,10 @@ import "./register.scss";
 const FormItem = Form.Item;
 
 class RegisterForm extends React.Component {
+	static propTypes = {
+		checkMobileData: PropTypes.object.isRequired,
+        checkMobile: PropTypes.func.isRequired,
+    }
 	constructor(props) {
 	    super(props);
 	    this.state = {
@@ -84,6 +89,19 @@ class RegisterForm extends React.Component {
 	componentDidMount() {
 	}
 
+	componentWillReceiveProps(nextProps) {
+		//获取后台数据
+        let checkMobileData = nextProps.checkMobileData;
+        console.log(checkMobileData)
+    	if(checkMobileData.rtn_code === 0) {
+			message.info('您的账户已存在，请登录' , 0.5);
+		} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+			message.info('您的账户不存在，请注册' , 0.5);
+		} else if(checkMobileData.rtn_code === 10018) {
+			message.info('您输入的手机号存在风险！请联系客服' , 0.5);
+		}
+    }
+
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
 		const form = this.props.form;	
@@ -91,19 +109,10 @@ class RegisterForm extends React.Component {
             callback("手机号码输入有误");
         } else {
             callback();
+            //验证成功判断是否新老用户
             let data = {};
 			data.mobile = value;
-			let callFuc = function(res) {
-				console.log(res)
-				if(res.rtn_code === 0) {
-					message.info('您的账户已存在，请登录');
-				} else if(res.rtn_code === 10010 || res.rtn_code === 10013) {
-					message.info('您的账户不存在，请注册');
-				} else if(res.rtn_code === 10018) {
-					message.info('您输入的手机号存在风险！请联系客服');
-				}
-			}
-			this.props.checkMobile('login/checkMobile', data, callFuc);
+			this.props.checkMobile(data);
         }
 	}
 
@@ -248,7 +257,9 @@ class RegisterForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	checkMobileData: state.checkMobile.checkMobileData,
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Form, Checkbox, Input, Button, Row, Col, Icon } from 'antd';
+import PropTypes from 'prop-types';
+import { Form, Checkbox, Input, Button, Row, Col, Icon, message } from 'antd';
 import { checkMobile } from 'actions';
-import Utils from 'utils/index';
 import Tools from 'utils/tools';
 import Header from 'component/header/header';
 import Footer from 'component/footer/footer';
@@ -14,6 +14,10 @@ import "./login.scss";
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
+	static propTypes = {
+		//checkMobileData: PropTypes.object.isRequired,
+        checkMobile: PropTypes.func.isRequired,
+    }
 	constructor(props) {
 	    super(props);
 	    this.state = {
@@ -33,8 +37,24 @@ class LoginForm extends React.Component {
 	}
 
 	componentDidMount() {
-
+		let data = {};
+			data.mobile = 13666606473;
+			this.props.checkMobile(data);
+		
 	}
+
+	// componentWillReceiveProps(nextProps) {
+	// 	//获取后台数据
+ //        let checkMobileData = nextProps.checkMobileData;
+ //        console.log(checkMobileData)
+ //    	if(checkMobileData.rtn_code === 0) {
+	// 		message.info('您的账户已存在，请登录' , 0.5);
+	// 	} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+	// 		message.info('您的账户不存在，请注册' , 0.5);
+	// 	} else if(checkMobileData.rtn_code === 10018) {
+	// 		message.info('您输入的手机号存在风险！请联系客服' , 0.5);
+	// 	}
+ //    }
 
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
@@ -43,12 +63,8 @@ class LoginForm extends React.Component {
             callback("手机号码输入有误");
         } else {
             callback();
-            let data = {};
-			data.mobile = value;
-			let callFuc = function(res) {
-				console.log(res)
-			}
-			this.props.checkMobile('login/checkMobile',data ,callFuc);
+            //验证成功判断是否新老用户
+            
         }
 	}
 
@@ -64,6 +80,8 @@ class LoginForm extends React.Component {
 	}
 
 	render() {
+		const { checkMobileData } = this.props;
+		console.log(checkMobileData)
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 		    labelCol: {
@@ -148,7 +166,10 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return {}
+	console.log(state.checkMobile)
+    return {
+    	checkMobileData: state.checkMobile.checkMobileData,
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

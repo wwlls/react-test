@@ -27,6 +27,10 @@ class Index extends React.Component {
         //   console.log(res);
         // });
     }
+    componentWillReceiveProps(nextProps) {
+        let count = nextProps.count;
+        console.log('nextProps ' + count);
+    }
     goOther (event) {
         // let name = event.target.getAttribute("data-name")
         // console.log(name)
@@ -47,6 +51,7 @@ class Index extends React.Component {
 
     render() {
         const { count } = this.props
+        console.log(count)
         return (
             <div className="page-index">
                 <Header />
@@ -68,6 +73,7 @@ class Index extends React.Component {
 
 //这个函数来指定如何把当前 Redux store state 映射到展示组件的 props 中
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         count: state.counter
     }

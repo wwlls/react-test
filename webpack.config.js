@@ -16,7 +16,7 @@ module.exports = {
         path: path.resolve(__dirname, 'build'), //打包文件的输出路径
         filename: 'bundle.js',
         chunkFilename: '[name].bundle.js',
-        publicPath: '/'
+        publicPath: '/' // 打包上线时，引用的js路径头部
     },
     devtool: 'source-map',
     module: {

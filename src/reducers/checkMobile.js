@@ -1,7 +1,7 @@
 import { CHECK_MOBILE } from '../actions';
 
 // let initState = {
-// 	fetchvalue: '',
+// 	checkMobileData: {},
 // }
 
 /** 对应的reducer处理函数，改变store中的值 **/
@@ -15,14 +15,15 @@ import { CHECK_MOBILE } from '../actions';
 //   	});
 // };
 
-export const mobile = (state = {}, action) => {
-	//console.log(state)
+export const checkMobileData = (state = {}, action) => {
 	switch (action.type) {
-	    case "CHECK_MOBILE":
-	      	return state;
+	    case "test.CHECK_MOBILE":
+	      	return {
+	      		checkMobileData: action.data
+	      	}
 	    default:
 	      	return state;
 	}
 }
 
-export default mobile;
+export default checkMobileData;

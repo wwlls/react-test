@@ -66,7 +66,7 @@ export default class page6 extends React.Component {
                     </ul>
                 </div>
                 <div style={{float:'right',marginTop:20}}>
-                    <Pagination current={this.state.current_page} pageSize={this.state.page_size} total={this.state.total} onChange={this.onChange}/>
+                    <Pagination showSizeChanger  current={this.state.current_page} pageSize={this.state.page_size} total={this.state.total} onChange={this.onChange}/>
                 </div>
             </div>
         );

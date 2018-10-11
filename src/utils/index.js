@@ -29,7 +29,6 @@ const Utils = {
         } else {
             data = this.setPublic(data);
             let accessToken = Utils.getStorage("ZZBSESSIONID");
-            console.log(accessToken)
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
@@ -40,29 +39,29 @@ const Utils = {
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
                 }
                 this.postRequest('token/get', tokenData, callFuc);
-                return;
+                // return;
             }
             data['sign'] = Utils.createSign(data);
         }
         return axios.post(Config.api + action, data).then(function(res) {
-            console.log(res)
             if (res.rtn_code == 1009) {// 未登录
                 //localStorage.removeItem(key); 清除手机号
                 window.location.href = Config.login_page;
-                return;
+                // return;
             };
-            if(res.rtn_code == 1002) {
+            if(res.rtn_code == 1002) {// token未获取到
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
                 let callFuc = function(accessRes) {
+                    console.log('accessRes ' + accessRes)
                     let accessToken = JSON.parse(accessRes.body).access_token;
                     console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
-                    callFuc(res);
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);
-                return;
+                // callFuc(res);
+                // return;
             }
             callFuc(res);
         });

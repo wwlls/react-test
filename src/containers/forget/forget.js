@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Form, Checkbox, Input, Button, Row, Col } from 'antd';
-import Utils from 'utils/index';
+import PropTypes from 'prop-types';
+import { Form, Checkbox, Input, Button, Row, Col, Icon, message } from 'antd';
+import { checkMobile } from 'actions';
 import Tools from 'utils/tools';
 import Header from 'component/header/header';
 import Footer from 'component/footer/footer';
@@ -14,6 +15,10 @@ import "./forget.scss";
 const FormItem = Form.Item;
 
 class ForgetForm extends React.Component {
+	static propTypes = {
+		checkMobileData: PropTypes.object.isRequired,
+        checkMobile: PropTypes.func.isRequired,
+    }
 	constructor(props) {
 	    super(props);
 	    this.state = {
@@ -73,6 +78,19 @@ class ForgetForm extends React.Component {
 	componentDidMount() {
 	}
 
+	componentWillReceiveProps(nextProps) {
+		//获取后台数据
+        let checkMobileData = nextProps.checkMobileData;
+        console.log(checkMobileData)
+    	if(checkMobileData.rtn_code === 0) {
+			message.info('您的账户已存在，请登录');
+		} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+			message.info('您的账户不存在，请注册');
+		} else if(checkMobileData.rtn_code === 10018) {
+			message.info('您输入的手机号存在风险！请联系客服');
+		}
+    }
+
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
 		const form = this.props.form;	
@@ -80,10 +98,10 @@ class ForgetForm extends React.Component {
             callback("手机号码输入有误");
         } else {
             callback();
-            // this.setState({
-            // 	mobile: form.getFieldValue('mobile')
-            // 	this.props.form.validateFields(['nickname'], { force: true });
-            // })
+            //验证成功判断是否新老用户
+            let data = {};
+			data.mobile = value;
+			this.props.checkMobile(data);
         }
 	}
 
@@ -193,9 +211,15 @@ class ForgetForm extends React.Component {
 	}
 }
 
-function mapStateToProps() {
-  return {
-  };
+const mapStateToProps = (state) => {
+    return {
+    	checkMobileData: state.checkMobile.checkMobileData,
+    }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ checkMobile }, dispatch);
+}
+
 const Forget = Form.create()(ForgetForm);
-export default  connect(mapStateToProps)(Forget)
+export default connect(mapStateToProps , mapDispatchToProps)(Forget)
