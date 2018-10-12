@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -206,6 +206,9 @@ class ForgetForm extends React.Component {
 				</div>
 				<Footer />
 				<BackTop />
+				<Prompt message={() => {
+				  return clearInterval(this.timer);
+				}} />
 			</div>
 		)
 	}
@@ -213,12 +216,12 @@ class ForgetForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-    	checkMobileData: state.checkMobile.checkMobileData,
+    	checkMobileData: state.checkMobile,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ checkMobile }, dispatch);
+  	return bindActionCreators({ checkMobile }, dispatch);
 }
 
 const Forget = Form.create()(ForgetForm);

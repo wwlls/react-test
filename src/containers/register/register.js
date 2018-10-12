@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -89,18 +89,18 @@ class RegisterForm extends React.Component {
 	componentDidMount() {
 	}
 
-	componentWillReceiveProps(nextProps) {
-		//获取后台数据
-        let checkMobileData = nextProps.checkMobileData;
-        console.log(checkMobileData)
-    	if(checkMobileData.rtn_code === 0) {
-			message.info('您的账户已存在，请登录' , 0.5);
-		} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-			message.info('您的账户不存在，请注册' , 0.5);
-		} else if(checkMobileData.rtn_code === 10018) {
-			message.info('您输入的手机号存在风险！请联系客服' , 0.5);
-		}
-    }
+	// componentWillReceiveProps(nextProps) {
+	// 	//获取后台数据
+ //        let checkMobileData = nextProps.checkMobileData;
+ //        console.log(checkMobileData)
+ //    	if(checkMobileData.rtn_code === 0) {
+	// 		message.info('您的账户已存在，请登录' , 0.5);
+	// 	} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+	// 		message.info('您的账户不存在，请注册' , 0.5);
+	// 	} else if(checkMobileData.rtn_code === 10018) {
+	// 		message.info('您输入的手机号存在风险！请联系客服' , 0.5);
+	// 	}
+ //    }
 
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
@@ -251,19 +251,31 @@ class RegisterForm extends React.Component {
 				</div>
 				<Footer />
 				<BackTop />
+				<Prompt message = {() => {
+				  return clearInterval(this.timer);
+				}} />
 			</div>
 		)
 	}
 }
 
 const mapStateToProps = (state) => {
+	let checkMobileData = state.checkMobile;
+	console.log(checkMobileData)
+   	if(checkMobileData.rtn_code === 0) {
+		message.info('您的账户已存在，请登录' , 0.5);
+	} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+		message.info('您的账户不存在，请注册' , 0.5);
+	} else if(checkMobileData.rtn_code === 10018) {
+		message.info('您输入的手机号存在风险！请联系客服' , 0.5);
+	}
     return {
-    	checkMobileData: state.checkMobile.checkMobileData,
+    	checkMobileData: state.checkMobile,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ checkMobile }, dispatch);
+  	return bindActionCreators({ checkMobile }, dispatch);
 }
 
 const Register = Form.create()(RegisterForm);

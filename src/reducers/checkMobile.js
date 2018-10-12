@@ -18,9 +18,7 @@ import { CHECK_MOBILE } from '../actions';
 export const checkMobileData = (state = {}, action) => {
 	switch (action.type) {
 	    case "test.CHECK_MOBILE":
-	      	return {
-	      		checkMobileData: action.data
-	      	}
+	      	return  action.data
 	    default:
 	      	return state;
 	}

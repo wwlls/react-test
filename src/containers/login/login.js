@@ -35,26 +35,9 @@ class LoginForm extends React.Component {
 	      	}
 	    });
 	}
-
 	componentDidMount() {
-		let data = {};
-			data.mobile = 13666606473;
-			this.props.checkMobile(data);
 		
 	}
-
-	// componentWillReceiveProps(nextProps) {
-	// 	//获取后台数据
- //        let checkMobileData = nextProps.checkMobileData;
- //        console.log(checkMobileData)
- //    	if(checkMobileData.rtn_code === 0) {
-	// 		message.info('您的账户已存在，请登录' , 0.5);
-	// 	} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-	// 		message.info('您的账户不存在，请注册' , 0.5);
-	// 	} else if(checkMobileData.rtn_code === 10018) {
-	// 		message.info('您输入的手机号存在风险！请联系客服' , 0.5);
-	// 	}
- //    }
 
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
@@ -64,7 +47,19 @@ class LoginForm extends React.Component {
         } else {
             callback();
             //验证成功判断是否新老用户
-            
+            let data = {};
+			data.mobile = 13666606473;
+			this.props.checkMobile(data);
+
+			let { checkMobileData } = this.props;
+			console.log(checkMobileData)
+		   	if(checkMobileData.rtn_code === 0) {
+				message.info('您的账户已存在，请登录' , 0.5);
+			} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+				message.info('您的账户不存在，请注册' , 0.5);
+			} else if(checkMobileData.rtn_code === 10018) {
+				message.info('您输入的手机号存在风险！请联系客服' , 0.5);
+			}
         }
 	}
 
@@ -80,8 +75,6 @@ class LoginForm extends React.Component {
 	}
 
 	render() {
-		const { checkMobileData } = this.props;
-		console.log(checkMobileData)
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 		    labelCol: {
@@ -94,7 +87,7 @@ class LoginForm extends React.Component {
 		    },
 	    };
 		return (
-			<div>
+			<div className="container">
 				<Header />
 				<div className="login">
 					<div className="layout">
@@ -115,11 +108,8 @@ class LoginForm extends React.Component {
 								            rules: [
 								            	{ required: true, whitespace : true, message: '请输入手机号' },
 								            	{ validator: this.checkPhone },
-								            	// { max: 11, message: '不是有效的手机号!' }, 
 								        	],
 								        	validateFirst: true,
-								        	// trigger: 'onBlur',
-								        	//validateTrigger: 'onBlur'
 								        })(
 							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength="11" placeholder="请输入手机号" />
 							         	 )}
@@ -166,14 +156,14 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state.checkMobile)
+	console.log(state)
     return {
-    	checkMobileData: state.checkMobile.checkMobileData,
+    	checkMobileData: state.checkMobile,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ checkMobile }, dispatch);
+  	return bindActionCreators({ checkMobile }, dispatch);
 }
 
 const Login = Form.create()(LoginForm);

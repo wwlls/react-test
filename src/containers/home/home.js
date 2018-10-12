@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Utils from 'utils';
+import PropTypes from 'prop-types';
+import { getCount } from 'actions';
 import CountUp from 'react-countup';
 import { Icon, Row, Col } from 'antd';
 import Header from 'component/header/header';
@@ -15,6 +17,10 @@ import downLoadApp from 'static/images/home/downLoad.png';
 import "./home.scss";
 
 class Home extends React.Component {
+	static propTypes = {
+		//checkMobileData: PropTypes.object.isRequired,
+        getCount: PropTypes.func.isRequired,
+    }
 	constructor(props) {
 	    super(props);
 	    this.state = {
@@ -23,15 +29,16 @@ class Home extends React.Component {
 	    		{img : imgbanner2 , id : 1 , url: 'list'}
 	    	],
 	    	//平台运营数据
-    		investMoneyTotal: 10000000000.625,
+    		investMoneyTotal: 0,
     		unit: '元',
-    		person: 12200,
+    		registerCount: 12200,
     		totalProfit: 100000,	
     		day: 365,
 	    };
 	}
 
 	componentDidMount() {
+		
 		// Utils.getRequest('/mall/api/CRH-MALLB001', {
 	 //      adv_location: 'mall_index'
 	 //    }, 'm1002').then((res) => {
@@ -40,49 +47,53 @@ class Home extends React.Component {
 	 //      });
 	 //    });
 
-	 	let data = {};
-		let callback = (res) => {
-			console.log(res)
-			this.setState({
-	      		carouselList: res
-	      	})
-		}
-		Utils.postRequest('carouselList',data ,callback);
+	 	this.props.getCount();
+	 	//获取平台数据
+		const { getCountData } = this.props;
+		console.log(getCountData)
 		
-		let investMoneyTotal = this.state.investMoneyTotal;
-		console.log(investMoneyTotal)
-		let totalProfit = this.state.totalProfit;
+		// let totalProfit = this.state.totalProfit;
 		let startTime = '2015/10/17 00:00:00';
 		let nowTime = new Date();
 		let removeTime = Math.floor((nowTime.getTime() - new Date(startTime).getTime()) / (24*3600*1000));
-		if (investMoneyTotal >= 10000 && investMoneyTotal < 100000000) {
-			this.setState({
-				investMoneyTotal : investMoneyTotal/10000,
-				unit: '万元',
-			})
-		} else if (investMoneyTotal >= 100000000) {
-			this.setState({
-				investMoneyTotal : investMoneyTotal/100000000,
-				unit: '亿元',
-			})
-		}
-		if (totalProfit >= 10000 && totalProfit < 100000000) {
-			this.setState({
-				investMoneyTotal : totalProfit/10000,
-				unit: '万元',
-			})
-		} else if (totalProfit >= 100000000) {
-			this.setState({
-				totalProfit : totalProfit/100000000,
-				unit: '亿元',
-			})
-		}
+		
+		// if (totalProfit >= 10000 && totalProfit < 100000000) {
+		// 	this.setState({
+		// 		investMoneyTotal : totalProfit/10000,
+		// 		unit: '万元',
+		// 	})
+		// } else if (totalProfit >= 100000000) {
+		// 	this.setState({
+		// 		totalProfit : totalProfit/100000000,
+		// 		unit: '亿元',
+		// 	})
+		// }
 		this.setState({
 			day: removeTime,
 		})
 	}
 
 	render() {
+		//获取平台数据
+		// const { getCountData } = this.props;
+		// console.log(getCountData)
+		// let investMoneyTotal = getCountData.investMoneyTotal;
+		// console.log(investMoneyTotal)
+		//注册人数
+		// this.setState({
+		// 	registerCount: getCountData.registerCount
+		// })
+		// if (investMoneyTotal >= 10000 && investMoneyTotal < 100000000) {
+		// 	this.setState({
+		// 		investMoneyTotal : investMoneyTotal/10000,
+		// 		unit: '万元',
+		// 	})
+		// } else if (investMoneyTotal >= 100000000) {
+		// 	this.setState({
+		// 		investMoneyTotal : investMoneyTotal/100000000,
+		// 		unit: '亿元',
+		// 	})
+		// }
 		return (
 			<div className="container">
 				<Header />
@@ -99,7 +110,7 @@ class Home extends React.Component {
 								</li>
 								<li className="floatL">
 									累计注册数
-									<CountUp start={0} end={parseFloat(this.state.person)} duration={4}>
+									<CountUp start={0} end={parseFloat(this.state.registerCount)} duration={4}>
 									</CountUp>
 									人
 								</li>
@@ -117,7 +128,7 @@ class Home extends React.Component {
 								</li>
 							</ul>
 						</div>
-						<a className="floatR" href="">更多数据<Icon type="double-right" /></a>
+						<Link className="floatR" to="/about?id=4">更多数据<Icon type="double-right" /></Link>
 					</div>
 				</div>
 				<div className="line"></div>
@@ -158,8 +169,15 @@ class Home extends React.Component {
 	}
 }
 
-function mapStateToProps() {
-  return {
-  };
+const mapStateToProps = (state) => {
+	console.log(state)
+  	return {
+  		getCountData: state.getCount
+  	};
 }
-export default  connect(mapStateToProps)(Home)
+
+const mapDispatchToProps = (dispatch) => {
+  	return bindActionCreators({ getCount }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

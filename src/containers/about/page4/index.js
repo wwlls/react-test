@@ -64,10 +64,10 @@ export default class page4 extends React.Component {
        
         let data = {};
 		let callback = (res) => {
-           
-            console.log(JSON.parse(res.body),JSON.parse(res.body).countData)
-            this.setState({infolist:JSON.parse(res.body).countData})
-		
+            console.log(JSON.parse(res.body).countData)
+            this.setState({
+                infolist: JSON.parse(res.body).countData
+            })
 		}
         Utils.postRequest('asset/getCountTotal',data ,callback);
      
