@@ -9,3 +9,6 @@ export const CHECK_MOBILE = 'CHECK_MOBILE';
 
 //平台数据
 export const GET_COUNT = 'GET_COUNT';
+
+//公司动态
+export const GET_NOTICEMESSAGELIST = 'GET_NOTICEMESSAGELIST';

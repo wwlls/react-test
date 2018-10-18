@@ -2,23 +2,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Header from '../../component/header/header';
-import SubBanner from '../../component/subBanner/subBanner'
-import Footer from '../../component/footer/footer';
-import BackTop from '../../component/backTop/backTop';
-import sc1 from '../../static/images/about/sign_c1.png';
-import sc2 from '../../static/images/about/sign_c2.png';
-import sc3 from '../../static/images/about/sign_c3.png';
-import n1 from '../../static/images/about/new1.jpg';
-import n2 from '../../static/images/about/new2.jpg';
-import money from '../../static/images/about/img_11.jpg';
-import pic9 from '../../static/images/about/news9.jpg';
-import pic10 from '../../static/images/about/news10.jpg';
-import pic3 from '../../static/images/about/new3.gif';
-import pic4 from '../../static/images/about/new4.jpg';
-import pic5 from '../../static/images/about/new5.jpg';
-import pic6 from '../../static/images/about/new6.jpg';
-import pic8 from '../../static/images/about/new8.jpg';
+import Header from 'component/header/header';
+import SubBanner from 'component/subBanner/subBanner'
+import Footer from 'component/footer/footer';
+import BackTop from 'component/backTop/backTop';
+import sc1 from 'static/images/about/sign_c1.png';
+import sc2 from 'static/images/about/sign_c2.png';
+import sc3 from 'static/images/about/sign_c3.png';
+import n1 from 'static/images/about/new1.jpg';
+import n2 from 'static/images/about/new2.jpg';
+import money from 'static/images/about/img_11.jpg';
+import pic9 from 'static/images/about/news9.jpg';
+import pic10 from 'static/images/about/news10.jpg';
+import pic3 from 'static/images/about/new3.gif';
+import pic4 from 'static/images/about/new4.jpg';
+import pic5 from 'static/images/about/new5.jpg';
+import pic6 from 'static/images/about/new6.jpg';
+import pic8 from 'static/images/about/new8.jpg';
 import './news.scss'
 
 export default class news extends React.Component {

@@ -1,39 +1,48 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { Icon, Row, Col,Pagination } from 'antd';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { getNoticeMessageList } from 'actions';
+import { Icon, Row, Col, Pagination } from 'antd';
 import moment from 'moment';
 import Utils from 'utils';
 import './page6.scss'
 
-export default class page6 extends React.Component {
+class Page6 extends React.Component {
+    static propTypes = {
+        //getCountData: PropTypes.object.isRequired,
+        getNoticeMessageList: PropTypes.func.isRequired,
+    }
     constructor(props) {
         super(props);
         this.state = {
             infolist: [],
             page_size: 6,
             current_page: 1,
-            total: 1,
         };
     }
 
     componentDidMount() {
-        this.getinfo()
+        this.getinfo()      
     }
 
-    //获取信息
+    //获取公司动态
     getinfo = () => {       
         let data = {
             page_size: this.state.page_size,
             current_page: this.state.current_page
         };
-		let callback = (res) => {
-            console.log(JSON.parse(res.body).noticeMessages)
-            this.setState({
-                infolist: JSON.parse(res.body).noticeMessages,
-                total: JSON.parse(res.body).total
-            })
-		}
-        Utils.postRequest('home/getNoticeMessageList',data ,callback);
+		this.props.getNoticeMessageList(data);
+    }
+
+    itemRender = (current, type, originalElement) => {
+        if (type === 'prev') {
+            return <a>上一页</a>;
+        } if (type === 'next') {
+            return <a>下一页</a>;
+        }
+          return originalElement;
     }
 
     //分页改变
@@ -46,12 +55,14 @@ export default class page6 extends React.Component {
     }
 
     render() {
+        const { totalData } = this.props;
+        const { getNoticeMessageListData } = this.props;
         return (
             <div className="page page6">
                 <div className='notice'>
                     <ul>
                     {
-                        this.state.infolist.map((item,index)=>{
+                        getNoticeMessageListData.map((item,index)=>{
                             return(
                                 <li key={index}>
                                     <Link to={item.link} target="_blank">
@@ -66,9 +77,23 @@ export default class page6 extends React.Component {
                     </ul>
                 </div>
                 <div style={{float:'right',marginTop:20}}>
-                    <Pagination showSizeChanger  current={this.state.current_page} pageSize={this.state.page_size} total={this.state.total} onChange={this.onChange}/>
+                    <Pagination showQuickJumper hideOnSinglePage={true} current={this.state.current_page} pageSize={this.state.page_size} total={totalData} onChange={this.onChange} itemRender={this.itemRender} />
                 </div>
             </div>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        totalData: state.getNoticeMessage.total,
+        getNoticeMessageListData: state.getNoticeMessage.noticeMessages
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ getNoticeMessageList }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page6)

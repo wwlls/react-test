@@ -18,7 +18,7 @@ import "./home.scss";
 
 class Home extends React.Component {
 	static propTypes = {
-		//checkMobileData: PropTypes.object.isRequired,
+		getCountData: PropTypes.object.isRequired,
         getCount: PropTypes.func.isRequired,
     }
 	constructor(props) {
@@ -28,17 +28,12 @@ class Home extends React.Component {
 	    		{img : imgbanner1 , id : 0 , url: 'index'} , 
 	    		{img : imgbanner2 , id : 1 , url: 'list'}
 	    	],
-	    	//平台运营数据
-    		investMoneyTotal: 0,
-    		unit: '元',
-    		registerCount: 12200,
-    		totalProfit: 100000,	
     		day: 365,
 	    };
 	}
 
 	componentDidMount() {
-		
+		//获取mock数据
 		// Utils.getRequest('/mall/api/CRH-MALLB001', {
 	 //      adv_location: 'mall_index'
 	 //    }, 'm1002').then((res) => {
@@ -46,28 +41,12 @@ class Home extends React.Component {
 	 //        imageUrl: res.resultList.length > 0 ? res.resultList[0].image_url : ''
 	 //      });
 	 //    });
-
+	 	//平台数据方法
 	 	this.props.getCount();
-	 	//获取平台数据
-		const { getCountData } = this.props;
-		console.log(getCountData)
-		
-		// let totalProfit = this.state.totalProfit;
+	 	//运营时间
 		let startTime = '2015/10/17 00:00:00';
 		let nowTime = new Date();
 		let removeTime = Math.floor((nowTime.getTime() - new Date(startTime).getTime()) / (24*3600*1000));
-		
-		// if (totalProfit >= 10000 && totalProfit < 100000000) {
-		// 	this.setState({
-		// 		investMoneyTotal : totalProfit/10000,
-		// 		unit: '万元',
-		// 	})
-		// } else if (totalProfit >= 100000000) {
-		// 	this.setState({
-		// 		totalProfit : totalProfit/100000000,
-		// 		unit: '亿元',
-		// 	})
-		// }
 		this.setState({
 			day: removeTime,
 		})
@@ -75,25 +54,8 @@ class Home extends React.Component {
 
 	render() {
 		//获取平台数据
-		// const { getCountData } = this.props;
-		// console.log(getCountData)
-		// let investMoneyTotal = getCountData.investMoneyTotal;
-		// console.log(investMoneyTotal)
-		//注册人数
-		// this.setState({
-		// 	registerCount: getCountData.registerCount
-		// })
-		// if (investMoneyTotal >= 10000 && investMoneyTotal < 100000000) {
-		// 	this.setState({
-		// 		investMoneyTotal : investMoneyTotal/10000,
-		// 		unit: '万元',
-		// 	})
-		// } else if (investMoneyTotal >= 100000000) {
-		// 	this.setState({
-		// 		investMoneyTotal : investMoneyTotal/100000000,
-		// 		unit: '亿元',
-		// 	})
-		// }
+		const { getCountData } = this.props;
+		console.log(getCountData)
 		return (
 			<div className="container">
 				<Header />
@@ -104,21 +66,45 @@ class Home extends React.Component {
 							<ul className="clear">
 								<li className="floatL">
 									累积交易额
-									<CountUp start={0} end={parseFloat(this.state.investMoneyTotal)} decimals={2} duration={4}>
+									<CountUp 
+										start={0} 
+										end={
+											getCountData.investMoneyTotal >= 100000000 ? getCountData.investMoneyTotal/100000000
+											: getCountData.investMoneyTotal >= 10000 ? getCountData.investMoneyTotal/10000
+											: getCountData.investMoneyTotal
+										} 
+										decimals={2} 
+										duration={4}>
 									</CountUp>
-									{this.state.unit}
+									{
+										getCountData.investMoneyTotal >= 100000000 ? '亿元'
+										: getCountData.investMoneyTotal >= 10000 ? '万元'
+										: '元'
+									}
 								</li>
 								<li className="floatL">
 									累计注册数
-									<CountUp start={0} end={parseFloat(this.state.registerCount)} duration={4}>
+									<CountUp start={0} end={getCountData.registerCount} duration={4}>
 									</CountUp>
 									人
 								</li>
 								<li className="floatL">
 									为用户累计赚取收益
-									<CountUp start={0} end={parseFloat(this.state.totalProfit)} decimals={2} duration={4}>
+									<CountUp 
+										start={0} 
+										end={
+											getCountData.totalProfit >= 100000000 ? getCountData.totalProfit/100000000
+											: getCountData.totalProfit >= 10000 ? getCountData.totalProfit/10000
+											: getCountData.totalProfit
+										} 
+										decimals={2} 
+										duration={4}>
 									</CountUp>
-									{this.state.unit}
+									{
+										getCountData.totalProfit >= 100000000 ? '亿元'
+										: getCountData.totalProfit >= 10000 ? '万元'
+										: '元'
+									}
 								</li>
 								<li className="floatL">
 									安全运营时间

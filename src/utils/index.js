@@ -47,7 +47,7 @@ const Utils = {
             if (res.rtn_code == 1009) {// 未登录
                 //localStorage.removeItem(key); 清除手机号
                 window.location.href = Config.login_page;
-                // return;
+                return;
             };
             if(res.rtn_code == 1002) {// token未获取到
                 let tokenData = {};
@@ -58,10 +58,14 @@ const Utils = {
                     let accessToken = JSON.parse(accessRes.body).access_token;
                     console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
+                    // if(accessRes !== '') {
+                    //     callFuc(res);
+                    // }
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);
-                // callFuc(res);
-                // return;
+                alert(1111)
+                callFuc(res);
+                return;
             }
             callFuc(res);
         });

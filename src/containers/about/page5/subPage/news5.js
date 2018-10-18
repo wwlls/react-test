@@ -2,10 +2,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Header from '../../component/header/header';
-import SubBanner from '../../component/subBanner/subBanner'
-import Footer from '../../component/footer/footer';
-import BackTop from '../../component/backTop/backTop';
+import Header from 'component/header/header';
+import SubBanner from 'component/subBanner/subBanner'
+import Footer from 'component/footer/footer';
+import BackTop from 'component/backTop/backTop';
 
 import n1 from 'static/images/about/new1.jpg';
 import n2 from 'static/images/about/new2.jpg';

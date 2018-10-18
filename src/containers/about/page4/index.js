@@ -1,6 +1,10 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { getCount } from 'actions';
+import moment from 'moment';
 import { Icon, Row, Col, Tooltip } from 'antd';
-import Utils from 'utils';
 import './page4.scss'
 import op1 from 'static/images/about/op1.png'
 import op2 from 'static/images/about/op2.png'
@@ -18,7 +22,11 @@ import op13 from 'static/images/about/op13.png'
 import op14 from 'static/images/about/op14.png'
 
 
-export default class page4 extends React.Component {
+class Page4 extends React.Component {
+    static propTypes = {
+        getCountData: PropTypes.object.isRequired,
+        getCount: PropTypes.func.isRequired,
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -48,85 +56,59 @@ export default class page4 extends React.Component {
                   {name:'提现'},
                 
                 ], 
-                jksf:[
-                    {name:'业务类型'},
-                    {name:'用户注册'},
-                    {name:'开通存管账户	'},
-                    {name:'充值'},
-                    {name:'提现'},
-                    {name:'借款服务'},
-                  
-                  ]   
+            jksf:[
+                {name:'业务类型'},
+                {name:'用户注册'},
+                {name:'开通存管账户	'},
+                {name:'充值'},
+                {name:'提现'},
+                {name:'借款服务'},
+              
+              ]   
         };
     }
 
     componentDidMount() {
-       
-        let data = {};
-		let callback = (res) => {
-            console.log(JSON.parse(res.body).countData)
-            this.setState({
-                infolist: JSON.parse(res.body).countData
-            })
-		}
-        Utils.postRequest('asset/getCountTotal',data ,callback);
-     
-   }
-    //获取当前时间
-     timestampToTime=()=> {
-        var date = new Date(new Date().getTime()-86400000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-        var Y = date.getFullYear() + '年';
-        var M = date.getMonth()+1 + '月';
-        var D = date.getDate() + '日';
-        var h = date.getHours() + ':';
-        var m = (date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes()) + ':';
-        var s = date.getSeconds();
-        return Y+M+D;
+       //平台数据方法
+        this.props.getCount();    
     }
 
-    render() {
-      const  {infolist} = this.state
-      const borrowUserMoney =  (infolist.borrowingMoney / infolist.borrowUserCountTotal).toFixed(2)
-      const borrowUserBigMoney = ((infolist.borrowingTop1WMoney / infolist.borrowingMoney)*100).toFixed(2)
-      const borrowUserTenMoney = ((infolist.borrowingTop10WMoney / infolist.borrowingMoney)*100).toFixed(2)
-      const investCountMoney = (infolist.investMoneyTotal / infolist.investCountTotal).toFixed(2)
 
-      const investCountBigMoney = (infolist.top1InvestMoney / infolist.investMoney).toFixed(2)
-      const investCountTenMoney = (infolist.top10InvestMoney / infolist.investMoney).toFixed(2)
+    render() {
+        //获取平台数据
+        const { getCountData } = this.props;
+        console.log(getCountData)
         return (
             <div className="page page4">
                <section className="column">
                     <p>
-                        <b>交易数据 </b>截至日期：{this.timestampToTime()}
+                        <b>交易数据 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
                     </p>
                     <div className="aboutData">
                         <Row gutter={40}>
                             <Col md={8} className='parent'>
                                 <Tooltip className='flex' placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的所有交易总和">
-                                    
                                     <img src={op1}/>
                                     <dl>
-                                        <dd>{infolist.investMoneyTotal}</dd>
+                                        <dd>{parseFloat(getCountData.investMoneyTotal).toFixed(2)}</dd>
                                         <dt>累计交易总金额（元）</dt>
                                     </dl>
                                 </Tooltip>
                             </Col>
                             <Col md={8} className='parent'>
                                 <Tooltip className='flex' placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的借贷交易笔数总和">
-                                    
                                     <img src={op2}/>
                                     <dl>
-                                        <dd>{infolist.investCountTotal}</dd>
+                                        <dd>{getCountData.investCountTotal}</dd>
                                         <dt>累计交易笔数（笔）</dt>
                                     </dl>
                                 </Tooltip>
                             </Col>
                             <Col md={8} className='parent'>
                                 <Tooltip className='flex' placement="bottomLeft" title="借贷余额：在投总额">
-                                  
                                     <img src={op3}/>
                                     <dl>
-                                        <dd>{infolist.investMoney}</dd>
+                                        <dd>{parseFloat(getCountData.investMoney).toFixed(2)}</dd>
                                         <dt>借贷余额（元）</dt>
                                     </dl>
                                 </Tooltip>
@@ -136,7 +118,7 @@ export default class page4 extends React.Component {
                                 <Tooltip className='flex' placement="bottomLeft" title="借贷余额笔数：在投总额笔数">
                                 <img src={op4}/>
                                     <dl>
-                                        <dd>{infolist.borrowingCount}</dd>
+                                        <dd>{getCountData.borrowingCount}</dd>
                                         <dt>借贷余额笔数（笔）</dt>
                                     </dl>
                                 </Tooltip>
@@ -146,7 +128,7 @@ export default class page4 extends React.Component {
                                 <Tooltip className='flex' placement="bottomLeft" title="利息余额：在投总额利息">
                                 <img src={op5}/>
                                     <dl>
-                                        <dd>{infolist.totalInterest}</dd>
+                                        <dd>{parseFloat(getCountData.totalInterest).toFixed(2)}</dd>
                                         <dt>利息余额（元）</dt>
                                     </dl>
                                 </Tooltip>
@@ -168,36 +150,33 @@ export default class page4 extends React.Component {
 
                 <section className="column">
                 <p>
-                    <b>借款人数据 </b>截至日期：{this.timestampToTime()}
+                    <b>借款人数据 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
                 </p>
                 <div className="aboutData">
                     <Row gutter={40}>
                         <Col md={8} className='parent'>
                             <Tooltip className='flex' placement="bottomLeft" title=" 在平台借款成功，累计借款人总数（去重）">
-                                
                                 <img src={op7}/>
                                 <dl>
-                                    <dd>{infolist.borrowUserCountTotal}</dd>
+                                    <dd>{getCountData.borrowUserCountTotal}</dd>
                                     <dt>累计借款用户</dt>
                                 </dl>
                             </Tooltip>
                         </Col>
                         <Col md={8} className='parent'>
                             <Tooltip className='flex' placement="bottomLeft" title="平台（在借）借款人总数">
-                                
                                 <img src={op7}/>
                                 <dl>
-                                    <dd>{infolist.borrowUserCount}</dd>
+                                    <dd>{getCountData.borrowUserCount}</dd>
                                     <dt>当前借款用户</dt>
                                 </dl>
                             </Tooltip>
                         </Col>
                         <Col md={8} className='parent'>
                             <Tooltip className='flex' placement="bottomLeft" title="自平台运营上线起，借款人累计交易总额与累计借款人总数之比">
-                          
                                 <img src={op8}/>
                                 <dl>
-                                    <dd>{borrowUserMoney}</dd>
+                                    <dd>{parseFloat(getCountData.borrowingMoney / getCountData.borrowUserCountTotal).toFixed(2)}</dd>
                                     <dt>人均累计借款金额(元)</dt>
                                 </dl>
                             </Tooltip>
@@ -207,17 +186,16 @@ export default class page4 extends React.Component {
                             <Tooltip className='flex' placement="bottomLeft" title="最大一单借款人借款余额与累计借款总额之比">
                             <img src={op9}/>
                                 <dl>
-                                    <dd>{borrowUserBigMoney}</dd>
+                                    <dd>{parseFloat(getCountData.borrowingTop1WMoney / getCountData.borrowingMoney).toFixed(2)}</dd>
                                     <dt>最大单一借款人待还金额占比(%)</dt>
                                 </dl>
                             </Tooltip>
-                            
                         </Col>
                         <Col md={8} className='parent'>
                             <Tooltip className='flex' placement="bottomLeft" title="借款最多的前十户借款人的借款余额与累计借款总额之比">
                             <img src={op9}/>
                                 <dl>
-                                    <dd>{borrowUserTenMoney}</dd>
+                                    <dd>{parseFloat(getCountData.borrowingTop10WMoney / getCountData.borrowingMoney).toFixed(2)}</dd>
                                     <dt>前十大借款人待还金额占比(%)</dt>
                                 </dl>
                             </Tooltip>
@@ -230,36 +208,33 @@ export default class page4 extends React.Component {
 
             <section className="column">
             <p>
-                <b>出借人信息 </b>截至日期：{this.timestampToTime()}
+                <b>出借人信息 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
             </p>
             <div className="aboutData">
                 <Row gutter={40}>
                     <Col md={8} className='parent'>
                         <Tooltip className='flex' placement="bottomLeft" title=" 在平台出借成功，累计出借人总数（去重）">
-                            
                             <img src={op1}/>
                             <dl>
-                                <dd>{infolist.investCountTotal}</dd>
+                                <dd>{getCountData.investCountTotal}</dd>
                                 <dt>累计出借人数量（人）</dt>
                             </dl>
                         </Tooltip>
                     </Col>
                     <Col md={8} className='parent'>
                         <Tooltip className='flex' placement="bottomLeft" title="平台（在投）出借人总数">
-                            
                             <img src={op2}/>
                             <dl>
-                                <dd>{infolist.investCount}</dd>
+                                <dd>{getCountData.investCount}</dd>
                                 <dt>当前出借人数量（人）</dt>
                             </dl>
                         </Tooltip>
                     </Col>
                     <Col md={8} className='parent'>
                         <Tooltip className='flex' placement="bottomLeft" title="自平台运营上线起，平台出借人累计交易总额与累计出借人总数之比">
-                          
                             <img src={op3}/>
                             <dl>
-                                <dd>{investCountMoney}</dd>
+                                <dd>{parseFloat(getCountData.investMoneyTotal / getCountData.investCountTotal).toFixed(2)}</dd>
                                 <dt>人均累计出借金额（元）</dt>
                             </dl>
                         </Tooltip>
@@ -269,7 +244,7 @@ export default class page4 extends React.Component {
                         <Tooltip className='flex' placement="bottomLeft" title="出借金额最大的出借人出借金额总和与累计出借总额之比">
                         <img src={op4}/>
                             <dl>
-                                <dd>{investCountBigMoney}</dd>
+                                <dd>{parseFloat(getCountData.top1InvestMoney / getCountData.investMoney).toFixed(2)}</dd>
                                 <dt>最大单户出借余额占比(%)</dt>
                             </dl>
                         </Tooltip>
@@ -279,7 +254,7 @@ export default class page4 extends React.Component {
                         <Tooltip className='flex' placement="bottomLeft" title="出借最多的前十户出借人的出借金额总和与累计借款总额之比">
                         <img src={op5}/>
                             <dl>
-                                <dd>{investCountTenMoney}</dd>
+                                <dd>{parseFloat(getCountData.top10InvestMoney / getCountData.investMoney).toFixed(2)}</dd>
                                 <dt>最大十户出借余额占比(%)</dt>
                             </dl>
                         </Tooltip>
@@ -292,7 +267,7 @@ export default class page4 extends React.Component {
 
         <section className="column">
         <p>
-            <b>出借人信息 </b>截至日期：{this.timestampToTime()}
+            <b>出借人信息 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
         </p>
         <div className="aboutData">
             <Row gutter={40}>
@@ -382,3 +357,16 @@ export default class page4 extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        getCountData: state.getCount
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ getCount }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page4)

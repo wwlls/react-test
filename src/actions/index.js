@@ -59,3 +59,22 @@ export const getCount = (parmas) => async(dispatch, getstate) => {
 		message.error("网络错误，请重试");
 	}
 }
+
+//获取公司动态
+const noticeMessageList = (data) => ({
+	type: 'test.GET_NOTICEMESSAGELIST',
+	data
+})
+
+export const getNoticeMessageList = (parmas) => async(dispatch, getstate) => {
+	try {
+		let callFuc = function(res) {
+			dispatch(
+				noticeMessageList(JSON.parse(res.body))
+			)
+		}
+		await Utils.postRequest(`home/getNoticeMessageList`, parmas, callFuc);
+	} catch (error) {
+		message.error("网络错误，请重试");
+	}
+}
