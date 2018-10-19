@@ -11,13 +11,13 @@ import './page6.scss'
 
 class Page6 extends React.Component {
     static propTypes = {
-        //getCountData: PropTypes.object.isRequired,
+        totalData: PropTypes.number.isRequired,
+        getNoticeMessageListData: PropTypes.array.isRequired,
         getNoticeMessageList: PropTypes.func.isRequired,
     }
     constructor(props) {
         super(props);
         this.state = {
-            infolist: [],
             page_size: 6,
             current_page: 1,
         };
@@ -65,7 +65,7 @@ class Page6 extends React.Component {
                         getNoticeMessageListData.map((item,index)=>{
                             return(
                                 <li key={index}>
-                                    <Link to={item.link} target="_blank">
+                                    <Link to={'/about/details?id=' +  item.id} target="_blank">
                                         <div className='tit'></div>
                                         <p>{item.content}</p>
                                         <p className='p2'>{moment(item.createTime).format('YYYY-MM-DD')}</p>
@@ -87,8 +87,8 @@ class Page6 extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        totalData: state.getNoticeMessage.total,
-        getNoticeMessageListData: state.getNoticeMessage.noticeMessages
+        totalData: state.getNoticeMessageList.total,
+        getNoticeMessageListData: state.getNoticeMessageList.noticeMessages
     };
 }
 
