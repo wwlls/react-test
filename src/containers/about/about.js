@@ -30,7 +30,7 @@ class About extends React.Component {
 		      { title: '媒体报道', content: <Page5 />, key: '5' },
 		      { title: '公司动态', content: <Page6 />, key: '6' },
 		      { title: '从业机构信息', content: <Page7 />, key: '7' },
-		      { title: '相关法律法规披露', content: <Page8 />, key: '8' },
+		      { title: '相关法律法规披露11', content: <Page8 />, key: '8' },
 		    ],
 	    	id: this.props.location.search.split('?id=')[1] !== undefined ? this.props.location.search.split('?id=')[1] : '1',
 	    };
