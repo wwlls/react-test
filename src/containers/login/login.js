@@ -69,6 +69,7 @@ class LoginForm extends React.Component {
 	}
 
 	componentDidUpdate() {
+		alert(1)
 		let { checkMobileData } = this.props;
 		console.log(checkMobileData)
 	   	if(checkMobileData.rtn_code === 0) {
