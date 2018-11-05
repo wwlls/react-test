@@ -50,7 +50,7 @@ class Page4 extends React.Component {
             tzsf:[
                   {name:'业务类型'},
                   {name:'用户注册'},
-                  {name:'开通存管账户	'},
+                  {name:'开通存管账户'},
                   {name:'充值'},
                   {name:'出借管理'},
                   {name:'提现'},

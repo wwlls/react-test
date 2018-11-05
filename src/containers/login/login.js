@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
             callback();
             //验证成功判断是否新老用户
             let data = {};
-			data.mobile = 13666606473;
+			data.mobile = value;
 			this.props.checkMobile(data);
         }
 	}
@@ -69,7 +69,6 @@ class LoginForm extends React.Component {
 	}
 
 	componentDidUpdate() {
-		alert(1)
 		let { checkMobileData } = this.props;
 		console.log(checkMobileData)
 	   	if(checkMobileData.rtn_code === 0) {

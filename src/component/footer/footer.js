@@ -1,5 +1,6 @@
 /** 尾部 **/
 import React from "react";
+import { Link } from "react-router-dom";
 import keep from "static/images/common/footer/place.png";
 import "./footer.scss";
 
@@ -23,35 +24,35 @@ export default class backTop extends React.Component {
                     <div className="subfooterLeft  floatL">
                         <dl className="floatL">
                             <dt>
-                                <a href="javascript:;">安全保障</a>
+                                <Link to="/safe">安全保障</Link>
                             </dt>
                             <dd>
-                                <a href="javascript:;">银行存管</a>
+                                <Link to="/safe">银行存管</Link>
                             </dd>
                             <dd>
-                                <a href="javascript:;">风险管理</a>
+                                <Link to="/safe?id=2">风险管理</Link>
                             </dd>
                             <dd>
-                                <a href="javascript:;">股东背景</a>
+                                <Link to="/safe?id=3">股东背景</Link>
                             </dd>
                         </dl>
                         <dl className="floatL">
                             <dt>
-                                <a href="javascript:;">运营数据</a>
+                                <Link to="/about?id=4">运营数据</Link>
                             </dt>
                         </dl>
                         <dl className="floatL">
                             <dt>
-                                <a href="javascript:;">信息披露</a>
+                                <Link to="/about?id=1">信息披露</Link>
                             </dt>
                             <dd>
-                                <a href="javascript:;">关于我们</a>
+                                <Link to="/about?id=1">信息披露</Link>
                             </dd>
                             <dd>
-                                <a href="javascript:;">业务介绍</a>
+                                <Link to="/about?id=3">业务介绍</Link>
                             </dd>
                             <dd>
-                                <a href="javascript:;">团队介绍</a>
+                                <Link to="/about?id=2">团队介绍</Link>
                             </dd>
                         </dl>
                     </div>

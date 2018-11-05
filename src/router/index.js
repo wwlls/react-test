@@ -15,6 +15,8 @@ import News3 from '../containers/about/page5/subPage/news3';
 import News4 from '../containers/about/page5/subPage/news4';
 import News5 from '../containers/about/page5/subPage/news5'; 
 import News6 from '../containers/about/page5/subPage/news6'; 
+//公司动态
+import Details from '../containers/about/page6/subPage/details';
 //法律法规
 import Law1 from '../containers/about/page8/subPage/law1';
 import Law2 from '../containers/about/page8/subPage/law2';
@@ -52,6 +54,7 @@ class RouterMap extends Component {
                 <Route path="/about/news4" exact component={ News4 } />
                 <Route path="/about/news5" exact component={ News5 } />
                 <Route path="/about/news6" exact component={ News6 } />
+                <Route path="/about/details" exact component={ Details } />
                 <Route path="/about/law1" exact component={ Law1 } />
                 <Route path="/about/law2" exact component={ Law2 } />
                 <Route path="/about/law3" exact component={ Law3 } />

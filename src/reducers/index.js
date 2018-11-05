@@ -3,13 +3,15 @@ import imgReducer from './reducer-img';
 import counter from './counter';
 import checkMobile from './checkMobile';
 import getCount from './getCount';
-import getNoticeMessage from './getNoticeMessageList';
+import getNoticeMessageList from './getNoticeMessageList';
+import getNoticeMessage from './getNoticeMessage';
 
 const rootReducer = combineReducers({
   imgReducer,
   counter,
   checkMobile,
   getCount,
+  getNoticeMessageList,
   getNoticeMessage,
 });
 

@@ -1,0 +1,19 @@
+@import "static/css/common.scss";
+.details {
+	color: $bigColor;
+	margin: 60px auto 200px;
+	& h2 {
+		font-size: 26px;
+		color: $bigColor;
+		margin: 0 0 80px;
+	}
+	& h5 {
+		color: $bigColor;
+	}
+	& p {
+		font-size: 20px;
+		&.name {
+			margin: 80px 30px 20px 0;
+		}
+	}
+}

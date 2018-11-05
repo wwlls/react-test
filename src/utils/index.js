@@ -63,7 +63,7 @@ const Utils = {
                     // }
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);
-                alert(1111)
+                // alert(1111)
                 callFuc(res);
                 return;
             }
