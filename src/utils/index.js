@@ -54,17 +54,15 @@ const Utils = {
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
                 let callFuc = function(accessRes) {
-                    console.log('accessRes ' + accessRes)
                     let accessToken = JSON.parse(accessRes.body).access_token;
                     console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
-                    // if(accessRes !== '') {
-                    //     callFuc(res);
-                    // }
+                    if(accessRes !== '') {
+                        alert(1)
+                        return callFuc(res);
+                    }
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);
-                // alert(1111)
-                callFuc(res);
                 return;
             }
             callFuc(res);
