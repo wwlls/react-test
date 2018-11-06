@@ -41,6 +41,23 @@ export const checkMobile = (parmas) => async(dispatch, getState) => {
         message.error("网络错误，请重试");
     }
 }
+//获取验证码
+const getCode = (data) => ({
+	type: 'test.VERIFY_CODE',
+	data
+})
+export const getVerifyCode = (parmas) => async(dispatch, getState) => {
+	try {
+		let callFuc = function(res) {
+			dispatch(
+				getCode(res)
+			)
+		}
+		await Utils.postRequest(`verifyCode/get`, parmas, callFuc);
+    } catch (error) {
+        message.error("网络错误，请重试");
+    }
+}
 
 //获取平台数据
 const countData = (data) => ({

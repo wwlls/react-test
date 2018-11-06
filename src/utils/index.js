@@ -57,9 +57,8 @@ const Utils = {
                     let accessToken = JSON.parse(accessRes.body).access_token;
                     console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
-                    if(accessRes !== '') {
-                        alert(1)
-                        return callFuc(res);
+                    if(accessToken !== '') {
+                        //return callFuc(res);
                     }
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);

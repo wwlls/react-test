@@ -7,6 +7,9 @@ export const REMOVE_NUM = 'REMOVE_NUM';
 //检测是否是老用户
 export const CHECK_MOBILE = 'CHECK_MOBILE';
 
+//验证码
+export const VERIFY_CODE= 'VERIFY_CODE';
+
 //平台数据
 export const GET_COUNT = 'GET_COUNT';
 

@@ -41,7 +41,7 @@ class LoginForm extends React.Component {
 
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
-		const form = this.props.form;	
+		const form = this.props.form;
 		if(!(Tools.isMobile(value)) || value.length !== 11) {
             callback("手机号码输入有误");
         } else {
@@ -49,7 +49,17 @@ class LoginForm extends React.Component {
             //验证成功判断是否新老用户
             let data = {};
 			data.mobile = value;
-			this.props.checkMobile(data);
+			this.props.checkMobile(data).then(() => {
+				let { checkMobileData } = this.props;
+				console.log(checkMobileData)
+			   	if(checkMobileData.rtn_code === 0) {
+					message.info('您的账户已存在，请登录');
+				} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+					message.info('您的账户不存在，请注册');
+				} else if(checkMobileData.rtn_code === 10018) {
+					message.info('您输入的手机号存在风险！请联系客服');
+				}
+			});
         }
 	}
 
@@ -62,22 +72,6 @@ class LoginForm extends React.Component {
             callback();
             //form.getFieldDecorator(['password'],{validateTrigger: 'onChange'});
         }
-	}
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return true
-	}
-
-	componentDidUpdate() {
-		let { checkMobileData } = this.props;
-		console.log(checkMobileData)
-	   	if(checkMobileData.rtn_code === 0) {
-			message.info('您的账户已存在，请登录' , 0.5);
-		} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-			message.info('您的账户不存在，请注册' , 0.5);
-		} else if(checkMobileData.rtn_code === 10018) {
-			message.info('您输入的手机号存在风险！请联系客服' , 0.5);
-		}
 	}
 
 	render() {

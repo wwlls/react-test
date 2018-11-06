@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Form, Checkbox, Input, Button, Row, Col, message } from 'antd';
-import { checkMobile } from 'actions';
+import md5 from 'md5';
+import { checkMobile, getVerifyCode } from 'actions';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
 import Header from 'component/header/header';
@@ -19,6 +20,8 @@ class RegisterForm extends React.Component {
 	static propTypes = {
 		checkMobileData: PropTypes.object.isRequired,
         checkMobile: PropTypes.func.isRequired,
+        verifyCodeData: PropTypes.object.isRequired,
+        getVerifyCode: PropTypes.func.isRequired,
     }
 	constructor(props) {
 	    super(props);
@@ -35,9 +38,22 @@ class RegisterForm extends React.Component {
 	handleSubmit = (e) => {
 	    e.preventDefault();
 	    this.props.form.validateFields((err, values) => {
-	    	console.log(err)
 	      	if (!err) {
 	        	console.log('Received values of form: ', values);
+	        	let data = {};
+	        	data.mobile = values.mobile;
+	        	data.verify_code = values.code;
+	        	data.passwd = 'hyb_' + md5(values.password);
+	        	data.invite_code = values.invite;
+	        	let callFuc = (res) => {
+            	console.log(res)
+            		if(res.rtn_code === 0) {
+
+            		} else {
+            			message.error(res.rtn_msg);
+            		}
+	            }
+	            Utils.postRequest('register/normal', data, callFuc);
 	      	}
 	    });
 	}
@@ -50,11 +66,20 @@ class RegisterForm extends React.Component {
             let data = {};
             data.mobile = value;
             data.reason = '注册验证';
-            let callFuc = (res) => {
-            	console.log(res)
-            	this.setTime();
-            }
-            Utils.postRequest('verifyCode/get', data, callFuc);
+            this.props.getVerifyCode(data).then(() => {
+            	let { verifyCodeData } = this.props;
+            	console.log(verifyCodeData)
+            	if(verifyCodeData.rtn_code == 0) {
+            		this.setTime();
+            	} else {
+            		message.error(verifyCodeData.rtn_msg);
+            	}
+            });
+            // let callFuc = (res) => {
+            // 	console.log(res)
+            // 	
+            // }
+            // Utils.postRequest('verifyCode/get', data, callFuc);
         } else {
         	form.validateFields(['mobile'], { force: true });
         } 
@@ -89,19 +114,6 @@ class RegisterForm extends React.Component {
 	componentDidMount() {
 	}
 
-	// componentWillReceiveProps(nextProps) {
-	// 	//获取后台数据
- //        let checkMobileData = nextProps.checkMobileData;
- //        console.log(checkMobileData)
- //    	if(checkMobileData.rtn_code === 0) {
-	// 		message.info('您的账户已存在，请登录' , 0.5);
-	// 	} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-	// 		message.info('您的账户不存在，请注册' , 0.5);
-	// 	} else if(checkMobileData.rtn_code === 10018) {
-	// 		message.info('您输入的手机号存在风险！请联系客服' , 0.5);
-	// 	}
- //    }
-
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
 		const form = this.props.form;	
@@ -112,7 +124,17 @@ class RegisterForm extends React.Component {
             //验证成功判断是否新老用户
             let data = {};
 			data.mobile = value;
-			this.props.checkMobile(data);
+			this.props.checkMobile(data).then(() => {
+				let { checkMobileData } = this.props;
+				console.log(checkMobileData)
+			   	if(checkMobileData.rtn_code === 0) {
+					message.info('您的账户已存在，请登录');
+				} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+					message.info('您的账户不存在，请注册');
+				} else if(checkMobileData.rtn_code === 10018) {
+					message.info('您输入的手机号存在风险！请联系客服');
+				}
+			});;
         }
 	}
 
@@ -260,22 +282,15 @@ class RegisterForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	// let checkMobileData = state.checkMobile;
-	// console.log(checkMobileData)
- //   	if(checkMobileData.rtn_code === 0) {
-	// 	message.info('您的账户已存在，请登录' , 0.5);
-	// } else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-	// 	message.info('您的账户不存在，请注册' , 0.5);
-	// } else if(checkMobileData.rtn_code === 10018) {
-	// 	message.info('您输入的手机号存在风险！请联系客服' , 0.5);
-	// }
+	console.log(state)
     return {
     	checkMobileData: state.checkMobile,
+    	verifyCodeData: state.getVerifyCode,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  	return bindActionCreators({ checkMobile }, dispatch);
+  	return bindActionCreators({ checkMobile, getVerifyCode }, dispatch);
 }
 
 const Register = Form.create()(RegisterForm);
