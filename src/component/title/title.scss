@@ -1,0 +1,15 @@
+@import "static/css/common.scss";
+.title {
+	font-size: 18px;
+	color: $bigColor;
+	padding: 15px 0 11px 20px;
+	border-bottom: 1px solid $borderColor;
+	& span {
+		background-color: $leftColor;
+	    width: 4px;
+	    height: 16px;
+	    display: inline-block;
+	    margin: -3px 8px 0 0;
+	    vertical-align: middle;
+	}
+}

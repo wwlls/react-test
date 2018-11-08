@@ -8,7 +8,10 @@ export const REMOVE_NUM = 'REMOVE_NUM';
 export const CHECK_MOBILE = 'CHECK_MOBILE';
 
 //验证码
-export const VERIFY_CODE= 'VERIFY_CODE';
+export const VERIFY_CODE = 'VERIFY_CODE';
+
+//当前登录用户信息
+export const GET_INFO = 'GET_INFO';
 
 //平台数据
 export const GET_COUNT = 'GET_COUNT';

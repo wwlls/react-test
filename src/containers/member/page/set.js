@@ -16,12 +16,15 @@ class Set extends React.Component {
 		// 	this.props.history.push('/login?toHref=member');
 		// 	return;
 		// }
+		let set = this.props.location.set
+		console.log(set)
 	}
 
 	render() {
+		
 		return (
 			<div>
-	  			5
+	  			1
 	  		</div>
 		)
 	}

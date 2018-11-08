@@ -59,6 +59,24 @@ export const getVerifyCode = (parmas) => async(dispatch, getState) => {
     }
 }
 
+//获取当前登录用户信息
+const getInfo = (data) => ({
+	type: 'test.GET_INFO',
+	data
+})
+export const getInfoData = (parmas) => async(dispatch, getState) => {
+	try {
+		let callFuc = function(res) {
+			dispatch(
+				getInfo(res)
+			)
+		}
+		await Utils.postRequest(`customer/getInfo`, parmas, callFuc);
+    } catch (error) {
+        message.error("网络错误，请重试");
+    }
+}
+
 //获取平台数据
 const countData = (data) => ({
 	type: 'test.GET_COUNT',

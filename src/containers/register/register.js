@@ -3,12 +3,13 @@ import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Form, Checkbox, Input, Button, Row, Col, message } from 'antd';
+import { Form, Checkbox, Input, Button, Row, Col, Message } from 'antd';
 import md5 from 'md5';
 import { checkMobile, getVerifyCode } from 'actions';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
 import Header from 'component/header/header';
+import Title from 'component/title/title';
 import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
 import CountDown from 'component/countDown/countDown';
@@ -44,13 +45,20 @@ class RegisterForm extends React.Component {
 	        	data.mobile = values.mobile;
 	        	data.verify_code = values.code;
 	        	data.passwd = 'hyb_' + md5(values.password);
-	        	data.invite_code = values.invite;
+	        	if(values.invite !== undefined) {
+	        		data.invite_code = values.invite;
+	        	} else {
+					data.invite_code = '';
+	        	}
 	        	let callFuc = (res) => {
             	console.log(res)
             		if(res.rtn_code === 0) {
-
+            			let customerMobile = JSON.parse(res.body).customer.mobile;
+            			Utils.setStorage('customerMobile' , customerMobile);
+            			Message.success('注册成功');
+            			this.props.history.push('/home');
             		} else {
-            			message.error(res.rtn_msg);
+            			Message.error(res.rtn_msg);
             		}
 	            }
 	            Utils.postRequest('register/normal', data, callFuc);
@@ -62,29 +70,38 @@ class RegisterForm extends React.Component {
 	habdelGetCode = () => {
 		let form = this.props.form;
         let value = form.getFieldValue('mobile');
-        if((Tools.isMobile(value))) {
-            let data = {};
-            data.mobile = value;
-            data.reason = '注册验证';
-            this.props.getVerifyCode(data).then(() => {
-            	let { verifyCodeData } = this.props;
-            	console.log(verifyCodeData)
-            	if(verifyCodeData.rtn_code == 0) {
-            		this.setTime();
-            	} else {
-            		message.error(verifyCodeData.rtn_msg);
-            	}
-            });
-            // let callFuc = (res) => {
-            // 	console.log(res)
-            // 	
-            // }
-            // Utils.postRequest('verifyCode/get', data, callFuc);
+        //点击验证码判断手机号
+        let { checkMobileData } = this.props;
+		if((Tools.isMobile(value))) {
+			if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+	            let data = {};
+	            data.mobile = value;
+	            data.reason = '注册验证';
+	            this.props.getVerifyCode(data).then(() => {
+	            	let { verifyCodeData } = this.props;
+	            	console.log(verifyCodeData)
+	            	if(verifyCodeData.rtn_code == 0) {
+	            		this.setTime();
+	            	} else {
+	            		Message.error(verifyCodeData.rtn_msg);
+	            	}
+	            });
+	            // let callFuc = (res) => {
+	            // 	console.log(res)
+	            // 	
+	            // }
+	            // Utils.postRequest('verifyCode/get', data, callFuc);
+            } else if(checkMobileData.rtn_code === 0) {
+				Message.info('您的账户已存在，请登录');
+			} else if(checkMobileData.rtn_code === 10018) {
+				Message.info('您输入的手机号存在风险！请联系客服');
+			}
         } else {
         	form.validateFields(['mobile'], { force: true });
         } 
     };
 
+    //倒计时方法
     setTime = () => {
     	clearInterval(this.timer);
         this.state.stop = false;
@@ -112,6 +129,11 @@ class RegisterForm extends React.Component {
     }
 
 	componentDidMount() {
+		//是否登录
+		let customerMobile = Utils.getStorage('customerMobile');
+		if(customerMobile !== '' && customerMobile !== null && customerMobile !== undefined) {
+			this.props.history.push('/home');
+		}
 	}
 
 	//验证手机号
@@ -128,13 +150,13 @@ class RegisterForm extends React.Component {
 				let { checkMobileData } = this.props;
 				console.log(checkMobileData)
 			   	if(checkMobileData.rtn_code === 0) {
-					message.info('您的账户已存在，请登录');
+					Message.info('您的账户已存在，请登录');
 				} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-					message.info('您的账户不存在，请注册');
+					Message.info('您的账户不存在，请注册');
 				} else if(checkMobileData.rtn_code === 10018) {
-					message.info('您输入的手机号存在风险！请联系客服');
+					Message.info('您输入的手机号存在风险！请联系客服');
 				}
-			});;
+			});
         }
 	}
 
@@ -177,9 +199,7 @@ class RegisterForm extends React.Component {
 					<div className="layout">
 						<div className="subLogin">
 							<section className="bgLogin">
-								<h4>
-									<span></span>新用户注册
-								</h4>
+								<Title title="新用户注册" />
 								<Form className="submit textC" onSubmit={this.handleSubmit}>
 									<h5>免费注册华赢宝账户</h5>
 									<p>已有账户？<Link to="/login">登录</Link></p>

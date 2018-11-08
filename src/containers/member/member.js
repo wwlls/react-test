@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { getInfoData } from 'actions';
 import Utils from 'utils';
 import { Layout } from 'antd';
 import Header from 'component/header/header';
@@ -21,29 +23,58 @@ import Coupon from './page/coupon';
 const { Content } = Layout;
 
 class Member extends React.Component {
+	static propTypes = {
+        InfoData: PropTypes.object.isRequired,
+        getInfoData: PropTypes.func.isRequired,
+    }
 	constructor(props) {
 	    super(props);
 	    this.state = {
 	    	threeSize: '',
+	    	mobile: '',
+	    	wxAvatar: '',
+	    	idCard: '',
 	    };
 	}
 
 	componentDidMount() {
-		// let userMobile = Utils.getStorage('userMobile');
-		// if(userMobile == '' || userMobile == null || userMobile == undefined) {
-		// 	this.props.history.push('/login?toHref=member');
-		// 	return;
-		// }
-		const { location } = this.props;
-		let pathname = location.pathname;
+		//是否登录
+		let customerMobile = Utils.getStorage('customerMobile');
+		if(customerMobile == '' || customerMobile == null || customerMobile == undefined) {
+			this.props.history.push('/login?redirectUri=member');
+			return;
+		}
+		//切换路由面包屑内容
+		let pathname = this.props.location.pathname;
 		console.log(1111,pathname)
 		this.threeSize(pathname);
+
+		//获取登录后用户信息
+		this.props.getInfoData().then(() => {
+            let { InfoData } = this.props;
+            if(InfoData.rtn_code === 0) {
+            	let customer = JSON.parse(InfoData.body).customer;
+            	console.log(customer)
+               	let customerMobile = customer.mobile;
+               	let customerWxAvatar = customer.wxAvatar;
+               	let customerIdCard  = customer.idCard;
+                this.setState({
+                    mobile: customerMobile,
+                    wxAvatar: customerWxAvatar,
+                }) 
+            }
+        });
+
+        let set = {
+	        pathname: '/member/set',
+	        set: '我是通过state传值'
+	    }
 	}
 
 	componentWillReceiveProps(nextProps) {
         let pathname = nextProps.location.pathname;
         console.log(pathname)
-        this.threeSize('nextProps ' + pathname);
+        this.threeSize(pathname);
     }
 
     threeSize = (pathname) => {
@@ -87,7 +118,7 @@ class Member extends React.Component {
 							</div>
 						</div>
 					  	<Layout>
-					  		<Menu path={location.pathname} />
+					  		<Menu path={location.pathname} mobile={this.state.mobile} wxAvatar={this.state.wxAvatar} />
 					  		<Layout>
 					  			<Content style={{margin: '0 0 0 30px'}}>
 			                        <Switch>
@@ -110,8 +141,14 @@ class Member extends React.Component {
 	}
 }
 
-function mapStateToProps() {
-  return {
-  };
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        InfoData: state.getInfo,
+    }
 }
-export default connect(mapStateToProps)(Member)
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ getInfoData }, dispatch);
+}
+export default connect(mapStateToProps , mapDispatchToProps)(Member)

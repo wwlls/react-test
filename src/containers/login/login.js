@@ -3,10 +3,13 @@ import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Form, Checkbox, Input, Button, Row, Col, Icon, message } from 'antd';
+import { Form, Checkbox, Input, Button, Row, Col, Icon, Message } from 'antd';
+import md5 from 'md5';
 import { checkMobile } from 'actions';
+import Utils from 'utils/index';
 import Tools from 'utils/tools';
 import Header from 'component/header/header';
+import Title from 'component/title/title';
 import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
 import "./login.scss";
@@ -15,7 +18,7 @@ const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
 	static propTypes = {
-		//checkMobileData: PropTypes.object.isRequired,
+		checkMobileData: PropTypes.object.isRequired,
         checkMobile: PropTypes.func.isRequired,
     }
 	constructor(props) {
@@ -31,12 +34,46 @@ class LoginForm extends React.Component {
 	    	console.log(err)
 	      	if (!err) {
 	        	console.log('Received values of form: ', values);
-	        	this.props.history.push('/register');
+	        	let data = {};
+	        	data.mobile = values.mobile;
+	        	data.passwd = 'hyb_' + md5(values.password);
+	        	data.is_auto = false;
+	        	let callFuc = (res) => {
+            		console.log(res)
+            		if(res.rtn_code === 0) {
+            			let customerMobile = JSON.parse(res.body).customer.mobile;
+            			Utils.setStorage('customerMobile' , customerMobile);
+            			let redirectUri = this.props.location.search.split('?redirectUri=')[1];
+            			if(redirectUri !== undefined && redirectUri !== '') {
+            				Message.success('登录成功');
+            				this.props.history.push('/' + redirectUri);
+            			} else {
+            				Message.success('登录成功');
+            				this.props.history.push('/home');
+            			}
+            		} else if(res.rtn_code === 1007){
+            			let error_num = JSON.parse(res.body).error_num;
+            			if(error_num === 1) {
+            				Message.error('登录密码不正确，请重新输入');
+            			} else if(error_num === 2) {
+            				Message.error('密码输入错误达到两次，一小时内您还有一次机会');
+            			} else {
+            				Message.error('账户已被锁定，建议您点击“忘记密码”进行密码重置');
+            			}
+            		} else {
+            			Message.error(res.rtn_msg);
+            		}
+	            }
+	            Utils.postRequest('login/checkPasswd', data, callFuc);
 	      	}
 	    });
 	}
 	componentDidMount() {
-		
+		//是否登录
+		let customerMobile = Utils.getStorage('customerMobile');
+		if(customerMobile !== '' && customerMobile !== null && customerMobile !== undefined) {
+			this.props.history.push('/home');
+		}
 	}
 
 	//验证手机号
@@ -53,11 +90,11 @@ class LoginForm extends React.Component {
 				let { checkMobileData } = this.props;
 				console.log(checkMobileData)
 			   	if(checkMobileData.rtn_code === 0) {
-					message.info('您的账户已存在，请登录');
+					Message.info('您的账户已存在，请登录');
 				} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-					message.info('您的账户不存在，请注册');
+					Message.info('您的账户不存在，请注册');
 				} else if(checkMobileData.rtn_code === 10018) {
-					message.info('您输入的手机号存在风险！请联系客服');
+					Message.info('您输入的手机号存在风险！请联系客服');
 				}
 			});
         }
@@ -88,14 +125,12 @@ class LoginForm extends React.Component {
 	    };
 		return (
 			<div className="container">
-				<Header />
+				<Header history ={this.props.history} />
 				<div className="login">
 					<div className="layout">
 						<div className="subLogin">
 							<section className="bgLogin">
-								<h4>
-									<span></span>老用户登录
-								</h4>
+								<Title title="老用户登录" />
 								<Form className="submit textC" onSubmit={this.handleSubmit}>
 									<h5>登录我的华赢宝账户</h5>
 									<p>没有账户？<Link to="/register">注册</Link></p>

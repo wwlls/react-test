@@ -1,5 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import md5 from 'md5';
 const Config = require('../../config');
 const mockData = require('../data/mockData'); // 财富mock数据
 
@@ -45,11 +46,12 @@ const Utils = {
         }
         return axios.post(Config.api + action, data).then(function(res) {
             if (res.rtn_code == 1009) {// 未登录
-                //localStorage.removeItem(key); 清除手机号
+                Utils.removeStorage('customerMobile'); //清除手机号
                 window.location.href = Config.login_page;
                 return;
             };
             if(res.rtn_code == 1002) {// token未获取到
+                Utils.removeStorage('customerMobile'); //清除手机号
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
@@ -110,7 +112,6 @@ const Utils = {
             data = data + key + "=" + encodeURIComponent(value);
         }
         data = data + "&key=" + Config.md5_key;
-        let md5 = require('md5');
         return md5(data);
     },
     //储存书局 

@@ -6,4 +6,53 @@
 		color: $smallColor;
 		margin: 0 8px 0 0;
 	}
+	& .myAssets {
+		& .titleAccount {
+			margin: 0 0 20px;
+			& .account {
+				margin: 29px 0 35px 20px;
+				& h5 {
+					font-size: 16px;
+					color: $bigColor;
+					& i {
+						color: $leftColor;
+						font-style: normal;
+					}
+				}
+				& p {
+					font-size: 28px;
+					color: $leftColor;
+					margin: 50px 0 0;
+					& em {
+						font-size: 14px;
+						font-style: normal;
+					}
+					& a {
+						margin: 0 5px 0 0;
+						display: inline-block;
+						& button {
+							&.ant-btn {
+								font-size: 16px;
+								color: $leftColor;
+								border-color: $leftColor;
+								width: 120px;
+								height: 40px;
+							}
+							&.ant-btn-primary {
+								font-size: 16px;
+								color: #fff;
+								border-color: $leftColor;
+		    					background-color: $leftColor;
+							}
+						}
+					}
+				}
+			}
+			& h4 {
+				font-size: 14px;
+				color: $smallColor;
+				padding: 0 0 35px 20px;
+			}	
+		}
+	}
 }

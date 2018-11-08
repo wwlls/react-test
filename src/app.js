@@ -4,7 +4,7 @@ import axios from 'axios';
 // import { Toast } from 'antd-mobile';
 import { message } from 'antd';
 import { Provider } from 'react-redux';
-import promise from 'redux-promise';
+import promise from 'redux-promise'; //可以实行异步
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk'
 import qs from 'qs';

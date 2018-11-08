@@ -3,10 +3,13 @@ import { Route, Switch, Link, Prompt } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Form, Checkbox, Input, Button, Row, Col, Icon, message } from 'antd';
-import { checkMobile } from 'actions';
+import { Form, Checkbox, Input, Button, Row, Col, Icon, Message } from 'antd';
+import md5 from 'md5';
+import { checkMobile, getVerifyCode } from 'actions';
+import Utils from 'utils/index';
 import Tools from 'utils/tools';
 import Header from 'component/header/header';
+import Title from 'component/title/title';
 import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
 import CountDown from 'component/countDown/countDown';
@@ -18,6 +21,8 @@ class ForgetForm extends React.Component {
 	static propTypes = {
 		checkMobileData: PropTypes.object.isRequired,
         checkMobile: PropTypes.func.isRequired,
+        verifyCodeData: PropTypes.object.isRequired,
+        getVerifyCode: PropTypes.func.isRequired,
     }
 	constructor(props) {
 	    super(props);
@@ -37,6 +42,19 @@ class ForgetForm extends React.Component {
 	    	console.log(err)
 	      	if (!err) {
 	        	console.log('Received values of form: ', values);
+	        	let data = {};
+	        	data.mobile = values.mobile;
+	        	data.verify_code = values.code;
+	        	data.new_passwd = 'hyb_' + md5(values.password);
+	        	let callFuc = (res) => {
+            	console.log(res)
+            		if(res.rtn_code === 0) {
+            			this.props.history.push('/login');
+            		} else {
+            			Message.error(res.rtn_msg);
+            		}
+	            }
+	            Utils.postRequest('login/updatePasswd', data, callFuc);
 	      	}
 	    });
 	}
@@ -45,51 +63,71 @@ class ForgetForm extends React.Component {
 	habdelGetCode = () => {
 		let form = this.props.form;
         let value = form.getFieldValue('mobile');
-        if((Tools.isMobile(value))) {
-            clearInterval(this.timer);
-            this.state.stop = false;
-            this.setState({
-                disabled: 'disabled'
-            })
-            this.timer = setInterval(function() {
-                let count = this.state.count;
-                this.state.liked = false;
-                count -= 1;
-                this.setState({
-                    count: count
-                });
-                if (count < 1) {
-                    this.state.stop = true;
-                    this.setState({
-                        liked: true,
-                        disabled: '',
-                        text: '重发',
-                        count: 60
-                    });
-    　　　　　　　　clearInterval(this.timer);
-                }
-            }.bind(this), 1000);
+        //点击验证码判断手机号
+        let { checkMobileData } = this.props;
+		if((Tools.isMobile(value))) {
+			if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+	            Message.info('您的账户不存在，请注册');
+            } else if(checkMobileData.rtn_code === 0) {
+				let data = {};
+	            data.mobile = value;
+	            data.reason = '修改登录密码';
+	            this.props.getVerifyCode(data).then(() => {
+	            	let { verifyCodeData } = this.props;
+	            	console.log(verifyCodeData)
+	            	if(verifyCodeData.rtn_code == 0) {
+	            		this.setTime();
+	            	} else {
+	            		Message.error(verifyCodeData.rtn_msg);
+	            	}
+	            });
+	            // let callFuc = (res) => {
+	            // 	console.log(res)
+	            // 	
+	            // }
+	            // Utils.postRequest('verifyCode/get', data, callFuc);
+			} else if(checkMobileData.rtn_code === 10018) {
+				Message.info('您输入的手机号存在风险！请联系客服');
+			}
         } else {
         	form.validateFields(['mobile'], { force: true });
-        }
-         
+        } 
     };
 
-	componentDidMount() {
-	}
-
-	componentWillReceiveProps(nextProps) {
-		//获取后台数据
-        let checkMobileData = nextProps.checkMobileData;
-        console.log(checkMobileData)
-    	if(checkMobileData.rtn_code === 0) {
-			message.info('您的账户已存在，请登录');
-		} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
-			message.info('您的账户不存在，请注册');
-		} else if(checkMobileData.rtn_code === 10018) {
-			message.info('您输入的手机号存在风险！请联系客服');
-		}
+    //倒计时方法
+    setTime = () => {
+    	clearInterval(this.timer);
+        this.state.stop = false;
+        this.setState({
+            disabled: 'disabled'
+        })
+        this.timer = setInterval(function() {
+            let count = this.state.count;
+            this.state.liked = false;
+            count -= 1;
+            this.setState({
+                count: count
+            });
+            if (count < 1) {
+                this.state.stop = true;
+                this.setState({
+                    liked: true,
+                    disabled: '',
+                    text: '重发',
+                    count: 60
+                });
+　　　　　　　　clearInterval(this.timer);
+            }
+        }.bind(this), 1000);
     }
+
+	componentDidMount() {
+		//是否登录
+		let customerMobile = Utils.getStorage('customerMobile');
+		if(customerMobile !== '' && customerMobile !== null && customerMobile !== undefined) {
+			this.props.history.push('/home');
+		}
+	}
 
 	//验证手机号
 	checkPhone = (rule, value, callback) => {
@@ -101,7 +139,20 @@ class ForgetForm extends React.Component {
             //验证成功判断是否新老用户
             let data = {};
 			data.mobile = value;
-			this.props.checkMobile(data);
+            this.props.checkMobile(data);
+   //          let data = {};
+			// data.mobile = value;
+			// this.props.checkMobile(data).then(() => {
+			// 	let { checkMobileData } = this.props;
+			// 	console.log(checkMobileData)
+			//    	if(checkMobileData.rtn_code === 0) {
+			// 		Message.info('您的账户已存在，请登录');
+			// 	} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
+			// 		Message.info('您的账户不存在，请注册');
+			// 	} else if(checkMobileData.rtn_code === 10018) {
+			// 		Message.info('您输入的手机号存在风险！请联系客服');
+			// 	}
+			// });
         }
 	}
 
@@ -135,9 +186,7 @@ class ForgetForm extends React.Component {
 					<div className="layout">
 						<div className="subLogin">
 							<section className="bgLogin">
-								<h4>
-									<span></span>忘记密码
-								</h4>
+								<Title title="忘记密码" />
 								<Form className="submit textC" onSubmit={this.handleSubmit}>
 									<FormItem 
 										hasFeedback
@@ -217,11 +266,12 @@ class ForgetForm extends React.Component {
 const mapStateToProps = (state) => {
     return {
     	checkMobileData: state.checkMobile,
+    	verifyCodeData: state.getVerifyCode,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  	return bindActionCreators({ checkMobile }, dispatch);
+  	return bindActionCreators({ checkMobile, getVerifyCode }, dispatch);
 }
 
 const Forget = Form.create()(ForgetForm);

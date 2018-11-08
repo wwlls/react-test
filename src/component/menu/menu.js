@@ -10,10 +10,8 @@ const { Sider } = Layout;
 export default class SiderCustom extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedKey: '', //选择的路径
+        this.state = { 
             userPic: userPic,
-            mobile: '13666606473',
         };
     } 
 
@@ -26,7 +24,7 @@ export default class SiderCustom extends Component {
     }
 
     setMenuOpen = props => {
-        const {path} = props;
+        const { path } = props;
         this.setState({
             selectedKey: path
         });
@@ -39,17 +37,22 @@ export default class SiderCustom extends Component {
     };
 
     render() {
+        //选择的路径
         const { selectedKey } = this.state;
         return (
             <div className="menu">
                 <div className="menuHeader">
                     <Row>
                         <Col md={8}>
-                            <img src={this.state.userPic} alt="userPic" />
+                            <img src={
+                                this.props.wxAvatar !== '' 
+                                ?  this.props.wxAvatar
+                                :  this.state.userPic
+                            } alt="userPic" />
                         </Col>
                         <Col md={16}>
                             <p>您好，欢迎来到华赢宝！</p>
-                            <p>用户名：{this.state.mobile.substring(0,3)}....{this.state.mobile.substring(7)}</p>
+                            <p>用户名：{this.props.mobile.substring(0,3)}****{this.props.mobile.substring(7)}</p>
                         </Col>
                     </Row>
                 </div>
