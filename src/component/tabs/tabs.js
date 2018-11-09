@@ -2,7 +2,7 @@ import React from "react";
 import { Tabs } from 'antd';
 import "./tabs.scss";
 
-export default class page1 extends React.Component {
+export default class Tab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +18,7 @@ export default class page1 extends React.Component {
             <div className="tabs">
                 <Tabs activeKey={this.props.id} onChange={this.props.callback}>
                     {
-                        this.props.panes.map(function (item) {
+                        this.props.panes.map((item) => {
                                 return (
                                     <TabPane tab={item.title} key={item.key}>{item.content}</TabPane>
                                 )

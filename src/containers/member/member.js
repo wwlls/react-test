@@ -46,7 +46,7 @@ class Member extends React.Component {
 		}
 		//切换路由面包屑内容
 		let pathname = this.props.location.pathname;
-		console.log(1111,pathname)
+		//console.log(1111,pathname)
 		this.threeSize(pathname);
 
 		//获取登录后用户信息
@@ -54,7 +54,7 @@ class Member extends React.Component {
             let { InfoData } = this.props;
             if(InfoData.rtn_code === 0) {
             	let customer = JSON.parse(InfoData.body).customer;
-            	console.log(customer)
+            	//console.log(customer)
                	let customerMobile = customer.mobile;
                	let customerWxAvatar = customer.wxAvatar;
                	let customerIdCard  = customer.idCard;
@@ -73,7 +73,7 @@ class Member extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
         let pathname = nextProps.location.pathname;
-        console.log(pathname)
+        //console.log(pathname)
         this.threeSize(pathname);
     }
 
@@ -142,7 +142,6 @@ class Member extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         InfoData: state.getInfo,
     }
