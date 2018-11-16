@@ -1,7 +1,7 @@
 @import "static/css/common.scss";
 .member {
 	margin: 16px 0 0;
-	& h5 {
+	& h1 {
 		font-size: 16px;
 		color: $smallColor;
 		margin: 0 8px 0 0;
@@ -53,6 +53,180 @@
 				color: $smallColor;
 				padding: 0 0 35px 20px;
 			}	
+		}
+	}
+	& .recharge {
+		& .rechargeMain {
+			padding: 20px 0 20px 20px;
+			& em {
+				font-size: 16px;
+				color: #333;
+				height: 40px;
+				line-height: 40px;
+				font-style: normal;
+				display: inline-block;
+			}
+			& .ant-calendar-picker {
+				margin: 0 5px 0 0;
+				& input {
+					height: 40px;
+						line-height: 40px;
+					
+				}
+			}
+			& button {
+				font-size: 14px;
+			    color: $leftColor;
+			    border: 1px solid $leftColor;
+			    width: 120px;
+			    text-align: center;
+			    height: 40px;
+			    line-height: 40px;
+			}
+		}
+	}
+	& .cash {
+		& .cashMain {
+			text-align: center;
+			& h5 {
+				font-size: 18px;
+			    color: $bigColor;
+			    margin: 81px 0 75px;
+			}
+			& img {
+				width: 128px;
+				margin: 0 0 23px;
+			}
+			& p {
+				font-size: 14px;
+			    color: $smallColor;
+			    padding: 0 0 325px;
+			}
+		}
+	}
+	& .capital {
+		& .capitalMain {
+			padding: 20px 0 20px 20px;
+			& em {
+				font-size: 16px;
+				color: #333;
+				height: 40px;
+				line-height: 40px;
+				font-style: normal;
+				display: inline-block;
+			}
+			& .ant-calendar-picker {
+				margin: 0 5px 0 0;
+				& input {
+					height: 40px;
+						line-height: 40px;
+					
+				}
+			}
+			& a {
+				font-size: 14px;
+				color: #333;
+				margin: 0 15px;
+				height: 40px;
+			    line-height: 40px;
+			    &.active {
+			    	color: $leftColor;
+			    }
+			}
+			& button {
+				font-size: 14px;
+			    color: $leftColor;
+			    border: 1px solid $leftColor;
+			    width: 120px;
+			    text-align: center;
+			    height: 40px;
+			    line-height: 40px;
+			}
+		}
+	}
+	& .coupon {
+		position: relative;
+		& i {
+			font-size: 14px;
+			color: $smallColor;
+			font-style: normal;
+			position: absolute;
+			top: 20px;
+			right: 20px;
+		}
+		& .couponNotUser {
+			background: url(../../static/images/member/couponOne.png);
+		    width: 290px;
+		    padding: 0 0 0 20px;
+		}
+		& .couponUser {
+			background: url(../../static/images/member/couponTwo.png);
+		    width: 290px;
+		    padding: 0 0 0 20px;
+		}
+		& .couponOut {
+			background: url(../../static/images/member/couponThree.png);
+		    width: 290px;
+		    padding: 0 0 0 20px;
+		}
+		& .couponSame {
+			position: relative;
+			& h2 {
+			    font-size: 36px;
+			    color: $leftColor;
+			    font-family: "PingFang SC";
+			    padding: 10px 0 0;
+			    & b {
+			    	font-size: 28px;
+    				font-weight: normal;
+			    }
+			}
+			& h3 {
+			    font-size: 16px;
+			    color: #7E85A0;
+			    margin: 0 0 6px;
+			}
+			& p {
+				font-size: 12px;
+			    color: #7E85A0;
+			    margin: 0 0 12px;
+			}
+			& h5 {
+			    font-size: 12px;
+			    color: #B4AFBA;
+			    height: 18px;
+			    padding: 0 0 36px;
+			}
+			& span {
+			    font-size: 12px;
+			    color: #FFBB9D;
+			    position: absolute;
+			    top: 20px;
+			    left: 110px;
+			    padding: 0 10px;
+			    height: 30px;
+			    line-height: 30px;
+			    border: 1px solid #FFBB9D;
+			    border-radius: 30px;
+			    -webkit-border-radius: 30px;
+			    -o-border-radius: 30px;
+			    -moz-border-radius: 30px;
+			    display: inline-block;
+			}
+			& a {
+				display: inline-block;
+				&.promptly {
+					font-size: 16px;
+				    color: #EF7A46;
+				    position: absolute;
+				    right: 0;
+				    top: 0;
+				    width: 20px;
+				    text-align: center;
+				    padding: 32px 30px 28px 18px;
+				    border-left: 1px solid rgba(255,255,255,0.5);
+				}
+			}
 		}
 	}
 }

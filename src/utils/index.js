@@ -48,7 +48,6 @@ const Utils = {
             if (res.rtn_code == 1009) {// 未登录
                 Utils.removeStorage('customerMobile'); //清除手机号
                 window.location.href = Config.login_page;
-                return;
             };
             if(res.rtn_code == 1002) {// token未获取到
                 Utils.removeStorage('customerMobile'); //清除手机号
@@ -64,8 +63,10 @@ const Utils = {
                     }
                 }
                 Utils.postRequest('token/get', tokenData, callFuc);
-                return;
             }
+            callFuc(res);
+        }, function (res) {
+            console.log(res)
             callFuc(res);
         });
     },

@@ -14,6 +14,7 @@ import BackTop from 'component/backTop/backTop';
 import "./member.scss";
 
 import MyAsset from './page/myAssets';
+import AssetList from './page/assets/assetList';
 import Recharge from './page/recharge';
 import Cash from './page/cash';
 import Capital from './page/capital';
@@ -31,7 +32,7 @@ class Member extends React.Component {
 	    super(props);
 	    this.state = {
 	    	threeSize: '',
-	    	mobile: '',
+	    	mobile: '13666606473',
 	    	wxAvatar: '',
 	    	idCard: '',
 	    };
@@ -112,7 +113,7 @@ class Member extends React.Component {
 				<div className="layout">
 					<div className="member">
 						<div className="clear">
-							<h5 className="floatL">您所在的位置：</h5>
+							<h1 className="floatL">您所在的位置：</h1>
 							<div className="floatL">
 								<Breadcrumb secondSize="个人中心" secondHref="/member" threeHref={this.state.threeSize} />
 							</div>
@@ -123,6 +124,7 @@ class Member extends React.Component {
 					  			<Content style={{margin: '0 0 0 30px'}}>
 			                        <Switch>
 			                            <Route exact path={'/member'} component={MyAsset} />
+			                            <Route exact path={'/member/assetList'} component={AssetList} />
 			                            <Route exact path={'/member/recharge'} component={Recharge} />
 			                            <Route exact path={'/member/cash'} component={Cash} />
 			                            <Route exact path={'/member/capital'} component={Capital} />

@@ -1,0 +1,10 @@
+@import "static/css/common.scss";
+.ant-table-body {
+	color: $bigColor;
+	& tr th {
+		color: $bigColor;
+	}
+}
+.ant-table-placeholder {
+	border-bottom: none;
+}

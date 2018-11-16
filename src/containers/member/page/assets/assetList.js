@@ -1,90 +1,103 @@
 import React from "react";
-import { Table, Divider, Tag } from 'antd';
+import { Message } from 'antd';
 import moment from 'moment';
+import Utils from 'utils/index';
+import Title from 'component/title/title';
+import Table from "component/table/table"; // tab子页面
+import Pagination from "component/pagination/pagination";
 
 export default class AssetList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentPage: 1,
+            pageSize: 10, 
+            total: 10,
+            columns: [{  //表格header
+                title: '已匹配本金(元)',
+                dataIndex: 'money',
+                key: 'money',
+                width: 120,
+            }, {
+                title: '项目编号',
+                dataIndex: 'projectNo',
+                key: 'projectNo',
+                width: 160,
+            }, {
+                title: '借款人',
+                dataIndex: 'borrowerName',
+                key: 'borrowerName',
+                width: 160,
+            }, {
+                title: '证件号',
+                dataIndex: 'borrowerIdCard',
+                key: 'borrowerIdCard',
+                width: 160,
+            }],
+            tableData: [],
         };
     }
 
     componentDidMount() {
+        this.getCreditAssetList();
     }
     
-    render() {
-        const columns = [{
-            title: '项目名称',
-            dataIndex: 'name',
-            key: 'name',
-            width: 170,
-        }, {
-            title: '年化率(%)',
-            dataIndex: 'interest',
-            key: 'interest',
-            width: 100,
-        }, {
-            title: '投资金额(元)',
-            dataIndex: 'money',
-            key: 'money',
-            width: 120,
-        }, {
-            title: '收益(元)',
-            dataIndex: 'profit',
-            key: 'profit',
-            width: 90,
-        }, {
-            title: '投资时间',
-            dataIndex: 'buyTime',
-            key: 'buyTime',
-            width: 120,
-        }, {
-            title: '还款时间',
-            dataIndex: 'endTime',
-            key: 'endTime',
-            width: 120,
-        }, {
-            title: '状态',
-            dataIndex: 'isExpired',
-            key: 'isExpired',
-            width: 120,
-        }, {
-            title: '操作',
-            dataIndex: 'detail',
-            key: 'detail',
-            render: (text, record) => (
-                <a href="/member?id=">{record.detail}</a>
-            )
-        }];
-
-        const { regularAssets } = this.props;
-        console.log(regularAssets)
-        const data = [];
-        //table数据渲染
-        for (var i = 0; i < regularAssets.length; i++) {
-            let status = '';
-            if(regularAssets[i].isExpired === 1) {
-                status = Math.ceil((regularAssets[i].endTime - regularAssets[i].buyTime)/(24*60*60*1000) - (new Date().getTime() - regularAssets[i].buyTime)/(24*60*60*1000)) + '天后还款';
-            } else if(regularAssets[i].isExpired === 3){
-                status = '已到期';
-            } else if(regularAssets[i].isExpired === 3){
-                status = '已变现';
+    //获取列表数据
+    getCreditAssetList() {
+        let assetId = this.props.location.search.split('?id=')[1];
+        let data = {};
+        data.asset_id = assetId;
+        data.current_page = this.state.currentPage;
+        data.page_size = this.state.pageSize;
+        let callFuc = (res) => {
+            console.log(JSON.parse(res.body))
+            if(res.rtn_code === 0) {
+                let creditAssets = JSON.parse(res.body).creditAssets;
+                let dataSource = [];
+                for (var i = 0; i < creditAssets.length; i++) {
+                    dataSource.push({
+                        key: i,
+                        money: creditAssets[i].money,
+                        projectNo: creditAssets[i].projectNo,
+                        borrowerName: creditAssets[i].borrowerName.substring(0,1)+"**",
+                        borrowerIdCard: creditAssets[i].borrowerIdCard.substring(0,3)+"***********"+creditAssets[i].borrowerIdCard.substring(14),
+                    })
+                }
+                this.setState({
+                    tableData: dataSource,
+                    total: JSON.parse(res.body).total
+                })
+            } else {
+                Message.error(res.rtn_msg);
             }
-            data.push({
-                key: i,
-                name: regularAssets[i].name,
-                interest: parseFloat(regularAssets[i].interest * 100).toFixed(1) + '%', 
-                money: parseFloat(regularAssets[i].money).toFixed(2),
-                profit: parseFloat(regularAssets[i].profit).toFixed(2),
-                buyTime: moment(regularAssets[i].buyTime).format('YYYY-MM-DD'),
-                endTime: moment(regularAssets[i].endTime).format('YYYY-MM-DD'),
-                isExpired: status,
-                detail:'出借详情',
-                assetId: regularAssets[i].assetId
-            })
         }
+        Utils.postRequest('asset/getCreditAssetList', data, callFuc);
+    }
+
+    //分页
+    onChangePagination = (e) => {
+        this.setState({
+            currentPage: e
+        },()=>{
+            this.getCreditAssetList()
+        })
+    }
+
+    render() {
         return (
-            <Table columns={columns} dataSource={data} pagination={false} rowClassName={(record, index) => record.isExpired === '3'?'csbsTypes':''} />
+            <div>
+                <Title title="出借详情" />
+                <Table 
+                    tableData={this.state.tableData} 
+                    columns={this.state.columns}
+                />
+                <Pagination
+                    currentPage={this.state.currentPage}
+                    pageSize={this.state.pageSize}
+                    total={this.state.total}
+                    onChangePagination={this.onChangePagination}
+                />
+            </div>
         );
     }
 }

@@ -22,7 +22,7 @@ export default class Banner extends React.Component {
             <div className={"carousel " + this.props.carousel}>
                 <Carousel dots autoplay>
                     {
-                        carouselList.map(function (item) {
+                        carouselList.map((item) => {
                             return (
                                 <h3 key={item.id}>
                                     <a href={'#/' + item.url}>

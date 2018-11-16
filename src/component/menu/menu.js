@@ -25,12 +25,21 @@ export default class SiderCustom extends Component {
 
     setMenuOpen = props => {
         const { path } = props;
+        // console.log('path ' + path)
+        // if(path === '/member/assetList') {
+        //     this.setState({
+        //         selectedKey: '/member'
+        //     });
+        // } else {
+            
+        // }
         this.setState({
-            selectedKey: path
-        });
+                selectedKey: path
+            }); 
     };
 
     menuClick = e => {
+        console.log(e.key)
         this.setState({
             selectedKey: e.key
         });

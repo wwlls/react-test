@@ -113,14 +113,16 @@ module.exports = {
         'BMap':'BMap',   //百度地图引入
     },
     devServer: {
-        historyApiFallback: true,
+        historyApiFallback: true,  //把historyApiFallback设置为true那么所有的路径都执行index.html
         inline: true, //当源文件改变时会自动刷新页面
-        contentBase:'./build/',
+        contentBase:'./build/',  //从项目的根目录提供服务
         port: PORT,   
         proxy: {
-          "/api": {
+          "/api": {   //context =====  "/api"
             target: config.api,
-            changeOrigin: true,
+            changeOrigin: true,  //是否跨域
+            secure: false,  // 如果是https接口，需要配置这个参数
+            //ws: true,    // 是否代理websockets
             // "pathRewrite": { //这个是个正则匹配
             //     "^/api": "/"
             // }

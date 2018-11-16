@@ -4,22 +4,23 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getNoticeMessageList } from 'actions';
-import { Icon, Row, Col, Pagination } from 'antd';
+import { Icon, Row, Col } from 'antd';
 import moment from 'moment';
 import Utils from 'utils';
+import Pagination from "component/pagination/pagination";
 import './page6.scss'
 
 class Page6 extends React.Component {
     static propTypes = {
-        totalData: PropTypes.number.isRequired,
+        total: PropTypes.number.isRequired,
         getNoticeMessageListData: PropTypes.array.isRequired,
         getNoticeMessageList: PropTypes.func.isRequired,
     }
     constructor(props) {
         super(props);
         this.state = {
-            page_size: 6,
-            current_page: 1,
+            pageSize: 6,
+            currentPage: 1,
         };
     }
 
@@ -30,8 +31,8 @@ class Page6 extends React.Component {
     //获取公司动态
     getinfo = () => {       
         let data = {
-            page_size: this.state.page_size,
-            current_page: this.state.current_page
+            pageSize: this.state.pageSize,
+            currentPage: this.state.currentPage
         };
 		this.props.getNoticeMessageList(data);
     }
@@ -46,16 +47,16 @@ class Page6 extends React.Component {
     }
 
     //分页改变
-    onChange = (e) => {
+    onChangePagination = (e) => {
         this.setState({
-            current_page: e
+            currentPage: e
         },()=>{
             this.getinfo()
         })
     }
 
     render() {
-        const { totalData } = this.props;
+        const { total } = this.props;
         const { getNoticeMessageListData } = this.props;
         return (
             <div className="page page6">
@@ -76,9 +77,12 @@ class Page6 extends React.Component {
                     }
                     </ul>
                 </div>
-                <div style={{float:'right',marginTop:20}}>
-                    <Pagination showQuickJumper hideOnSinglePage={true} current={this.state.current_page} pageSize={this.state.page_size} total={totalData} onChange={this.onChange} itemRender={this.itemRender} />
-                </div>
+                <Pagination
+                    currentPage={this.state.currentPage}
+                    pageSize={this.state.pageSize}
+                    total={total}
+                    onChangePagination={this.onChangePagination}
+                />
             </div>
         );
     }
@@ -87,7 +91,7 @@ class Page6 extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        totalData: state.getNoticeMessageList.total,
+        total: state.getNoticeMessageList.total,
         getNoticeMessageListData: state.getNoticeMessageList.noticeMessages
     };
 }
