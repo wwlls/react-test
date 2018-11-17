@@ -31,16 +31,21 @@ const Utils = {
             data = this.setPublic(data);
             let accessToken = Utils.getStorage("ZZBSESSIONID");
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
+                Utils.removeStorage('customerMobile'); //清除手机号
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
-                let callFuc = function(accessRes) {
+                let callFuc1 = function(accessRes) {
                     let accessToken = JSON.parse(accessRes.body).access_token;
-                    console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
+                    Utils.postRequest(action, data = {}, () => {
+                        return axios.post(Config.api + action, data).then(function(res) {
+                            callFuc(res);
+                        })
+                    })
                 }
-                this.postRequest('token/get', tokenData, callFuc);
-                // return;
+                this.postRequest('token/get', tokenData, callFuc1);
+                return;
             }
             data['sign'] = Utils.createSign(data);
         }
@@ -48,25 +53,26 @@ const Utils = {
             if (res.rtn_code == 1009) {// 未登录
                 Utils.removeStorage('customerMobile'); //清除手机号
                 window.location.href = Config.login_page;
+                return;
             };
             if(res.rtn_code == 1002) {// token未获取到
                 Utils.removeStorage('customerMobile'); //清除手机号
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
-                let callFuc = function(accessRes) {
+                let callFuc1 = function(accessRes) {
                     let accessToken = JSON.parse(accessRes.body).access_token;
                     console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
-                    if(accessToken !== '') {
-                        //return callFuc(res);
-                    }
+                    Utils.postRequest(action, data = {}, () => {
+                        return axios.post(Config.api + action, data).then(function(res) {
+                            callFuc(res);
+                        })
+                    })
                 }
-                Utils.postRequest('token/get', tokenData, callFuc);
+                Utils.postRequest('token/get', tokenData, callFuc1);
+                return;
             }
-            callFuc(res);
-        }, function (res) {
-            console.log(res)
             callFuc(res);
         });
     },
