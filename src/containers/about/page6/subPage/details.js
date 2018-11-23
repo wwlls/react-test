@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getNoticeMessage } from 'actions';
+import { Message } from 'antd';
 import moment from 'moment';
 import Header from 'component/header/header';
 import SubBanner from 'component/subBanner/subBanner'
@@ -18,27 +19,40 @@ class Details extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            title: '',
+            content: '',
+            createTime: new Date().getTime(),
         };
     }
 
     componentDidMount() {
-        let data = {
-            notice_message_id: this.props.location.search.split('?id=')[1],
-        };
-        this.props.getNoticeMessage(data)
+        let data = {}
+        data.notice_message_id = this.props.location.search.split('?id=')[1],
+        this.props.getNoticeMessage(data).then(() => {
+            let { getNoticeMessageData } = this.props;
+            if(getNoticeMessageData.rtn_code === 0) {
+                let noticeMessage = JSON.parse(getNoticeMessageData.body).noticeMessage;
+                this.setState({
+                    title: noticeMessage.title,
+                    content: noticeMessage.content,
+                    createTime: noticeMessage.createTime,
+                })
+            } else {
+                Message.error(getNoticeMessageData.rtn_msg);
+            }
+        })
     }
     
     render() {
-        const { getNoticeMessageData } = this.props;
         return (
             <div className="container">
                 <Header />
                 <SubBanner />
                 <div className="page details">
-                    <h2 className="textC title">{getNoticeMessageData.title}</h2>
-                    <h5>{getNoticeMessageData.content}</h5>
+                    <h2 className="textC title">{this.state.title}</h2>
+                    <h5>{this.state.content}</h5>
                     <p className="textR name">华赢宝</p>
-                    <p className="textR">{moment(getNoticeMessageData.createTime).format('YYYY-MM-DD')}</p>
+                    <p className="textR">{moment(this.state.createTime).format('YYYY-MM-DD')}</p>
                 </div>
                 <Footer />
                 <BackTop />
@@ -49,7 +63,7 @@ class Details extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        getNoticeMessageData: state.getNoticeMessage.noticeMessage  
+        getNoticeMessageData: state.getNoticeMessage
     };
 }
 

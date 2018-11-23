@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getNoticeMessageList } from 'actions';
-import { Icon, Row, Col } from 'antd';
+import { Icon, Row, Col, Message } from 'antd';
 import moment from 'moment';
 import Utils from 'utils';
 import Pagination from "component/pagination/pagination";
@@ -12,8 +12,7 @@ import './page6.scss'
 
 class Page6 extends React.Component {
     static propTypes = {
-        total: PropTypes.number.isRequired,
-        getNoticeMessageListData: PropTypes.array.isRequired,
+        getNoticeMessageListData: PropTypes.object.isRequired,
         getNoticeMessageList: PropTypes.func.isRequired,
     }
     constructor(props) {
@@ -21,6 +20,8 @@ class Page6 extends React.Component {
         this.state = {
             pageSize: 6,
             currentPage: 1,
+            total: 10,
+            noticeMessagesList: [],
         };
     }
 
@@ -30,11 +31,22 @@ class Page6 extends React.Component {
 
     //获取公司动态
     getinfo = () => {       
-        let data = {
-            pageSize: this.state.pageSize,
-            currentPage: this.state.currentPage
-        };
-		this.props.getNoticeMessageList(data);
+        let data = {};
+        data.page_size = this.state.pageSize;
+        data.current_page = this.state.currentPage;
+		this.props.getNoticeMessageList(data).then(() => {
+            let { getNoticeMessageListData } = this.props;
+            if(getNoticeMessageListData.rtn_code === 0) {
+                let total = JSON.parse(getNoticeMessageListData.body).total;
+                let noticeMessages = JSON.parse(getNoticeMessageListData.body).noticeMessages;
+                this.setState({
+                    total: total,
+                    noticeMessagesList: noticeMessages,
+                })
+            } else {
+                Message.error(getNoticeMessageListData.rtn_msg);
+            }
+        });
     }
 
     itemRender = (current, type, originalElement) => {
@@ -55,32 +67,30 @@ class Page6 extends React.Component {
         })
     }
 
-    render() {
-        const { total } = this.props;
-        const { getNoticeMessageListData } = this.props;
+    render() {      
         return (
             <div className="page page6">
                 <div className='notice'>
                     <ul>
-                    {
-                        getNoticeMessageListData.map((item,index)=>{
-                            return(
-                                <li key={index}>
-                                    <Link to={'/about/details?id=' +  item.id} target="_blank">
-                                        <div className='tit'></div>
-                                        <p>{item.content}</p>
-                                        <p className='p2'>{moment(item.createTime).format('YYYY-MM-DD')}</p>
-                                    </Link>
-                                </li>
-                            )
-                        })
-                    }
+                        {
+                            this.state.noticeMessagesList.map((item,index)=>{
+                                return(
+                                    <li key={index}>
+                                        <Link to={'/about/details?id=' +  item.id} target="_blank">
+                                            <div className='tit'></div>
+                                            <p>{item.content}</p>
+                                            <p className='p2'>{moment(item.createTime).format('YYYY-MM-DD')}</p>
+                                        </Link>
+                                    </li>
+                                )
+                            })
+                        }
                     </ul>
                 </div>
                 <Pagination
                     currentPage={this.state.currentPage}
                     pageSize={this.state.pageSize}
-                    total={total}
+                    total={this.state.total}
                     onChangePagination={this.onChangePagination}
                 />
             </div>
@@ -89,10 +99,8 @@ class Page6 extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
-        total: state.getNoticeMessageList.total,
-        getNoticeMessageListData: state.getNoticeMessageList.noticeMessages
+        getNoticeMessageListData: state.getNoticeMessageList
     };
 }
 

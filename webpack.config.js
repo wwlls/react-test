@@ -90,7 +90,7 @@ module.exports = {
           url: `http://localhost:${PORT}/home`
         }),
         new htmlWebpackPlugin({
-            title: '华赢宝—支氏控股集团旗下互联网金融平台', //开发环境下项目title
+            title: config.title, //开发环境下项目title
             template: 'index.html', //指定模板路径
             favicon: "./favicon.ico", // 自动把根目录下的favicon.ico图片加入html
             filename: 'index.html', //生成的html存放路径，相对于 output.path

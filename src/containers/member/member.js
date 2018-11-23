@@ -55,7 +55,7 @@ class Member extends React.Component {
             let { InfoData } = this.props;
             if(InfoData.rtn_code === 0) {
             	let customer = JSON.parse(InfoData.body).customer;
-            	//console.log(customer)
+            	console.log(customer)
                	let customerMobile = customer.mobile;
                	let customerWxAvatar = customer.wxAvatar;
                	let customerIdCard  = customer.idCard;

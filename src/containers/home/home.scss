@@ -25,6 +25,220 @@
 	height: 1px;
 	margin: 10px 0 30px;
 }
+.product {
+	margin: 0 0 30px;
+	& .productList {
+	    border: 1px solid #E7ECF4;
+		border-left: none;
+	    padding: 30px 0 0 36px;
+	    & .productLi {
+	    	margin: 0 0 28px;
+	    	& h5 {
+		    	font-size: 18px;
+				color: #50587a;
+			    & span {
+			    	margin: 0 0 0 10px;
+			    	&.new {
+			    		font-size: 12px;
+					    color: #fff;
+					    background: #ef7a46;
+					    border-radius: 5px;
+					    padding: 3px 10px;
+			    	}
+			    	&.only {
+		    		    font-size: 12px;
+					    color: #979cb2;
+					    background: #fff;
+					    border-radius: 5px;
+					    padding: 3px 10px;
+					    border: 1px solid #979cb2;
+			    	}
+			    }
+		    }
+		    & .productOneMian {
+		    	margin: 20px 0 0;
+		    	& h4 {
+		    		font-size: 32px;
+		    		text-align: center;
+		    		&.interest {
+						color: #ff7136;
+						& em {
+							font-size: 16px;
+							font-style: normal;
+						}
+		    		}
+		    		&.day {
+					    color: #50587a;
+					    & em {
+					    	font-size: 16px;
+							font-style: normal;
+					    }
+		    		}
+		    	}
+		    	& p {
+		    		text-align: center;
+				    font-size: 14px;
+				    color: #50587a;
+		    	}
+		    }
+		    & .goLend {
+		    	width: 135px;
+			    height: 40px;
+			    border-radius: 5px;
+			    text-align: center;
+			    line-height: 40px;
+			    background: #ef7a46;
+			    margin: 40px 0 0;
+			    border: 1px solid #ef7a46;
+			    &:hover {
+			    	border: 1px solid #ef7a46;
+			    }
+			    & a {
+			    	color: #fff;
+			    	&:hover {
+			    		color: #fff;
+			    	}
+			    }
+		    }
+		    & .progress {
+		    	margin: 10px 0 0 36px;
+		    	width: 68px;
+			    height: 2px;
+			    background: #000;
+			    position: relative;
+		    	& .barHover {
+		    		background: #ee9414;
+		    		height: 100%;
+				    width: 100%;
+				    position: absolute;
+		    	}
+		    }
+	    }
+	}
+	& .productOne {
+		border-top: 1px solid #ffaf24;
+	}
+	& .productTwo {
+		border-top: 1px solid #519fea;
+	}
+	& .productThree {
+		border-top: 1px solid #2ecf64;
+	}
+	& .welfare {
+		margin: 0 0 0 40px;
+	}
+	& .rank {
+		& h5 {
+			font-size: 18px;
+			color: $bigColor;
+			& span {
+	            background-image: url(../../static/images/home/titleIcon.png);
+	            width: 23px; 
+	            height: 19px;
+	            background-position: -10px -52px;
+	            display: inline-block;
+	            vertical-align: middle;
+	            margin: -5px 9px 0 0;
+	        }
+		}
+		& .rankTop10 {
+			margin: 20px 0;
+		    height: 240px;
+    		overflow: hidden;
+    		& ul {
+				height: 200%;
+	            overflow: hidden;
+				& li {
+					width: 100%;
+				    clear: both;
+				    height: 32px;
+				    line-height: 32px;
+				    & .slick-list {
+	                    overflow: visible;
+	                }
+				    & .rankTop10Div {
+						width: 100%;
+	                    height: 32px;
+	                    line-height: 32px;
+	                    clear: both;
+	                    display: block;
+	                    display: table-cell;
+	                    vertical-align:middle;
+	                    padding: 0;
+	                    margin: 0;
+	                    & span {
+	                    	font-size: 14px;
+	                    	color: #9B9B9B;
+	                    	display: inline-block;
+	                    	&.sort {
+	                    		width:18px;
+								height: 18px;
+								text-align: center;
+								line-height: 18px;
+								border-radius: 50%;
+								background: #676f91;
+								font-size: 12px;
+								color: #fff;
+	                    	}
+	                    	&.top {
+	                    		background-image: url(../../static/images/home/topIcon.png);
+	                    		width: 18px; 
+	                    		height: 23px;
+	                    		margin: 5px 0 0;
+	                    	}
+	                    	&.top1 {
+	                    		background-position: -10px -10px;
+	                    	}
+	                    	&.top2 {
+	                    		background-position: -48px -10px;
+	                    	}
+	                    	&.top3 {
+	                    		background-position: -86px -10px;
+	                    	}
+	                    }
+				    }
+				}
+			}
+		}
+	}
+	& .news {
+		& h5 {
+			font-size: 18px;
+			color: $bigColor;
+			& span {
+	            background-image: url(../../static/images/home/titleIcon.png);
+	            width: 22px; 
+	            height: 22px;
+	            background-position: -56px -10px;
+	            display: inline-block;
+	            vertical-align: middle;
+	            margin: -8px 10px 0 0;
+	        }
+		}
+		& ul {
+			margin: 20px 0;
+			& li {
+				padding: 8px 0;
+				& a {
+					font-size: 14px;
+    				color: $smallColor;
+    				width: 320px;
+				    white-space: nowrap;
+				    overflow: hidden;
+				    text-overflow: ellipsis;
+				    display: inline-block;
+					& em {
+					    width: 3px;
+					    height: 10px;
+					    background: #ef7a46;
+					    margin: 0 16px 0 0;
+					    display: inline-block;
+					}
+				}
+			}
+		}
+	}
+}
 .hot {
 	& b {
 		background-image: url(../../static/images/home/info.png);

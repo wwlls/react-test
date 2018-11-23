@@ -29,7 +29,7 @@ export default class pagePartner extends React.Component {
                 <div className="pagePartnerBanner">
                     <ul className="pagePartnerUl clear">
                         <li className="floatL">
-                            <Carousel autoplay ref="partnerCarousel">
+                            <Carousel autoplay dots="flase" ref="partnerCarousel">
                                 {
                                     this.props.children.map((item,index) =>{
                                         return (

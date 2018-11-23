@@ -118,7 +118,6 @@ class MyAssets extends React.Component {
     	data.current_page = this.state.currentPage;
     	data.page_size = this.state.pageSize;
     	let callFuc = (res) => {
-    		console.log(JSON.parse(res.body))
     		if(res.rtn_code === 0) {
     			let regularAssets = JSON.parse(res.body).regularAssets;
     			let dataSource = [];

@@ -144,6 +144,39 @@
 			}
 		}
 	}
+	& .set {
+		& .accountSet {
+			& .accountSetMain {
+				& .ant-row {
+					padding: 20px 0 20px 20px;
+					& span {
+						font-size: 14px;
+						color: $bigColor;
+					}
+				}
+			}
+			
+		}
+		& .safeSet {
+			& .safeSetMain {
+				& .ant-row {
+					padding: 20px 0 20px 20px;
+				    border-bottom: 1px solid #DFE6EA;
+				    & span {
+						font-size: 14px;
+						color: $bigColor;
+						&.say {
+							font-size: 12px;
+							color: $smallColor;
+						}
+					}
+					& a {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
 	& .coupon {
 		position: relative;
 		& i {
@@ -153,21 +186,6 @@
 			position: absolute;
 			top: 20px;
 			right: 20px;
-		}
-		& .couponNotUser {
-			background: url(../../static/images/member/couponOne.png);
-		    width: 290px;
-		    padding: 0 0 0 20px;
-		}
-		& .couponUser {
-			background: url(../../static/images/member/couponTwo.png);
-		    width: 290px;
-		    padding: 0 0 0 20px;
-		}
-		& .couponOut {
-			background: url(../../static/images/member/couponThree.png);
-		    width: 290px;
-		    padding: 0 0 0 20px;
 		}
 		& .couponSame {
 			position: relative;
@@ -227,6 +245,60 @@
 				    border-left: 1px solid rgba(255,255,255,0.5);
 				}
 			}
+			& img {
+			    width: 103px;
+			    height: 103px;
+			    position: absolute;
+			    right: 8px;
+			    bottom: 11px;
+			}
+		}
+		& .couponNotUser {
+			background: url(../../static/images/member/couponOne.png);
+		    width: 290px;
+		    padding: 0 0 0 20px;
+		}
+		& .couponUser {
+			background: url(../../static/images/member/couponTwo.png);
+		    width: 290px;
+		    padding: 0 0 0 20px;
+		    & h2 {
+				color: #fff;
+		    }
+		    & h3 {
+		    	color: #fff;
+		    }
+		    & p {
+		    	color: #fff;
+		    }
+		    & h5 {
+		    	color: #fff;
+		    }
+		    & span {
+		    	color: #fff;
+		    	border: 1px solid #fff;
+		    }
+		}
+		& .couponOut {
+			background: url(../../static/images/member/couponTwo.png);
+		    width: 290px;
+		    padding: 0 0 0 20px;
+		    & h2 {
+				color: #fff;
+		    }
+		    & h3 {
+		    	color: #fff;
+		    }
+		    & p {
+		    	color: #fff;
+		    }
+		    & h5 {
+		    	color: #fff;
+		    }
+		    & span {
+		    	color: #fff;
+		    	border: 1px solid #fff;
+		    }
 		}
 	}
 }

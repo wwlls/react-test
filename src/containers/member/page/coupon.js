@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Button, Tabs, Message } from 'antd';
@@ -6,6 +7,8 @@ import moment from 'moment';
 import Utils from 'utils';
 import Title from 'component/title/title';
 import Pagination from "component/pagination/pagination";
+import IsUser from 'static/images/member/isUser.png';
+import IsOut from 'static/images/member/isOut.png';
 
 const TabPane = Tabs.TabPane;
 
@@ -132,19 +135,6 @@ class Coupon extends React.Component {
 	}
 
 	render() {
-// 		if (navigator.userAgent.indexOf("Safari") >= 0) {
-//     if (sheight - cheight <= 0){
-//         blockmarginTop = 222;
-//     } else {
-//         blockmarginTop = sheight - cheight + 200;
-//     }
-// } else {
-//     blockmarginTop = document.documentElement.scrollTop + 200;
-// }
-
-//blockmarginTop =(navigator.userAgent.indexOf("Safari") >= 0) ? (sheight - cheight <= 0) ? 222 : sheight - cheight + 200 : document.documentElement.scrollTop + 200;
-
-
 		return (
 			<div className="coupon">
 	  			<Title title="我的赠券" />
@@ -192,7 +182,7 @@ class Coupon extends React.Component {
 						                        	}
 						                        </h5>
 						                        <span>{item.description}</span>
-						                        <a className="promptly" href="./investment.html">立即使用</a>
+						                        <Link className="promptly" to="./investment.html">立即使用</Link>
 					                        </div>
 					                    </Col>
 						      		)
@@ -248,7 +238,7 @@ class Coupon extends React.Component {
 						                        	}
 						                        </h5>
 						                        <span>{item.description}</span>
-						                        <a className="promptly" href="./investment.html">立即使用</a>
+						                        <img src={IsUser} alt="已使用" />
 					                        </div>
 					                    </Col>
 						      		)
@@ -304,7 +294,7 @@ class Coupon extends React.Component {
 						                        	}
 						                        </h5>
 						                        <span>{item.description}</span>
-						                        <a className="promptly" href="./investment.html">立即使用</a>
+						                        <img src={IsOut} alt="已过期" />
 					                        </div>
 					                    </Col>
 						      		)

@@ -5,6 +5,7 @@ import history from 'utils/history';
 //项目
 import Home from '../containers/home/home';
 import Lend from '../containers/lend/lend';
+import LendDetail from '../containers/lend/page/lendDetail';
 import Safe from '../containers/safe/safe';
 //start about
 import About from '../containers/about/about';
@@ -45,8 +46,9 @@ class RouterMap extends Component {
         <Router history={history}>
             <Switch>
                 <Route path="/home" exact component={ Home } />
-                <Route path="/lend" component={ Lend } />
-                <Route path="/safe"  component={ Safe } />
+                <Route path="/lend" exact component={ Lend } />
+                <Route path="/lendDetail" exact component={ LendDetail } />
+                <Route path="/safe" exact component={ Safe } />
                 <Route path="/about" exact component={ About } />
                 <Route path="/about/news1" exact component={ News1 } />
                 <Route path="/about/news2" exact component={ News2 } />

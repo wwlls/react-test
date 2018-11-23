@@ -16,6 +16,9 @@ export const GET_INFO = 'GET_INFO';
 //平台数据
 export const GET_COUNT = 'GET_COUNT';
 
+//产品列表
+export const GET_PRODUCTLIST = 'GET_PRODUCTLIST';
+
 //公司动态列表
 export const GET_NOTICEMESSAGELIST = 'GET_NOTICEMESSAGELIST';
 

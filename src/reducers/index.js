@@ -5,6 +5,7 @@ import checkMobile from './checkMobile';
 import getVerifyCode from './getVerifyCode';
 import getInfo from './getInfo';
 import getCount from './getCount';
+import getProductList from './getProductList';
 import getNoticeMessageList from './getNoticeMessageList';
 import getNoticeMessage from './getNoticeMessage';
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   getVerifyCode,
   getInfo,
   getCount,
+  getProductList,
   getNoticeMessageList,
   getNoticeMessage,
 });

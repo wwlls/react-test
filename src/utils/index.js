@@ -28,24 +28,25 @@ const Utils = {
           // 返回一个数组[status, data, headers]
             this.mockAdapter.onPost(url).reply(200, mockData[urlCode]);
         } else {
+            //Utils.removeStorage('ZZBSESSIONID');
             data = this.setPublic(data);
             let accessToken = Utils.getStorage("ZZBSESSIONID");
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
-                Utils.removeStorage('customerMobile'); //清除手机号
-                let tokenData = {};
-                tokenData['app_key'] = Config.app_key;
-                tokenData['device_id'] = Config.device_id;
-                let callFuc1 = function(accessRes) {
-                    let accessToken = JSON.parse(accessRes.body).access_token;
-                    Utils.setStorage("ZZBSESSIONID" , accessToken);
-                    Utils.postRequest(action, data = {}, () => {
-                        return axios.post(Config.api + action, data).then(function(res) {
-                            callFuc(res);
-                        })
-                    })
-                }
-                this.postRequest('token/get', tokenData, callFuc1);
-                return;
+                // Utils.removeStorage('customerMobile'); //清除手机号
+                // let tokenData = {};
+                // tokenData['app_key'] = Config.app_key;
+                // tokenData['device_id'] = Config.device_id;
+                // let callFuc1 = function(accessRes) {
+                //     let accessToken = JSON.parse(accessRes.body).access_token;
+                //     Utils.setStorage("ZZBSESSIONID" , accessToken);
+                //     Utils.postRequest(action, data = {}, () => { //获取到token后再次请求接口
+                //         return axios.post(Config.api + action, data).then(function(res) {
+                //             callFuc(res);
+                //         })
+                //     })
+                // }
+                // this.postRequest('token/get', tokenData, callFuc1);
+                // return;
             }
             data['sign'] = Utils.createSign(data);
         }
@@ -64,7 +65,7 @@ const Utils = {
                     let accessToken = JSON.parse(accessRes.body).access_token;
                     console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
-                    Utils.postRequest(action, data = {}, () => {
+                    Utils.postRequest(action, data = {}, () => { //获取到token后再次请求接口
                         return axios.post(Config.api + action, data).then(function(res) {
                             callFuc(res);
                         })
@@ -121,14 +122,14 @@ const Utils = {
         data = data + "&key=" + Config.md5_key;
         return md5(data);
     },
-    //储存书局 
+    //储存数据
     setStorage(key, value) {
         if (typeof value === 'object') {
             value = JSON.stringify(value);
         }
         localStorage.setItem(key, value);
     },
-    // 存的0，取出来0,
+    // 获取数据
     getStorage(key) {
         let value = localStorage.getItem(key);
         try {
@@ -137,6 +138,7 @@ const Utils = {
         }
         return value;
     },
+    // 删除数据
     removeStorage(key) {
         localStorage.removeItem(key);
     },

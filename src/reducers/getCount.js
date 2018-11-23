@@ -15,6 +15,7 @@ let initstate = {
 	investCount: 0,
 	top1InvestMoney: 0,
 	top10InvestMoney: 0,
+	top10InvestUser: [],
 }
 
 export const getCountData = (state = initstate, action) => {

@@ -3,23 +3,30 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { getCount } from 'actions';
+import { getCount, getProductList } from 'actions';
 import CountUp from 'react-countup';
-import { Icon, Row, Col } from 'antd';
+import { Icon, Row, Col, Button, Message, Carousel } from 'antd';
 import Header from 'component/header/header';
-import Carousel from 'component/carousel/carousel';
+import CarouselPage from 'component/carousel/carousel';
 import Partner from 'component/partner/partner';
 import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
 import imgbanner1 from 'static/images/common/banner/banner1.jpg';
 import imgbanner2 from 'static/images/common/banner/banner2.jpg';
 import downLoadApp from 'static/images/home/downLoad.png';
+import ProductImg1 from 'static/images/home/product_img1.png';
+import ProductImg2 from 'static/images/home/product_img2.png';
+import ProductImg3 from 'static/images/home/product_img3.png';
+import First from 'static/images/home/first.png';
+import Packet from 'static/images/home/packet.png';
 import "./home.scss";
 
 class Home extends React.Component {
 	static propTypes = {
 		getCountData: PropTypes.object.isRequired,
         getCount: PropTypes.func.isRequired,
+        productListData: PropTypes.object.isRequired,
+        getProductList: PropTypes.func.isRequired,
     }
 	constructor(props) {
 	    super(props);
@@ -29,6 +36,10 @@ class Home extends React.Component {
 	    		{img : imgbanner2 , id : 1 , url: 'list'}
 	    	],
     		day: 365,
+    		productsOne: [],
+    		productsTwo: [],
+    		productsThree: [],
+    		//rankList: []
 	    };
 	}
 
@@ -43,6 +54,40 @@ class Home extends React.Component {
 	 //    });
 	 	//平台数据方法
 	 	this.props.getCount();
+	 	//产品列表方法
+	 	this.props.getProductList().then(() => {
+	 		let { productListData } = this.props;
+	 		console.log(productListData)
+	 		if(productListData.rtn_code === 0) {
+	 			let product = JSON.parse(productListData.body).products;
+	 			//爆款专区
+	 			let productsOneArr = [];
+		 		for (var i = 0; i < 1; i++) {
+		 			productsOneArr.push(product[4],product[5]);
+		 			this.setState({
+		 				productsOne: productsOneArr
+		 			})
+		 		}
+		 		//短期出借
+		 		let productsTwoArr = [];
+		 		for (var i = 0; i < 1; i++) {
+		 			productsTwoArr.push(product[0],product[1]);
+		 			this.setState({
+		 				productsTwo: productsTwoArr
+		 			})
+		 		}
+		 		//长期出借
+		 		let productsThreeArr = [];
+		 		for (var i = 0; i < 1; i++) {
+		 			productsThreeArr.push(product[2],product[3]);
+		 			this.setState({
+		 				productsThree: productsThreeArr
+		 			})
+		 		}
+	 		} else {
+	 			Message.error(productListData.rtn_msg);
+	 		}
+	 	});
 	 	//运营时间
 		let startTime = '2015/10/17 00:00:00';
 		let nowTime = new Date();
@@ -58,7 +103,7 @@ class Home extends React.Component {
 		return (
 			<div className="container">
 				<Header />
-				<Carousel carouselList={this.state.carouselList} carousel="indexList" open="block" />
+				<CarouselPage carouselList={this.state.carouselList} carousel="indexList" open="block" />
 				<div className="content layout">
 					<div className="platform clear">
 						<div className="floatL">
@@ -141,6 +186,232 @@ class Home extends React.Component {
 	                    </Col>
 	                </Row>
 				</div>
+				<div className="line"></div>
+				<div className="layout">
+					<Row className="product">
+						<Col md={4}>
+							<img src={ProductImg1} alt="爆款专区" />
+						</Col>
+						<Col md={12} className="productList productOne">
+							{
+								this.state.productsOne.map((item, i) => {
+									return (
+										<Row className="productLi" key={i}>
+											<Col md={18}>
+												<h5>
+													{item.name}
+													<span className={
+														item.prodType === 2 ? 'new'
+														:   item.prodType === 5 ? 'only'
+														:   ''
+													}>
+														{
+															item.prodType === 2 ? '新手专享'
+														:   item.prodType === 5 ? '限时限量'
+														:   ''
+														}
+													</span>
+													<span className="only">
+														{
+															item.prodType === 2 ? '仅此一次'
+														:   item.prodType === 5 ? '相约15号'
+														:   ''
+														}
+													</span>
+												</h5>
+												<Row className="productOneMian">
+													<Col md={7}>
+														<h4 className="interest">{parseFloat(item.interest*100).toFixed(1)}<em>%</em></h4>
+														<p>借贷双方约定利率</p>
+													</Col>
+													<Col md={12}>
+														<h4 className="day">{item.period}<em>天</em></h4>
+														<p>出借期限</p>
+													</Col>
+												</Row>
+											</Col>
+											<Col md={6}>
+												<Button className="goLend"><Link to={'/lendDetail?id='+item.productId}>立即出借</Link></Button>
+												<div className="progress">
+													<div className="barHover" style={{width: item.realPercent + '%'}}></div>
+													<div className="bar"></div>
+												</div>
+											</Col>
+										</Row>
+									)
+								})
+							}
+						</Col>
+						<Col md={7} className="welfare">
+							<Link to="">
+								<img src={First} alt="新手引导" />
+							</Link>
+							<Link to="">
+								<img src={Packet} alt="红包" />
+							</Link>
+						</Col>
+					</Row>
+
+					<Row className="product">
+						<Col md={4}>
+							<img src={ProductImg2} alt="短期出借" />
+						</Col>
+						<Col md={12} className="productList productTwo">
+							{
+								this.state.productsTwo.map((item, i) => {
+									return (
+										<Row className="productLi" key={i}>
+											<Col md={18}>
+												<h5>
+													{item.name}
+												</h5>
+												<Row className="productOneMian">
+													<Col md={7}>
+														<h4 className="interest">{parseFloat(item.interest*100).toFixed(1)}<em>%</em></h4>
+														<p>借贷双方约定利率</p>
+													</Col>
+													<Col md={12}>
+														<h4 className="day">{item.period}<em>天</em></h4>
+														<p>出借期限</p>
+													</Col>
+												</Row>
+											</Col>
+											<Col md={6}>
+												<Button className="goLend"><Link to={'/lendDetail?id='+item.productId}>立即出借</Link></Button>
+												<div className="progress">
+													<div className="barHover" style={{width: item.realPercent + '%'}}></div>
+													<div className="bar"></div>
+												</div>
+											</Col>
+										</Row>
+									)
+								})
+							}
+						</Col>
+						<Col md={7} className="welfare rank">
+							<h5><span></span>当月出借排行</h5>
+							<div className="rankTop10">
+								<ul>
+									<li>
+										<Carousel autoplay vertical dots="flase">
+											{
+												getCountData.top10InvestUser.map((item, index) => {
+													return (
+														<div className="rankTop10Div" key={index}>
+															<Row>
+																<Col md={3}>
+																	<span className={
+																		index === 0 ? 'top1 top' 
+																		: index === 1 ? 'top2 top'
+																		: index === 2 ?'top3 top'
+																		: "sort"
+																	}>
+																		{
+																			index === 0 ? '' 
+																			: index === 1 ? ''
+																			: index === 2 ?''
+																			: index + 1
+																		}
+																	</span>
+																</Col>
+																<Col md={15}>
+																	<span>{item.mobile}</span>
+																</Col>
+																<Col md={6} className="textR">
+																	<span>{parseFloat(item.principal).toFixed(2)}</span>
+																</Col>
+															</Row>
+														</div>
+													)
+												})	
+											}
+										</Carousel>
+									</li>
+								</ul>
+							</div>
+						</Col>
+					</Row>
+
+					<Row className="product">
+						<Col md={4}>
+							<img src={ProductImg3} alt="长期出借" />
+						</Col>
+						<Col md={12} className="productList productThree">
+							{
+								this.state.productsThree.map((item, i) => {
+									return (
+										<Row className="productLi" key={i}>
+											<Col md={18}>
+												<h5>
+													{item.name}
+												</h5>
+												<Row className="productOneMian">
+													<Col md={7}>
+														<h4 className="interest">{parseFloat(item.interest*100).toFixed(1)}<em>%</em></h4>
+														<p>借贷双方约定利率</p>
+													</Col>
+													<Col md={12}>
+														<h4 className="day">{item.period}<em>天</em></h4>
+														<p>出借期限</p>
+													</Col>
+												</Row>
+											</Col>
+											<Col md={6}>
+												<Button className="goLend"><Link to={'/lendDetail?id='+item.productId}>立即出借</Link></Button>
+												<div className="progress">
+													<div className="barHover" style={{width: item.realPercent + '%'}}></div>
+													<div className="bar"></div>
+												</div>
+											</Col>
+										</Row>
+									)
+								})
+							}
+						</Col>
+						<Col md={7} className="welfare news">
+							<h5><span></span>媒体报道</h5>
+							<ul>
+								<li>
+									<Link to="/about/news5" target="_blank">
+										<em></em>
+										华赢宝携手三家优质资产对接，加速合规建设
+									</Link>
+								</li>
+								<li>
+									<Link to="/about/news4" target="_blank">
+										<em></em>
+										华赢宝赞助2017萧山广场舞大赛完美结束
+									</Link>
+								</li>
+								<li>
+									<Link to="/about/news6" target="_blank">
+										<em></em>
+										支氏控股集团华赢宝发布验资报告
+									</Link>
+								</li>
+								<li>
+									<Link to="/about/news2" target="_blank">
+										<em></em>
+										「华赢宝征文活动」有华赢宝的日子，树桩吐绿，鸟语花香
+									</Link>
+								</li>
+								<li>
+									<Link to="/about/news1" target="_blank">
+										<em></em>
+										华赢宝累计成交突破10亿元
+									</Link>
+								</li>
+								<li>
+									<Link to="/about/news3" target="_blank">
+										<em></em>
+										华赢宝获批ICP证，积极响应监管政策变化
+									</Link>
+								</li>
+							</ul>
+						</Col>
+					</Row>
+				</div>
+				<div className="line"></div>
 				<Partner />
 				<div className="downLoad">
 					<img src={downLoadApp} alt="下载APP" />
@@ -156,12 +427,13 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   	return {
-  		getCountData: state.getCount
+  		getCountData: state.getCount,
+  		productListData: state.getProductList
   	};
 }
 
 const mapDispatchToProps = (dispatch) => {
-  	return bindActionCreators({ getCount }, dispatch);
+  	return bindActionCreators({ getCount, getProductList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -95,6 +95,24 @@ export const getCount = (parmas) => async(dispatch, getstate) => {
 	}
 }
 
+//获取产品列表
+const productListData = (data) => ({
+	type: 'test.GET_PRODUCTLIST',
+	data
+})
+export const getProductList = (parmas) => async(dispatch, getstate) => {
+	try {
+		let callFuc = function(res) {
+			dispatch(
+				productListData(res)
+			)
+		}
+		await Utils.postRequest(`product/getRegularListForOfficialSite`, parmas, callFuc);
+	} catch (error) {
+		message.error("网络错误，请重试");
+	}
+}
+
 //获取公司动态
 const noticeMessageList = (data) => ({
 	type: 'test.GET_NOTICEMESSAGELIST',
@@ -105,7 +123,7 @@ export const getNoticeMessageList = (parmas) => async(dispatch, getstate) => {
 	try {
 		let callFuc = function(res) {
 			dispatch(
-				noticeMessageList(JSON.parse(res.body))
+				noticeMessageList(res)
 			)
 		}
 		await Utils.postRequest(`home/getNoticeMessageList`, parmas, callFuc);
@@ -124,7 +142,7 @@ export const getNoticeMessage = (parmas) => async(dispatch, getstate) => {
 	try {
 		let callFuc = function(res) {
 			dispatch(
-				noticeMessage(JSON.parse(res.body))
+				noticeMessage(res)
 			)
 		}
 		await Utils.postRequest(`home/getNoticeMessage`, parmas, callFuc);

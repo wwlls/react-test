@@ -5,7 +5,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');// 生成html
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 每次打包前清除旧的build文件夹
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // 代码压缩插件，webpack本身自带了，引入这个是为了配置参数
 var config = require('./config');
-
+const PORT = 8090;
 const svgDirs = [
   require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
   // path.resolve(__dirname, 'src/svgs'),  // 2. 自己私人的 svg 存放目录
@@ -129,11 +129,17 @@ module.exports = {
         historyApiFallback: true,
         inline: true,
         contentBase:'./build/',
-        port:'8086',   // 我电脑上默认的8080端口无法访问，所以设置port为8086
+        port: PORT,   // 我电脑上默认的8080端口无法访问，所以设置port为8086
         proxy: {
           "/mall": {
             target: config.api,
-            changeOrigin: true
+            changeOrigin: true,
+            changeOrigin: true,  //是否跨域
+            secure: false,  // 如果是https接口，需要配置这个参数
+            //ws: true,    // 是否代理websockets
+            // "pathRewrite": { //这个是个正则匹配
+            //     "^/api": "/"
+            // }
           }
         },
     },

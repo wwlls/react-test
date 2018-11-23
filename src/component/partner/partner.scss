@@ -1,19 +1,19 @@
 @import "static/css/common.scss";
 .partner {
-	width: 1162px !important;
 	height: 162px;
 	padding: 18px 0 40px;
-	margin: 20px auto!important;
-	border: 1px solid $borderColor;
 	& h5 {
 		font-size: 18px;
 		color: $bigColor;
-		& img {
-			width: 26px;
-			height: 22px;
-			vertical-align: middle;
-			margin: -5px 10px 0 18px;
-		}
+		& span {
+            background-image: url(../../static/images/home/titleIcon.png);
+            width: 26px; 
+            height: 22px;
+            background-position: -10px -10px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: -8px 10px 0 0;
+        }
 	}
     & .pagePartner {
         position: relative;
@@ -43,7 +43,6 @@
             height: 100px;
             margin: 0 auto;
             overflow: hidden;
-            
             & .pagePartnerUl {
                 width: 200%;
                 overflow: hidden;

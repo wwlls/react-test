@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Button } from 'antd-mobile';
+import { Button } from 'antd';
 import Header from '../../component/header/header';
 import { setImg, addNum , removeNum } from '../../actions';
 import Utils from '../../utils';
@@ -64,8 +64,8 @@ class Index extends React.Component {
                 <img src={ImgTest} />
                 <div className="btn" onClick={this.goOther} data-name={"姓名"}>获取数据跳转页面</div>
                 <h5>{count}</h5>
-                <button onClick={this.addBtn}>add</button>
-                <button onClick={this.removeBtn}>remove</button>
+                <Button onClick={this.addBtn}>add</Button>
+                <Button onClick={this.removeBtn}>remove</Button>
             </div>
         )
     }

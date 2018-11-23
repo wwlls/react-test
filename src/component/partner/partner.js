@@ -1,7 +1,6 @@
 /** 合作单位 **/
 import React from "react";
 import PagePartner from './page/pagePartner';
-import partnerIcon from "static/images/home/partnerIcon.png";
 import imgpartner1 from "static/images/common/partner/partner1.png";
 import imgpartner2 from "static/images/common/partner/partner2.png";
 import imgpartner3 from "static/images/common/partner/partner3.png";
@@ -34,7 +33,7 @@ export default class partner extends React.Component {
     render() {
         return (
             <div className="partner layout">
-               	<h5><img src={partnerIcon} alt="合作单位" />合作单位</h5>
+               	<h5><span></span>合作单位</h5>
                <PagePartner children={this.state.children} />
             </div>
         );

@@ -1,7 +1,7 @@
 /** 导航 **/
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Affix, Modal, Message } from 'antd';
+import { Affix, Modal, Message, Button } from 'antd';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -49,6 +49,7 @@ export default class Header extends React.Component {
             visible: true,
         });
     }
+    //确定
     handleOk = (e) => {
         let data = {};
         let callFuc = (res) => {
@@ -59,11 +60,12 @@ export default class Header extends React.Component {
                     visible: false,
                 });
                 Message.success('退出成功');
-                this.context.router.history.push('/login');
+                this.context.router.history.push('/home');
             }
         }
         Utils.postRequest('logout', data, callFuc);
     }
+    //取消
     handleCancel = (e) => {
         console.log(e);
         this.setState({
@@ -126,7 +128,7 @@ export default class Header extends React.Component {
                             <div className="subNav">
                                 <ul>
                                     <li><NavLink to="/home">首页</NavLink></li>
-                                    <li><NavLink to="/lend">我要出借</NavLink></li>
+                                    <li><NavLink className={this.props.active} to="/lend">我要出借</NavLink></li>
                                     <li><NavLink to="/safe">稳健发展</NavLink></li>
                                     <li onMouseOver={this.handleMouseUserOver} onMouseLeave={this.handleMouseOut} source='news'>
                                         <NavLink to="/about">信息披露</NavLink>
@@ -167,13 +169,13 @@ export default class Header extends React.Component {
                 </Affix>
                 <Modal
                   title="提示"
-                  okText="确认"
                   centered
                   destroyOnClose={true}
-                  cancelText="取消"
                   visible={this.state.visible}
                   onCancel={this.handleCancel}
-                  onOk={this.handleOk}
+                  footer={[
+                    <Button key="submit" type="primary" onClick={this.handleOk}>确认</Button>
+                  ]}
                 >
                   <p>确定要退出华赢宝吗？</p>
                 </Modal>
