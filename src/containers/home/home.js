@@ -57,7 +57,6 @@ class Home extends React.Component {
 	 	//产品列表方法
 	 	this.props.getProductList().then(() => {
 	 		let { productListData } = this.props;
-	 		console.log(productListData)
 	 		if(productListData.rtn_code === 0) {
 	 			let product = JSON.parse(productListData.body).products;
 	 			//爆款专区

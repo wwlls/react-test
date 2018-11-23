@@ -28,25 +28,24 @@ const Utils = {
           // 返回一个数组[status, data, headers]
             this.mockAdapter.onPost(url).reply(200, mockData[urlCode]);
         } else {
-            //Utils.removeStorage('ZZBSESSIONID');
             data = this.setPublic(data);
             let accessToken = Utils.getStorage("ZZBSESSIONID");
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
-                // Utils.removeStorage('customerMobile'); //清除手机号
-                // let tokenData = {};
-                // tokenData['app_key'] = Config.app_key;
-                // tokenData['device_id'] = Config.device_id;
-                // let callFuc1 = function(accessRes) {
-                //     let accessToken = JSON.parse(accessRes.body).access_token;
-                //     Utils.setStorage("ZZBSESSIONID" , accessToken);
-                //     Utils.postRequest(action, data = {}, () => { //获取到token后再次请求接口
-                //         return axios.post(Config.api + action, data).then(function(res) {
-                //             callFuc(res);
-                //         })
-                //     })
-                // }
-                // this.postRequest('token/get', tokenData, callFuc1);
-                // return;
+                Utils.removeStorage('customerMobile'); //清除手机号
+                let tokenData = {};
+                tokenData['app_key'] = Config.app_key;
+                tokenData['device_id'] = Config.device_id;
+                let callFuc1 = function(accessRes) {
+                    let accessToken = JSON.parse(accessRes.body).access_token;
+                    Utils.setStorage("ZZBSESSIONID" , accessToken);
+                    Utils.postRequest(action, data = {}, () => { //获取到token后再次请求接口
+                        return axios.post(Config.api + action, data).then(function(res) {
+                            callFuc(res);
+                        })
+                    })
+                }
+                this.postRequest('token/get', tokenData, callFuc1);
+                return;
             }
             data['sign'] = Utils.createSign(data);
         }
