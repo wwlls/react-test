@@ -9,6 +9,7 @@ import Table from "component/table/table"; // tab子页面
 import Tabs from 'component/tabs/tabs';
 import BackTop from 'component/backTop/backTop';
 import CountUp from 'react-countup';
+import Tools from 'utils/tools';
 import imgbanner1 from 'static/images/common/banner/banner1.jpg';
 import imgbanner2 from 'static/images/common/banner/banner2.jpg';
 
@@ -20,6 +21,8 @@ export default class Member extends React.Component {
                 {img : imgbanner1 , id : 0 , url: 'index'} , 
                 {img : imgbanner2 , id : 1 , url: 'list'}
             ],
+            money: 1000000000,
+            time: Tools.isMoment(new Date().getTime(), 1),
             count: 60,
             stop: true,
             disabled: '',
@@ -148,6 +151,8 @@ export default class Member extends React.Component {
         return (
             <div className="page page-Member">
                 <p>member页面</p>
+                <div>金额格式化：{Tools.isNumeral(this.state.money)}</div>
+                <div>时间格式化：{Tools.isMoment(this.state.time, 0)}<br/>{Tools.isMoment(this.state.time, 1)}<br/>{Tools.isMoment(this.state.time, 2)}</div>
                 <CountUp start={0} end={1000000} decimals={2} duration={4}></CountUp>
                 <Cascader />
                 <CarouselPage carouselList={this.state.carouselList} carousel="indexList" open="block" />

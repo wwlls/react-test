@@ -5,8 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getNoticeMessageList } from 'actions';
 import { Icon, Row, Col, Message } from 'antd';
-import moment from 'moment';
-import Utils from 'utils';
+import Tools from 'utils/tools';
 import Pagination from "component/pagination/pagination";
 import './page6.scss'
 
@@ -79,7 +78,7 @@ class Page6 extends React.Component {
                                         <Link to={'/about/details?id=' +  item.id} target="_blank">
                                             <div className='tit'></div>
                                             <p>{item.content}</p>
-                                            <p className='p2'>{moment(item.createTime).format('YYYY-MM-DD')}</p>
+                                            <p className='p2'>{Tools.isMoment(item.createTime, 1)}</p>
                                         </Link>
                                     </li>
                                 )

@@ -6,7 +6,8 @@ import locale from 'antd/lib/date-picker/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
-import Utils from 'utils';
+import Utils from 'utils/index';
+import Tools from 'utils/tools';
 import Title from 'component/title/title';
 import Table from "component/table/table"; // tab子页面
 import Pagination from "component/pagination/pagination";
@@ -15,8 +16,8 @@ class Capital extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	defaultStartDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
-	    	defaultEndDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
+	    	defaultStartDate: Tools.isMoment(new Date().getTime(), 1),
+	    	defaultEndDate: Tools.isMoment(new Date().getTime(), 1),
 	    	currentPage: 1,
             pageSize: 10, 
             total: 10,
@@ -80,8 +81,8 @@ class Capital extends React.Component {
                 for (var i = 0; i < accountDetails.length; i++) {
                     dataSource.push({
                         key: i,
-                        occurencyDate: moment(accountDetails[i].occurencyDate).format('YYYY-MM-DD  HH:mm:ss'),
-                        money: accountDetails[i].money,
+                        occurencyDate: Tools.isMoment(accountDetails[i].occurencyDate, 0),
+                        money: Tools.isNumeral(accountDetails[i].money),
                         occurencyType: accountDetails[i].occurencyType,
                         reason: accountDetails[i].reason,
                     })
@@ -126,10 +127,10 @@ class Capital extends React.Component {
 	//今天
 	today = () => {
 		this.setState({
-			defaultStartDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
-			defaultEndDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
-	  		start_date: moment(new Date().getTime()).format('YYYY-MM-DD'),
-	  		end_date: moment(new Date().getTime()).format('YYYY-MM-DD'),
+			defaultStartDate: Tools.isMoment(new Date().getTime(), 1),
+			defaultEndDate: Tools.isMoment(new Date().getTime(), 1),
+	  		start_date: Tools.isMoment(new Date().getTime(), 1),
+	  		end_date: Tools.isMoment(new Date().getTime(), 1),
 	  		today: 'active',
 	  		oneMonth: '',
 	  		threeMonth: '',
@@ -140,10 +141,10 @@ class Capital extends React.Component {
 	//近一个月
 	oneMonth = () => {
 		this.setState({
-			defaultStartDate: moment(new Date().setMonth(new Date().getMonth()-1)).format('YYYY-MM-DD'),
-			defaultEndDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
-	  		start_date: moment(new Date().setMonth(new Date().getMonth()-1)).format('YYYY-MM-DD'),
-	  		end_date: moment(new Date().getTime()).format('YYYY-MM-DD'),
+			defaultStartDate: Tools.isMoment(new Date().setMonth(new Date().getMonth()-1), 1),
+			defaultEndDate: Tools.isMoment(new Date().getTime(), 1),
+	  		start_date: Tools.isMoment(new Date().setMonth(new Date().getMonth()-1), 1),
+	  		end_date: Tools.isMoment(new Date().getTime(), 1),
 	  		today: '',
 	  		oneMonth: 'active',
 	  		threeMonth: '',
@@ -154,10 +155,10 @@ class Capital extends React.Component {
 	//近3个月
 	threeMonth = () => {
 		this.setState({
-			defaultStartDate: moment(new Date().setMonth(new Date().getMonth()-3)).format('YYYY-MM-DD'),
-			defaultEndDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
-	  		start_date: moment(new Date().setMonth(new Date().getMonth()-3)).format('YYYY-MM-DD'),
-	  		end_date: moment(new Date().getTime()).format('YYYY-MM-DD'),
+			defaultStartDate: Tools.isMoment(new Date().setMonth(new Date().getMonth()-3), 1),
+			defaultEndDate: Tools.isMoment(new Date().getTime(), 1),
+	  		start_date: Tools.isMoment(new Date().setMonth(new Date().getMonth()-3), 1),
+	  		end_date: Tools.isMoment(new Date().getTime(), 1),
 	  		today: '',
 	  		oneMonth: '',
 	  		threeMonth: 'active',
@@ -173,20 +174,20 @@ class Capital extends React.Component {
 		} else {
 			if(this.state.start_date === '' && this.state.end_date === '') {  //开始时间与结束时间同时没有选择
 				this.setState({
-			  		start_date: moment(new Date().getTime()).format('YYYY-MM-DD'),
-			  		end_date: moment(new Date().getTime()).format('YYYY-MM-DD')
+			  		start_date: Tools.isMoment(new Date().getTime(), 1),
+			  		end_date: Tools.isMoment(new Date().getTime(), 1)
 			  	}, () => {
 			      	this.search();
 			    });
 			} else if(this.state.start_date === '') { //开始时间没有选择
 				this.setState({
-			  		start_date: moment(new Date().getTime()).format('YYYY-MM-DD')
+			  		start_date: Tools.isMoment(new Date().getTime(), 1)
 			  	}, () => {
 					this.search();
 			    });
 			} else if(this.state.end_date === '') {	//结束时间没有选择
 				this.setState({
-			  		end_date: moment(new Date().getTime()).format('YYYY-MM-DD')
+			  		end_date: Tools.isMoment(new Date().getTime(), 1)
 			  	}, () => {
 			      	this.search();
 			    });

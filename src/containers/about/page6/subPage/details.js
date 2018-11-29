@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getNoticeMessage } from 'actions';
 import { Message } from 'antd';
-import moment from 'moment';
+import Tools from 'utils/tools';
 import Header from 'component/header/header';
 import SubBanner from 'component/subBanner/subBanner'
 import Footer from 'component/footer/footer';
@@ -52,7 +52,7 @@ class Details extends React.Component {
                     <h2 className="textC title">{this.state.title}</h2>
                     <h5>{this.state.content}</h5>
                     <p className="textR name">华赢宝</p>
-                    <p className="textR">{moment(this.state.createTime).format('YYYY-MM-DD')}</p>
+                    <p className="textR">{Tools.isMoment(this.state.createTime, 1)}</p>
                 </div>
                 <Footer />
                 <BackTop />

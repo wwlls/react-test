@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getCount } from 'actions';
-import moment from 'moment';
 import { Icon, Row, Col, Tooltip } from 'antd';
+import Tools from 'utils/tools';
 import './page4.scss'
 import op1 from 'static/images/about/op1.png'
 import op2 from 'static/images/about/op2.png'
@@ -82,7 +82,7 @@ class Page4 extends React.Component {
             <div className="page page4">
                <section className="column">
                     <p>
-                        <b>交易数据 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
+                        <b>交易数据 </b>截至日期：{Tools.isMoment(new Date(new Date().getTime()-86400000), 2)}
                     </p>
                     <div className="aboutData">
                         <Row gutter={40}>
@@ -90,7 +90,7 @@ class Page4 extends React.Component {
                                 <Tooltip className='flex' placement="bottomLeft" title="自华赢宝成立起，华赢宝撮合完成的所有交易总和">
                                     <img src={op1}/>
                                     <dl>
-                                        <dd>{parseFloat(getCountData.investMoneyTotal).toFixed(2)}</dd>
+                                        <dd>{Tools.isNumeral(getCountData.investMoneyTotal)}</dd>
                                         <dt>累计交易总金额（元）</dt>
                                     </dl>
                                 </Tooltip>
@@ -108,7 +108,7 @@ class Page4 extends React.Component {
                                 <Tooltip className='flex' placement="bottomLeft" title="借贷余额：在投总额">
                                     <img src={op3}/>
                                     <dl>
-                                        <dd>{parseFloat(getCountData.investMoney).toFixed(2)}</dd>
+                                        <dd>{Tools.isNumeral(getCountData.investMoney)}</dd>
                                         <dt>借贷余额（元）</dt>
                                     </dl>
                                 </Tooltip>
@@ -128,7 +128,7 @@ class Page4 extends React.Component {
                                 <Tooltip className='flex' placement="bottomLeft" title="利息余额：在投总额利息">
                                 <img src={op5}/>
                                     <dl>
-                                        <dd>{parseFloat(getCountData.totalInterest).toFixed(2)}</dd>
+                                        <dd>{Tools.isNumeral(getCountData.totalInterest)}</dd>
                                         <dt>利息余额（元）</dt>
                                     </dl>
                                 </Tooltip>
@@ -150,7 +150,7 @@ class Page4 extends React.Component {
 
                 <section className="column">
                 <p>
-                    <b>借款人数据 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
+                    <b>借款人数据 </b>截至日期：{Tools.isMoment(new Date(new Date().getTime()-86400000), 2)}
                 </p>
                 <div className="aboutData">
                     <Row gutter={40}>
@@ -176,7 +176,7 @@ class Page4 extends React.Component {
                             <Tooltip className='flex' placement="bottomLeft" title="自平台运营上线起，借款人累计交易总额与累计借款人总数之比">
                                 <img src={op8}/>
                                 <dl>
-                                    <dd>{parseFloat(getCountData.borrowingMoney / getCountData.borrowUserCountTotal).toFixed(2)}</dd>
+                                    <dd>{Tools.isNumeral(getCountData.borrowingMoney / getCountData.borrowUserCountTotal)}</dd>
                                     <dt>人均累计借款金额(元)</dt>
                                 </dl>
                             </Tooltip>
@@ -208,7 +208,7 @@ class Page4 extends React.Component {
 
             <section className="column">
             <p>
-                <b>出借人信息 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
+                <b>出借人信息 </b>截至日期：{Tools.isMoment(new Date(new Date().getTime()-86400000), 2)}
             </p>
             <div className="aboutData">
                 <Row gutter={40}>
@@ -234,7 +234,7 @@ class Page4 extends React.Component {
                         <Tooltip className='flex' placement="bottomLeft" title="自平台运营上线起，平台出借人累计交易总额与累计出借人总数之比">
                             <img src={op3}/>
                             <dl>
-                                <dd>{parseFloat(getCountData.investMoneyTotal / getCountData.investCountTotal).toFixed(2)}</dd>
+                                <dd>{Tools.isNumeral(getCountData.investMoneyTotal / getCountData.investCountTotal)}</dd>
                                 <dt>人均累计出借金额（元）</dt>
                             </dl>
                         </Tooltip>
@@ -267,7 +267,7 @@ class Page4 extends React.Component {
 
         <section className="column">
         <p>
-            <b>出借人信息 </b>截至日期：{moment(new Date(new Date().getTime()-86400000)).format('YYYY年MM月DD日')}
+            <b>出借人信息 </b>截至日期：{Tools.isMoment(new Date(new Date().getTime()-86400000), 2)}
         </p>
         <div className="aboutData">
             <Row gutter={40}>

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Button, Tabs, Message } from 'antd';
-import moment from 'moment';
 import Utils from 'utils/index';
+import Tools from 'utils/tools';
 import Title from 'component/title/title';
 import Table from "component/table/table"; // tab子页面
 import Pagination from "component/pagination/pagination";
@@ -50,7 +50,7 @@ class MyAssets extends React.Component {
 	            key: 'buyTime',
 	            width: 120,
 	            render: (text, record) => (
-	            	<span>{moment(record.buyTime).format('YYYY-MM-DD')}</span>
+	            	<span>{Tools.isMoment(record.buyTime, 1)}</span>
 	            )
 	        }, {
 	            title: '还款时间',
@@ -58,7 +58,7 @@ class MyAssets extends React.Component {
 	            key: 'endTime',
 	            width: 120,
 	            render: (text, record) => (
-	            	<span>{moment(record.endTime).format('YYYY-MM-DD')}</span>
+	            	<span>{Tools.isMoment(record.endTime, 1)}</span>
 	            )
 	        }, {
 	            title: '状态',
@@ -126,8 +126,8 @@ class MyAssets extends React.Component {
 		                key: i,
 		                name: regularAssets[i].name,
 		                interest: parseFloat(regularAssets[i].interest * 100).toFixed(1) + '%', 
-		                money: parseFloat(regularAssets[i].money).toFixed(2),
-		                profit: parseFloat(regularAssets[i].profit).toFixed(2),
+		                money: Tools.isNumeral(regularAssets[i].money),
+		                profit: Tools.isNumeral(regularAssets[i].profit),
 		                buyTime: regularAssets[i].buyTime,
 		                endTime: regularAssets[i].endTime,
 		                status: regularAssets[i].isExpired,

@@ -6,7 +6,8 @@ import locale from 'antd/lib/date-picker/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
-import Utils from 'utils';
+import Utils from 'utils/index';
+import Tools from 'utils/tools';
 import Title from 'component/title/title';
 import Table from "component/table/table"; // tab子页面
 import Pagination from "component/pagination/pagination";
@@ -15,8 +16,8 @@ class Recharge extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	defaultStartDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
-	    	defaultEndDate: moment(new Date().getTime()).format('YYYY-MM-DD'),
+	    	defaultStartDate: Tools.isMoment(new Date().getTime(), 1),
+	    	defaultEndDate: Tools.isMoment(new Date().getTime(), 1),
 	    	currentPage: 1,
             pageSize: 10, 
             total: 10,
@@ -94,10 +95,10 @@ class Recharge extends React.Component {
                 for (var i = 0; i < rechargeRecords.length; i++) {
                     dataSource.push({
                         key: i,
-                        createdTime: moment(rechargeRecords[i].createdTime).format('YYYY-MM-DD  HH:mm:ss'),
+                        createdTime: Tools.isMoment(rechargeRecords[i].createdTime, 0),
                         createdId: rechargeRecords[i].id,
                         rechargeWay: rechargeRecords[i].rechargeWay,
-                        money: parseFloat(rechargeRecords[i].money).toFixed(2),
+                        money: Tools.isNumeral(rechargeRecords[i].money),
                         status: rechargeRecords[i].result
                     })
                 }
@@ -145,20 +146,20 @@ class Recharge extends React.Component {
 		} else {
 			if(this.state.start_date === '' && this.state.end_date === '') {  //开始时间与结束时间同时没有选择
 				this.setState({
-			  		start_date: moment(new Date().getTime()).format('YYYY-MM-DD'),
-			  		end_date: moment(new Date().getTime()).format('YYYY-MM-DD')
+			  		start_date: Tools.isMoment(new Date().getTime(), 1),
+			  		end_date: Tools.isMoment(new Date().getTime(), 1)
 			  	}, () => {
 			      	this.search();
 			    });
 			} else if(this.state.start_date === '') { //开始时间没有选择
 				this.setState({
-			  		start_date: moment(new Date().getTime()).format('YYYY-MM-DD')
+			  		start_date: Tools.isMoment(new Date().getTime(), 1)
 			  	}, () => {
 					this.search();
 			    });
 			} else if(this.state.end_date === '') {	//结束时间没有选择
 				this.setState({
-			  		end_date: moment(new Date().getTime()).format('YYYY-MM-DD')
+			  		end_date: Tools.isMoment(new Date().getTime(), 1)
 			  	}, () => {
 			      	this.search();
 			    });

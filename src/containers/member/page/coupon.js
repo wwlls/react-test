@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Button, Tabs, Message } from 'antd';
-import moment from 'moment';
-import Utils from 'utils';
+import Utils from 'utils/index';
+import Tools from 'utils/tools';
 import Title from 'component/title/title';
 import Pagination from "component/pagination/pagination";
 import IsUser from 'static/images/member/isUser.png';
@@ -168,7 +168,7 @@ class Coupon extends React.Component {
 						                        		: 	''
 						                        	}
 						                        </h3>
-						                        <p>有效期至{moment(item.expirationTime).format('YYYY-MM-DD')}</p>
+						                        <p>有效期至{Tools.isMoment(item.expirationTime, 1)}</p>
 						                        <h5>
 						                        	{
 						                        		item.type === 9 ? ''
@@ -224,7 +224,7 @@ class Coupon extends React.Component {
 						                        		: 	''
 						                        	}
 						                        </h3>
-						                        <p>有效期至{moment(item.expirationTime).format('YYYY-MM-DD')}</p>
+						                        <p>有效期至{Tools.isMoment(item.expirationTime, 1)}</p>
 						                        <h5>
 						                        	{
 						                        		item.type === 9 ? ''
@@ -280,7 +280,7 @@ class Coupon extends React.Component {
 						                        		: 	''
 						                        	}
 						                        </h3>
-						                        <p>有效期至{moment(item.expirationTime).format('YYYY-MM-DD')}</p>
+						                        <p>有效期至{Tools.isMoment(item.expirationTime, 1)}</p>
 						                        <h5>
 						                        	{
 						                        		item.type === 9 ? ''

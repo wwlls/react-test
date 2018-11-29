@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getProductList } from 'actions';
 import { Icon, Row, Col, Button, Message } from 'antd';
+import Tools from 'utils/tools';
 import Header from 'component/header/header';
 import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
@@ -110,7 +111,7 @@ class Lend extends React.Component {
 															<p>出借期限</p>
 														</Col>
 														<Col md={7}>
-															<h4 className="day">{item.remainMoney}<em>元</em></h4>
+															<h4 className="day">{Tools.isNumeral(item.remainMoney)}<em>元</em></h4>
 															<p>剩余可投</p>
 														</Col>
 													</Row>
@@ -152,7 +153,7 @@ class Lend extends React.Component {
 															<p>出借期限</p>
 														</Col>
 														<Col md={7}>
-															<h4 className="day">{item.remainMoney}<em>元</em></h4>
+															<h4 className="day">{Tools.isNumeral(item.remainMoney)}<em>元</em></h4>
 															<p>剩余可投</p>
 														</Col>
 													</Row>
@@ -194,7 +195,7 @@ class Lend extends React.Component {
 															<p>出借期限</p>
 														</Col>
 														<Col md={7}>
-															<h4 className="day">{item.remainMoney}<em>元</em></h4>
+															<h4 className="day">{Tools.isNumeral(item.remainMoney)}<em>元</em></h4>
 															<p>剩余可投</p>
 														</Col>
 													</Row>

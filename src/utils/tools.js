@@ -1,5 +1,8 @@
 import 'core-js/es6/map';
 import 'core-js/es6/set';
+import numeral from 'numeral';
+import moment from 'moment';
+
 /** 这个文件中封装了一些常用的工具函数 **/
 
 const tools = {
@@ -99,6 +102,25 @@ const tools = {
             return true;
         }
         return false;
+    },
+
+    /**
+     * 金额格式化
+     */
+    isNumeral(money) {
+        return numeral(money).format('0,0.00');
+    },
+    /**
+     * 时间格式化
+     */
+    isMoment(time, type) {
+        if(type === 0) {
+            return moment(time).format('YYYY-MM-DD  HH:mm:ss');
+        } else if(type === 1) {
+            return moment(time).format('YYYY-MM-DD');
+        } else if(type === 2) {
+            return moment(time).format('YYYY年MM月DD日');
+        }
     },
 
     /**
