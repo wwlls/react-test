@@ -19,8 +19,7 @@ class Page6 extends React.Component {
         this.state = {
             pageSize: 6,
             currentPage: 1,
-            total: 10,
-            noticeMessagesList: [],
+            noticeMessages: [],
         };
     }
 
@@ -33,19 +32,7 @@ class Page6 extends React.Component {
         let data = {};
         data.page_size = this.state.pageSize;
         data.current_page = this.state.currentPage;
-		this.props.getNoticeMessageList(data).then(() => {
-            let { getNoticeMessageListData } = this.props;
-            if(getNoticeMessageListData.rtn_code === 0) {
-                let total = JSON.parse(getNoticeMessageListData.body).total;
-                let noticeMessages = JSON.parse(getNoticeMessageListData.body).noticeMessages;
-                this.setState({
-                    total: total,
-                    noticeMessagesList: noticeMessages,
-                })
-            } else {
-                Message.error(getNoticeMessageListData.rtn_msg);
-            }
-        });
+		this.props.getNoticeMessageList(data);
     }
 
     itemRender = (current, type, originalElement) => {
@@ -67,12 +54,13 @@ class Page6 extends React.Component {
     }
 
     render() {      
+        const { getNoticeMessageListData } = this.props;
         return (
             <div className="page page6">
                 <div className='notice'>
                     <ul>
                         {
-                            this.state.noticeMessagesList.map((item,index)=>{
+                            getNoticeMessageListData.noticeMessages.map((item,index)=>{
                                 return(
                                     <li key={index}>
                                         <Link to={'/about/details?id=' +  item.id} target="_blank">
@@ -89,7 +77,7 @@ class Page6 extends React.Component {
                 <Pagination
                     currentPage={this.state.currentPage}
                     pageSize={this.state.pageSize}
-                    total={this.state.total}
+                    total={getNoticeMessageListData.total}
                     onChangePagination={this.onChangePagination}
                 />
             </div>

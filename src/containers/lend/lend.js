@@ -22,49 +22,17 @@ class Lend extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	productsOne: [],
-    		productsTwo: [],
-    		productsThree: [],
+	    	products: [],
 	    };
 	}
 
 	componentDidMount() {
 		//产品列表方法
-	 	this.props.getProductList().then(() => {
-	 		let { productListData } = this.props;
-	 		if(productListData.rtn_code === 0) {
-	 			let product = JSON.parse(productListData.body).products;
-	 			//爆款专区
-	 			let productsOneArr = [];
-		 		for (var i = 0; i < 1; i++) {
-		 			productsOneArr.push(product[4],product[5]);
-		 			this.setState({
-		 				productsOne: productsOneArr
-		 			})
-		 		}
-		 		//短期出借
-		 		let productsTwoArr = [];
-		 		for (var i = 0; i < 1; i++) {
-		 			productsTwoArr.push(product[0],product[1]);
-		 			this.setState({
-		 				productsTwo: productsTwoArr
-		 			})
-		 		}
-		 		//长期出借
-		 		let productsThreeArr = [];
-		 		for (var i = 0; i < 1; i++) {
-		 			productsThreeArr.push(product[2],product[3]);
-		 			this.setState({
-		 				productsThree: productsThreeArr
-		 			})
-		 		}
-	 		} else {
-	 			Message.error(productListData.rtn_msg);
-	 		}
-	 	});
+	 	this.props.getProductList();
 	}
 
 	render() {
+		const { productListData } = this.props;
 		return (
 			<div className="container">
 				<Header />
@@ -76,7 +44,7 @@ class Lend extends React.Component {
 							</Col>
 							<Col md={20} className="productList productOne">
 								{
-									this.state.productsOne.map((item, i) => {
+									productListData.products[0].map((item, i) => {
 										return (
 											<Row className="productLi" key={i}>
 												<Col md={18}>
@@ -136,7 +104,7 @@ class Lend extends React.Component {
 							</Col>
 							<Col md={20} className="productList productTwo">
 								{
-									this.state.productsTwo.map((item, i) => {
+									productListData.products[1].map((item, i) => {
 										return (
 											<Row className="productLi" key={i}>
 												<Col md={18}>
@@ -178,7 +146,7 @@ class Lend extends React.Component {
 							</Col>
 							<Col md={20} className="productList productThree">
 								{
-									this.state.productsThree.map((item, i) => {
+									productListData.products[2].map((item, i) => {
 										return (
 											<Row className="productLi" key={i}>
 												<Col md={18}>

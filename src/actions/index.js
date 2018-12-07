@@ -85,9 +85,13 @@ const countData = (data) => ({
 export const getCount = (parmas) => async(dispatch, getstate) => {
 	try {
 		let callFuc = function(res) {
-			dispatch(
-				countData(JSON.parse(res.body).countData)
-			)
+			if(res.rtn_code === 0) {
+				dispatch(
+					countData(JSON.parse(res.body).countData)
+				)
+			} else {
+				Message.error(res.rtn_msg);
+			}
 		}
 		await Utils.postRequest(`asset/getCountTotal`, parmas, callFuc);
 	} catch (error) {
@@ -96,16 +100,35 @@ export const getCount = (parmas) => async(dispatch, getstate) => {
 }
 
 //获取产品列表
-const productListData = (data) => ({
+const productListData = (data1,data2,data3) => ({
 	type: 'test.GET_PRODUCTLIST',
-	data
+	data1,
+	data2,
+	data3
 })
 export const getProductList = (parmas) => async(dispatch, getstate) => {
 	try {
 		let callFuc = function(res) {
-			dispatch(
-				productListData(res)
-			)
+			if(res.rtn_code === 0) {
+				let products = JSON.parse(res.body).products;
+				//爆款专区
+				let productsOne = [];
+				//短期出借
+				let productsTwo = [];
+				//长期出借
+				let productsThree = [];
+				for (var i = 0; i < 1; i++) {
+		 			productsOne.push(products[4],products[5]);
+		 			productsTwo.push(products[0],products[1]);
+		 			productsThree.push(products[2],products[3]);
+		 		};
+				dispatch(
+					productListData(productsOne,productsTwo,productsThree)
+				)
+				
+			} else {
+				Message.error(res.rtn_msg);
+			}
 		}
 		await Utils.postRequest(`product/getRegularListForOfficialSite`, parmas, callFuc);
 	} catch (error) {
@@ -122,9 +145,13 @@ const noticeMessageList = (data) => ({
 export const getNoticeMessageList = (parmas) => async(dispatch, getstate) => {
 	try {
 		let callFuc = function(res) {
-			dispatch(
-				noticeMessageList(res)
-			)
+			if(res.rtn_code === 0) {
+				dispatch(
+					noticeMessageList(JSON.parse(res.body))
+				)
+			} else {
+				Message.error(res.rtn_msg);
+			}
 		}
 		await Utils.postRequest(`home/getNoticeMessageList`, parmas, callFuc);
 	} catch (error) {
@@ -141,9 +168,13 @@ const noticeMessage = (data) => ({
 export const getNoticeMessage = (parmas) => async(dispatch, getstate) => {
 	try {
 		let callFuc = function(res) {
-			dispatch(
-				noticeMessage(res)
-			)
+			if(res.rtn_code === 0) {
+				dispatch(
+					noticeMessage(JSON.parse(res.body))
+				)
+			} else {
+				Message.error(res.rtn_msg);
+			}			
 		}
 		await Utils.postRequest(`home/getNoticeMessage`, parmas, callFuc);
 	} catch (error) {

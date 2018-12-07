@@ -6,15 +6,15 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var config = require('./config');
 const PORT = 8090;
 const svgDirs = [
-  require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
-  // path.resolve(__dirname, 'src/svgs'),  // 2. 自己私人的 svg 存放目录
+  require.resolve('antd').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
+  path.resolve(__dirname, 'src/svgs'),  // 2. 自己私人的 svg 存放目录
 ]
 
 module.exports = {
     entry: ["babel-polyfill", "./src/app.js"], //相对路径 babel-polyfill转义es6兼容ie浏览器
     output: {
         path: path.resolve(__dirname, 'build'), //打包文件的输出路径
-        filename: 'bundle.js',
+        filename: 'bundle.js',    //用于输出文件的文件名
         chunkFilename: '[name].bundle.js',
         publicPath: '/' // 打包上线时，引用的js路径头部
     },
@@ -86,6 +86,7 @@ module.exports = {
           ]
     },
     plugins: [
+        //项目启动打开路由
         new OpenBrowserPlugin({
           url: `http://localhost:${PORT}/home`
         }),

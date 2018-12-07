@@ -36,9 +36,7 @@ class Home extends React.Component {
 	    		{img : imgbanner2 , id : 1 , url: 'list'}
 	    	],
     		day: 365,
-    		productsOne: [],
-    		productsTwo: [],
-    		productsThree: [],
+    		products: [],
     		//rankList: []
 	    };
 	}
@@ -55,38 +53,7 @@ class Home extends React.Component {
 	 	//平台数据方法
 	 	this.props.getCount();
 	 	//产品列表方法
-	 	this.props.getProductList().then(() => {
-	 		let { productListData } = this.props;
-	 		if(productListData.rtn_code === 0) {
-	 			let product = JSON.parse(productListData.body).products;
-	 			//爆款专区
-	 			let productsOneArr = [];
-		 		for (var i = 0; i < 1; i++) {
-		 			productsOneArr.push(product[4],product[5]);
-		 			this.setState({
-		 				productsOne: productsOneArr
-		 			})
-		 		}
-		 		//短期出借
-		 		let productsTwoArr = [];
-		 		for (var i = 0; i < 1; i++) {
-		 			productsTwoArr.push(product[0],product[1]);
-		 			this.setState({
-		 				productsTwo: productsTwoArr
-		 			})
-		 		}
-		 		//长期出借
-		 		let productsThreeArr = [];
-		 		for (var i = 0; i < 1; i++) {
-		 			productsThreeArr.push(product[2],product[3]);
-		 			this.setState({
-		 				productsThree: productsThreeArr
-		 			})
-		 		}
-	 		} else {
-	 			Message.error(productListData.rtn_msg);
-	 		}
-	 	});
+	 	this.props.getProductList();
 	 	//运营时间
 		let startTime = '2015/10/17 00:00:00';
 		let nowTime = new Date();
@@ -99,6 +66,7 @@ class Home extends React.Component {
 	render() {
 		//获取平台数据
 		const { getCountData } = this.props;
+		const { productListData } = this.props;
 		return (
 			<div className="container">
 				<Header />
@@ -193,7 +161,7 @@ class Home extends React.Component {
 						</Col>
 						<Col md={12} className="productList productOne">
 							{
-								this.state.productsOne.map((item, i) => {
+								productListData.products[0].map((item, i) => {
 									return (
 										<Row className="productLi" key={i}>
 											<Col md={18}>
@@ -257,7 +225,7 @@ class Home extends React.Component {
 						</Col>
 						<Col md={12} className="productList productTwo">
 							{
-								this.state.productsTwo.map((item, i) => {
+								productListData.products[1].map((item, i) => {
 									return (
 										<Row className="productLi" key={i}>
 											<Col md={18}>
@@ -294,35 +262,37 @@ class Home extends React.Component {
 									<li>
 										<Carousel autoplay vertical dots="flase">
 											{
-												getCountData.top10InvestUser.map((item, index) => {
-													return (
-														<div className="rankTop10Div" key={index}>
-															<Row>
-																<Col md={3}>
-																	<span className={
-																		index === 0 ? 'top1 top' 
-																		: index === 1 ? 'top2 top'
-																		: index === 2 ?'top3 top'
-																		: "sort"
-																	}>
-																		{
-																			index === 0 ? '' 
-																			: index === 1 ? ''
-																			: index === 2 ?''
-																			: index + 1
-																		}
-																	</span>
-																</Col>
-																<Col md={15}>
-																	<span>{item.mobile}</span>
-																</Col>
-																<Col md={6} className="textR">
-																	<span>{parseFloat(item.principal).toFixed(2)}</span>
-																</Col>
-															</Row>
-														</div>
-													)
-												})	
+												getCountData.top10InvestUser !== '' && getCountData.top10InvestUser !== null && getCountData.top10InvestUser !== undefined ?
+													getCountData.top10InvestUser.map((item, index) => {
+														return (
+															<div className="rankTop10Div" key={index}>
+																<Row>
+																	<Col md={3}>
+																		<span className={
+																			index === 0 ? 'top1 top' 
+																			: index === 1 ? 'top2 top'
+																			: index === 2 ?'top3 top'
+																			: "sort"
+																		}>
+																			{
+																				index === 0 ? '' 
+																				: index === 1 ? ''
+																				: index === 2 ?''
+																				: index + 1
+																			}
+																		</span>
+																	</Col>
+																	<Col md={15}>
+																		<span>{item.mobile}</span>
+																	</Col>
+																	<Col md={6} className="textR">
+																		<span>{parseFloat(item.principal).toFixed(2)}</span>
+																	</Col>
+																</Row>
+															</div>
+														)
+													})	
+												: 	''
 											}
 										</Carousel>
 									</li>
@@ -337,7 +307,7 @@ class Home extends React.Component {
 						</Col>
 						<Col md={12} className="productList productThree">
 							{
-								this.state.productsThree.map((item, i) => {
+								productListData.products[2].map((item, i) => {
 									return (
 										<Row className="productLi" key={i}>
 											<Col md={18}>

@@ -28,31 +28,21 @@ class Details extends React.Component {
     componentDidMount() {
         let data = {}
         data.notice_message_id = this.props.location.search.split('?id=')[1],
-        this.props.getNoticeMessage(data).then(() => {
-            let { getNoticeMessageData } = this.props;
-            if(getNoticeMessageData.rtn_code === 0) {
-                let noticeMessage = JSON.parse(getNoticeMessageData.body).noticeMessage;
-                this.setState({
-                    title: noticeMessage.title,
-                    content: noticeMessage.content,
-                    createTime: noticeMessage.createTime,
-                })
-            } else {
-                Message.error(getNoticeMessageData.rtn_msg);
-            }
-        })
+        this.props.getNoticeMessage(data);
     }
     
     render() {
+        const { getNoticeMessageData } = this.props;
+        console.log(getNoticeMessageData)
         return (
             <div className="container">
                 <Header />
                 <SubBanner />
                 <div className="page details">
-                    <h2 className="textC title">{this.state.title}</h2>
-                    <h5>{this.state.content}</h5>
+                    <h2 className="textC title">{getNoticeMessageData.noticeMessage.title}</h2>
+                    <h5>{getNoticeMessageData.noticeMessage.content}</h5>
                     <p className="textR name">华赢宝</p>
-                    <p className="textR">{Tools.isMoment(this.state.createTime, 1)}</p>
+                    <p className="textR">{Tools.isMoment(getNoticeMessageData.noticeMessage.createTime, 1)}</p>
                 </div>
                 <Footer />
                 <BackTop />
