@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { accountGetInfoData } from 'actions';
 import { Row, Col, Button, Tabs, Message } from 'antd';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
@@ -12,9 +14,17 @@ import Pagination from "component/pagination/pagination";
 const TabPane = Tabs.TabPane;
 
 class MyAssets extends React.Component {
+	static propTypes = {
+        accountData: PropTypes.object.isRequired,
+        accountGetInfoData: PropTypes.func.isRequired,
+    };
 	constructor(props) {
 	    super(props);
 	    this.state = {
+	    	totalProfit: 0,
+	    	lastProfit: 0,
+	    	assetProfit: 0,
+	    	available: 0,
 	    	panes : [
 		      { title: '全部记录', key: '0' },
 		      { title: '持有资产', key: '1' },
@@ -97,11 +107,29 @@ class MyAssets extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getRegularAssetList()	
+		//获取用户信息
+		this.props.accountGetInfoData().then(() => {
+			let { accountData } = this.props;
+			if(accountData.rtn_code === 0) {
+            	let accountBook = JSON.parse(accountData.body).accountBook;
+            	let bankCard = accountBook.bankCard.card;
+				Utils.setStorage('customerBankCard' , bankCard);
+                this.setState({
+                	totalProfit: accountBook.available + accountBook.regularAsset + accountBook.regularCurrProfit + accountBook.currentAsset + accountBook.currentInterest,
+                	lastProfit: accountBook.regularLastProfit + accountBook.currentLastProfit,
+					assetProfit: accountBook.regularTotalProfit + accountBook.currentTotalProfit,
+                    available: accountBook.available,
+                }) 
+            } else {
+            	Message.error(accountData.rtn_msg);
+            }
+		});
+
+		this.getRegularAssetList();
 	}
 
 	//切换回调
-	callbackRegularAssets = (key) =>	 {
+	callbackRegularAssets = (key) => {
 		console.log(key)
 		this.setState({
 	      currentKey: key,
@@ -166,18 +194,18 @@ class MyAssets extends React.Component {
 						<Row>
 		                    <Col md={5}>
 		                        <h5>总资产：</h5>
-		                        <p>0<em>元</em></p>
+		                        <p>{this.state.totalProfit.toFixed(2)}<em>元</em></p>
 		                    </Col>
 		                    <Col md={5}>
 		                        <h5>昨日收益：</h5>
-		                        <p>0<em>元</em></p>
+		                        <p>{this.state.lastProfit.toFixed(2)}<em>元</em></p>
 		                    </Col>
 		                    <Col md={5}>
 		                        <h5>累计收益：</h5>
-		                        <p>0<em>元</em></p>
+		                        <p>{this.state.assetProfit.toFixed(2)}<em>元</em></p>
 		                    </Col>
 		                    <Col md={9}>
-		                        <h5>账户余额：<i>0</i>元</h5>
+		                        <h5>账户余额：<i>{this.state.available.toFixed(2)}</i>元</h5>
 		                        <p>
 		                        	<Link to="/member/recharge"><Button type="primary">充值</Button></Link>
 		                        	<Link to="/member/cash"><Button>提现</Button></Link>
@@ -215,8 +243,13 @@ class MyAssets extends React.Component {
 	}
 }
 
-function mapStateToProps() {
-  return {
-  };
+const mapStateToProps = (state) => {
+    return {
+        accountData: state.accountGetInfo,
+    }
 }
-export default connect(mapStateToProps)(MyAssets)
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ accountGetInfoData }, dispatch);
+}
+export default connect(mapStateToProps , mapDispatchToProps)(MyAssets)

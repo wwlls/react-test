@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getInfoData } from 'actions';
-import Utils from 'utils';
+import Utils from 'utils/index';
 import { Layout } from 'antd';
 import Header from 'component/header/header';
 import Menu from 'component/menu/menu';
@@ -35,6 +35,14 @@ class Member extends React.Component {
 	    	mobile: '13666606473',
 	    	wxAvatar: '',
 	    	idCard: '',
+	    	menuList:[
+                {key: '/member', name: '我的资产', sort: 1},
+                {key: '/member/recharge', name: '账户充值', sort: 2},
+                {key: '/member/cash', name: '账户提现', sort: 3},
+                {key: '/member/capital', name: '资金流水', sort: 4},
+                {key: '/member/set', name: '账户设置', sort: 5},
+                {key: '/member/coupon', name: '我的赠券', sort: 6},
+            ]
 	    };
 	}
 
@@ -45,9 +53,8 @@ class Member extends React.Component {
 			this.props.history.push('/login?redirectUri=member');
 			return;
 		}
-		//切换路由面包屑内容
+		//初始面包屑内容
 		let pathname = this.props.location.pathname;
-		//console.log(1111,pathname)
 		this.threeSize(pathname);
 
 		//获取登录后用户信息
@@ -55,21 +62,18 @@ class Member extends React.Component {
             let { InfoData } = this.props;
             if(InfoData.rtn_code === 0) {
             	let customer = JSON.parse(InfoData.body).customer;
-            	console.log(customer)
-               	let customerMobile = customer.mobile;
-               	let customerWxAvatar = customer.wxAvatar;
-               	let customerIdCard  = customer.idCard;
                 this.setState({
-                    mobile: customerMobile,
-                    wxAvatar: customerWxAvatar,
-                }) 
+                	name: customer.name,
+                    mobile: customer.mobile,
+                    idCard: customer.idCard,
+                    wxAvatar: customer.wxAvatar,
+                });
+                Utils.setStorage('customerName' , customer.name);
+                Utils.setStorage('customerIdCard' , customer.idCard);
+            } else {
+            	Message.error(InfoData.rtn_msg);
             }
         });
-
-        let set = {
-	        pathname: '/member/set',
-	        set: '我是通过state传值'
-	    }
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -78,32 +82,16 @@ class Member extends React.Component {
         this.threeSize(pathname);
     }
 
+    //获取面包屑内容
     threeSize = (pathname) => {
-    	if(pathname === '/member') {
-			this.setState({
-				threeSize: '我的资产'
-			})
-		} else if(pathname === '/member/recharge') {
-			this.setState({
-				threeSize: '账户充值'
-			})
-		} else if(pathname === '/member/cash') {
-			this.setState({
-				threeSize: '账户提现'
-			})
-		} else if(pathname === '/member/capital') {
-			this.setState({
-				threeSize: '资金流水'
-			})
-		} else if(pathname === '/member/set') {
-			this.setState({
-				threeSize: '账户设置'
-			})
-		} else if(pathname === '/member/coupon') {
-			this.setState({
-				threeSize: '我的赠券'
-			})
-		}
+    	this.state.menuList.forEach((item, index) => {
+    		if(pathname === item.key) {
+    			this.setState({
+    				threeSize: item.name
+    			})
+       
+    		}
+    	})
     }
 
 	render() {
@@ -119,7 +107,7 @@ class Member extends React.Component {
 							</div>
 						</div>
 					  	<Layout>
-					  		<Menu path={location.pathname} mobile={this.state.mobile} wxAvatar={this.state.wxAvatar} />
+					  		<Menu menuList={this.state.menuList} path={location.pathname} mobile={this.state.mobile} wxAvatar={this.state.wxAvatar} />
 					  		<Layout>
 					  			<Content style={{margin: '0 0 0 30px'}}>
 			                        <Switch>

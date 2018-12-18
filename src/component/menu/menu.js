@@ -25,21 +25,12 @@ export default class SiderCustom extends Component {
 
     setMenuOpen = props => {
         const { path } = props;
-        // console.log('path ' + path)
-        // if(path === '/member/assetList') {
-        //     this.setState({
-        //         selectedKey: '/member'
-        //     });
-        // } else {
-            
-        // }
         this.setState({
-                selectedKey: path
-            }); 
+            selectedKey: path
+        }); 
     };
 
     menuClick = e => {
-        console.log(e.key)
         this.setState({
             selectedKey: e.key
         });
@@ -73,25 +64,16 @@ export default class SiderCustom extends Component {
                         selectedKeys={[selectedKey]}
                         mode="inline"
                         onOpenChange={this.openMenu}
-                    >
-                        <Menu.Item key={"/member"}>
-                            <Link to={"/member"}>我的资产</Link>
-                        </Menu.Item>
-                        <Menu.Item key={"/member/recharge"}>
-                            <Link to={"/member/recharge"}>账户充值</Link>
-                        </Menu.Item>
-                        <Menu.Item key={"/member/cash"}>
-                            <Link to={"/member/cash"}>账户提现</Link>
-                        </Menu.Item>
-                        <Menu.Item key={"/member/capital"}>
-                            <Link to={"/member/capital"}>资金流水</Link>
-                        </Menu.Item>
-                        <Menu.Item key={"/member/set"}>
-                            <Link to={"/member/set"}>账户设置</Link>
-                        </Menu.Item>
-                        <Menu.Item key={"/member/coupon"}>
-                            <Link to={"/member/coupon"}>我的赠券</Link>
-                        </Menu.Item>
+                    >   
+                        {
+                            this.props.menuList.map((item, index) => {
+                                return (
+                                    <Menu.Item key={item.key}>
+                                        <Link to={item.key}>{item.name}</Link>
+                                    </Menu.Item>
+                                )
+                            })
+                        }
                     </Menu>
                 </Sider>
             </div>

@@ -4,6 +4,7 @@ import counter from './counter';
 import checkMobile from './checkMobile';
 import getVerifyCode from './getVerifyCode';
 import getInfo from './getInfo';
+import accountGetInfo from './accountgetInfo';
 import getCount from './getCount';
 import getProductList from './getProductList';
 import getNoticeMessageList from './getNoticeMessageList';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   checkMobile,
   getVerifyCode,
   getInfo,
+  accountGetInfo,
   getCount,
   getProductList,
   getNoticeMessageList,

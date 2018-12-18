@@ -13,6 +13,9 @@ export const VERIFY_CODE = 'VERIFY_CODE';
 //当前登录用户信息
 export const GET_INFO = 'GET_INFO';
 
+//当前用户信息
+export const ACCOUNT_GETINFO = 'ACCOUNT_GETINFO';
+
 //平台数据
 export const GET_COUNT = 'GET_COUNT';
 

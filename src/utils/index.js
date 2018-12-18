@@ -31,7 +31,7 @@ const Utils = {
             data = this.setPublic(data);
             let accessToken = Utils.getStorage("ZZBSESSIONID");
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
-                Utils.removeStorage('customerMobile'); //清除手机号
+                Utils.removeSession(); //清除本地数据
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
@@ -51,12 +51,12 @@ const Utils = {
         }
         return axios.post(Config.api + action, data).then(function(res) {
             if (res.rtn_code == 1009) {// 未登录
-                Utils.removeStorage('customerMobile'); //清除手机号
+                Utils.removeSession(); //清除本地数据
                 window.location.href = Config.login_page;
                 return;
             };
             if(res.rtn_code == 1002) {// token未获取到
-                Utils.removeStorage('customerMobile'); //清除手机号
+                Utils.removeSession(); //清除本地数据
                 let tokenData = {};
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
@@ -141,6 +141,13 @@ const Utils = {
     removeStorage(key) {
         localStorage.removeItem(key);
     },
+    //删除本地数据
+    removeSession() {
+        Utils.removeStorage('customerMobile');
+        Utils.removeStorage('customerName');
+        Utils.removeStorage('customerIdCard');
+        Utils.removeStorage('customerBankCard');
+    }
 };
 
 export default Utils;

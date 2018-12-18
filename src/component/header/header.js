@@ -55,7 +55,7 @@ export default class Header extends React.Component {
         let callFuc = (res) => {
             console.log(res)
             if(res.rtn_code === 0) {
-                Utils.removeStorage('customerMobile');
+                Utils.removeSession();
                 this.setState({
                     visible: false,
                 });

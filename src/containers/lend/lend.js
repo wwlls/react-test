@@ -33,6 +33,7 @@ class Lend extends React.Component {
 
 	render() {
 		const { productListData } = this.props;
+		console.log(productListData.products[0])
 		return (
 			<div className="container">
 				<Header />

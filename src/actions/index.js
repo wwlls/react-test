@@ -77,6 +77,24 @@ export const getInfoData = (parmas) => async(dispatch, getState) => {
     }
 }
 
+//获取当前用户信息
+const accountGetInfo = (data) => ({
+	type: 'test.ACCOUNT_GETINFO',
+	data
+})
+export const accountGetInfoData = (parmas) => async(dispatch, getState) => {
+	try {
+		let callFuc = function(res) {
+			dispatch(
+				accountGetInfo(res)
+			)
+		}
+		await Utils.postRequest(`account/getInfo`, parmas, callFuc);
+    } catch (error) {
+        message.error("网络错误，请重试");
+    }
+}
+
 //获取平台数据
 const countData = (data) => ({
 	type: 'test.GET_COUNT',
