@@ -7,6 +7,7 @@ import { Affix, Modal, Message, Button } from 'antd';
 import PropTypes from 'prop-types';
 // import { getInfoData } from 'actions';
 import Utils from 'utils/index';
+import Tools from 'utils/tools';
 import Dropdown from '../dropdown/dropdown';
 import imgLogo from "static/images/common/header/logo.png";
 import "./header.scss";
@@ -27,7 +28,8 @@ export default class Header extends React.Component {
             open: 'none',
             top: 0,
             name: '',
-            visible: false
+            visible: false,
+            contact: '确定要退出华赢宝吗？'
         };
     }
 
@@ -74,6 +76,20 @@ export default class Header extends React.Component {
     }
 
     componentDidMount() {
+        //获取天气信息
+        let city = '杭州';
+        Utils.thirdRrquest({
+            url:'http://api.map.baidu.com/telematics/v3/weather?location='+encodeURIComponent(city)+'&output=json&ak=3p49MVra6urFRGOT9s8UBWr2'
+        }).then((res)=>{
+            if(res.status == 'success'){
+                let data = res.results[0].weather_data[0];
+                console.log(data)
+                this.setState({
+                    dayPictureUrl:data.dayPictureUrl,
+                    weather:data.weather
+                })
+            }
+        })
 
         // this.props.getInfoData().then(() => {
         //     let { InfoData } = this.props;
@@ -99,11 +115,13 @@ export default class Header extends React.Component {
                             客服热线： 400-1190-717（工作时间 09:00-21:00）
                             <Dropdown name="weChat" />
                             <Dropdown name="qq" />
+                            <img className="weather" src={this.state.dayPictureUrl} alt="" />
+                            {this.state.weather}
                         </div>
                         <div className="subLoginbarRight">
                             {customerMobile !== '' &&  customerMobile !== null && customerMobile !== undefined
                             ? <div className="floatL">
-                                <Link to="/member">{String(customerMobile).substring(0,3)}****{String(customerMobile).substring(7)}</Link>
+                                <Link to="/member">{Tools.formatPhone(customerMobile)}</Link>
                                 <i>/</i>
                                 <a href="javascript:;" onClick={this.handleLogout}>退出</a>
                               </div>
@@ -177,7 +195,7 @@ export default class Header extends React.Component {
                     <Button key="submit" type="primary" onClick={this.handleOk}>确认</Button>
                   ]}
                 >
-                  <p>确定要退出华赢宝吗？</p>
+                  <p>{this.state.contact}</p>
                 </Modal>
             </div>
         );

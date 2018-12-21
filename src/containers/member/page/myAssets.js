@@ -99,6 +99,7 @@ class MyAssets extends React.Component {
 	            dataIndex: 'detail',
 	            key: 'detail',
 	            render: (text, record) => (
+	            	// <a onClick={this.handleTest} href="javascript:;">{record.detail}</a>
 	            	<Link to={'/member/assetList?id='+record.assetId}>{record.detail}</Link>
 	            )
 	        }],
@@ -107,6 +108,7 @@ class MyAssets extends React.Component {
 	}
 
 	componentDidMount() {
+		this.getRegularAssetList();
 		//获取用户信息
 		this.props.accountGetInfoData().then(() => {
 			let { accountData } = this.props;
@@ -120,13 +122,14 @@ class MyAssets extends React.Component {
 					assetProfit: accountBook.regularTotalProfit + accountBook.currentTotalProfit,
                     available: accountBook.available,
                 }) 
-            } else {
-            	Message.error(accountData.rtn_msg);
             }
 		});
-
-		this.getRegularAssetList();
 	}
+
+	//获取当前是第几条数据
+	// handleTest = (event) => {
+	// 	console.log((event.target).closest('tr').getAttribute('data-row-key'))
+	// }
 
 	//切换回调
 	callbackRegularAssets = (key) => {

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getInfoData } from 'actions';
 import Utils from 'utils/index';
-import { Layout } from 'antd';
+import { Layout, Message } from 'antd';
 import Header from 'component/header/header';
 import Menu from 'component/menu/menu';
 import Breadcrumb from 'component/breadcrumb/breadcrumb';
@@ -70,8 +70,6 @@ class Member extends React.Component {
                 });
                 Utils.setStorage('customerName' , customer.name);
                 Utils.setStorage('customerIdCard' , customer.idCard);
-            } else {
-            	Message.error(InfoData.rtn_msg);
             }
         });
 	}

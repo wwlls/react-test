@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { is, fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { getProductList } from 'actions';
 import { Icon, Row, Col, Button, Message } from 'antd';
@@ -31,9 +32,12 @@ class Lend extends React.Component {
 	 	this.props.getProductList();
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+	    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+	}
+
 	render() {
 		const { productListData } = this.props;
-		console.log(productListData.products[0])
 		return (
 			<div className="container">
 				<Header />
@@ -86,7 +90,7 @@ class Lend extends React.Component {
 													</Row>
 												</Col>
 												<Col md={6}>
-													<Button className="goLend"><Link to={'/lendDetail?id='+item.productId}>立即出借</Link></Button>
+													<Button className="goLend"><Link to={{pathname:'/lendDetail', search:'?id='+item.productId+'&name='+item.name+'&interest='+item.interest+'&period='+item.period+'&remainMoney='+item.remainMoney+'&prodType='+item.prodType, state:{fromDashboard: true}}}>立即出借</Link></Button>
 													<div className="progress">
 														<div className="barHover" style={{width: item.realPercent + '%'}}></div>
 														<div className="bar"></div>

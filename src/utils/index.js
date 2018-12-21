@@ -1,6 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import md5 from 'md5';
+import JsonP from 'jsonp';
 const Config = require('../../config');
 const mockData = require('../data/mockData'); // 财富mock数据
 
@@ -9,6 +10,21 @@ const Utils = {
     /*
     mockStr: 用来模拟数据时，区分不同请求
     */
+    //第三方请求
+    thirdRrquest(options) {
+        return new Promise((resolve, reject) => {
+            JsonP(options.url, {
+                param: 'callback'
+            }, (err, response) => {
+                if (response.status == 'success') {
+                    resolve(response);
+                } else {
+                    reject(response.messsage);
+                }
+            })
+        })
+    },
+    //get请求
     getRequest(url, params= {}, mockStr = '') {
         const urlOrigin = url.split('api/')[1];
         if (Config.mock) {
@@ -19,6 +35,7 @@ const Utils = {
         params['action'] = urlOrigin;
         return axios.get(url, { params });
     },
+    //post请求
     postRequest(action, data = {} , callFuc) {
         data['action'] = action;
         //mock数据
@@ -39,7 +56,7 @@ const Utils = {
                     let accessToken = JSON.parse(accessRes.body).access_token;
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
                     Utils.postRequest(action, data = {}, () => { //获取到token后再次请求接口
-                        return axios.post(Config.api + action, data).then(function(res) {
+                        return axios.post(Config.api + action, data).then((res) => {
                             callFuc(res);
                         })
                     })
@@ -48,8 +65,12 @@ const Utils = {
                 return;
             }
             data['sign'] = Utils.createSign(data);
+            let loading = document.getElementById('ajaxLoading');
+            loading.style.display = 'block';
         }
-        return axios.post(Config.api + action, data).then(function(res) {
+        return axios.post(Config.api + action, data).then((res) => {
+            let loading = document.getElementById('ajaxLoading');
+            loading.style.display = 'none';
             if (res.rtn_code == 1009) {// 未登录
                 Utils.removeSession(); //清除本地数据
                 window.location.href = Config.login_page;
@@ -65,7 +86,7 @@ const Utils = {
                     console.log(accessToken)
                     Utils.setStorage("ZZBSESSIONID" , accessToken);
                     Utils.postRequest(action, data = {}, () => { //获取到token后再次请求接口
-                        return axios.post(Config.api + action, data).then(function(res) {
+                        return axios.post(Config.api + action, data).then((res) => {
                             callFuc(res);
                         })
                     })

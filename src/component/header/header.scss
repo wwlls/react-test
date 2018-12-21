@@ -40,6 +40,12 @@
 					}
 				}
 			}
+			& img {
+				&.weather {
+					height: 15px;
+					margin: 0 10px;
+				}
+			}
 		}
 		.subLoginbarRight {
 			float: right;

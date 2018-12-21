@@ -122,6 +122,20 @@ const tools = {
             return moment(time).format('YYYY年MM月DD日');
         }
     },
+    /**
+     * 隐藏手机号中间4位
+     */
+    formatPhone(phone) {
+        phone += '';
+        return phone.replace(/(\d{3})\d*(\d{4})/g, '$1***$2')
+    },
+    /**
+     * 隐藏身份证号中11位
+     */
+    formatIdentity(number) {
+        number += '';
+        return number.replace(/(\d{4})\d*(\d{4})/g, '$1**********$2')
+    },
 
     /**
         给字符串打马赛克

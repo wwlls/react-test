@@ -23,6 +23,12 @@ class LendDetail extends React.Component {
 	}
 
 	componentDidMount() {
+		let parameter = this.props.location.search.split('?')[1].split('&');
+		console.log(parameter)
+		parameter.forEach((item, index) => {
+			let id = item.id;
+			console.log(id)
+		})
 	}
 
 	render() {

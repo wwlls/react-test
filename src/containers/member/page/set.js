@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Modal } from 'antd';
 import Utils from 'utils/index';
+import Tools from 'utils/tools';
 import Title from 'component/title/title';
 
 class Set extends React.Component {
@@ -35,14 +36,14 @@ class Set extends React.Component {
 		let mobile = Utils.getStorage('customerMobile');
 		if(mobile != '' && mobile != null && mobile != 'undefined') {
 			this.setState({
-				mobile: String(mobile).substring(0,3) + '****' + String(mobile).substring(7),
+				mobile: Tools.formatPhone(mobile),
 			})
 		}
 		//身份证
 		let idCard = Utils.getStorage('customerIdCard');
 		if(idCard != '' && idCard != null && idCard != 'undefined') {
 			this.setState({
-				idCard: String(idCard).substring(0,3) + '***********' + String(idCard).substring(14),
+				idCard: Tools.formatIdentity(idCard),
 				certified: '已认证',
 			})
 		} else {

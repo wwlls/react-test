@@ -67,9 +67,13 @@ const getInfo = (data) => ({
 export const getInfoData = (parmas) => async(dispatch, getState) => {
 	try {
 		let callFuc = function(res) {
-			dispatch(
-				getInfo(res)
-			)
+			if(res.rtn_code === 0) {
+				dispatch(
+					getInfo(res)
+				)
+			} else {
+				Message.error(res.rtn_msg);
+			}
 		}
 		await Utils.postRequest(`customer/getInfo`, parmas, callFuc);
     } catch (error) {
@@ -85,9 +89,13 @@ const accountGetInfo = (data) => ({
 export const accountGetInfoData = (parmas) => async(dispatch, getState) => {
 	try {
 		let callFuc = function(res) {
-			dispatch(
-				accountGetInfo(res)
-			)
+			if(res.rtn_code === 0) {
+				dispatch(
+					accountGetInfo(res)
+				)
+			} else {
+				Message.error(res.rtn_msg);
+			}
 		}
 		await Utils.postRequest(`account/getInfo`, parmas, callFuc);
     } catch (error) {

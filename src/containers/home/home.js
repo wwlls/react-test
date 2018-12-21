@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { is, fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { getCount, getProductList } from 'actions';
 import CountUp from 'react-countup';
@@ -61,6 +62,11 @@ class Home extends React.Component {
 		this.setState({
 			day: removeTime,
 		})
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+	    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+	    alert(222)
 	}
 
 	render() {
