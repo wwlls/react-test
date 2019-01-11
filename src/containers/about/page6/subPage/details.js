@@ -38,12 +38,12 @@ class Details extends React.Component {
             <div className="container">
                 <Header />
                 <SubBanner />
-                <div className="page details">
+                <article className="page details">
                     <h2 className="textC title">{getNoticeMessageData.noticeMessage.title}</h2>
                     <h5>{getNoticeMessageData.noticeMessage.content}</h5>
                     <p className="textR name">华赢宝</p>
                     <p className="textR">{Tools.isMoment(getNoticeMessageData.noticeMessage.createTime, 1)}</p>
-                </div>
+                </article>
                 <Footer />
                 <BackTop />
             </div>

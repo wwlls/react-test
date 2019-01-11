@@ -106,19 +106,17 @@ class Member extends React.Component {
 						</div>
 					  	<Layout>
 					  		<Menu menuList={this.state.menuList} path={location.pathname} mobile={this.state.mobile} wxAvatar={this.state.wxAvatar} />
-					  		<Layout>
-					  			<Content style={{margin: '0 0 0 30px'}}>
-			                        <Switch>
-			                            <Route exact path={'/member'} component={MyAsset} />
-			                            <Route exact path={'/member/assetList'} component={AssetList} />
-			                            <Route exact path={'/member/recharge'} component={Recharge} />
-			                            <Route exact path={'/member/cash'} component={Cash} />
-			                            <Route exact path={'/member/capital'} component={Capital} />
-			                            <Route exact path={'/member/set'} component={Set} />
-			                            <Route exact path={'/member/coupon'} component={Coupon} />
-			                        </Switch>
-		                        </Content>
-		                    </Layout>
+					  		<Content style={{margin: '0 0 0 30px'}}>
+		                        <Switch>
+		                            <Route exact path={'/member'} component={MyAsset} />
+		                            <Route exact path={'/member/assetList'} component={AssetList} />
+		                            <Route exact path={'/member/recharge'} component={Recharge} />
+		                            <Route exact path={'/member/cash'} component={Cash} />
+		                            <Route exact path={'/member/capital'} component={Capital} />
+		                            <Route exact path={'/member/set'} component={Set} />
+		                            <Route exact path={'/member/coupon'} component={Coupon} />
+		                        </Switch>
+	                        </Content>
 					  	</Layout>
 					</div>
 				</div>

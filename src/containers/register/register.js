@@ -8,6 +8,7 @@ import md5 from 'md5';
 import { checkMobile, getVerifyCode } from 'actions';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
+import Api from 'api/api';
 import Header from 'component/header/header';
 import Title from 'component/title/title';
 import Footer from 'component/footer/footer';
@@ -61,7 +62,7 @@ class RegisterForm extends React.Component {
             			Message.error(res.rtn_msg);
             		}
 	            }
-	            Utils.postRequest('register/normal', data, callFuc);
+	            Utils.postRequest(Api.register_normal, data, callFuc);
 	      	}
 	    });
 	}

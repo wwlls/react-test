@@ -8,6 +8,7 @@ import md5 from 'md5';
 import { checkMobile } from 'actions';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
+import Api from 'api/api';
 import Header from 'component/header/header';
 import Title from 'component/title/title';
 import Footer from 'component/footer/footer';
@@ -64,7 +65,7 @@ class LoginForm extends React.Component {
             			Message.error(res.rtn_msg);
             		}
 	            }
-	            Utils.postRequest('login/checkPasswd', data, callFuc);
+	            Utils.postRequest(Api.login_checkPasswd, data, callFuc);
 	      	}
 	    });
 	}

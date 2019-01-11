@@ -6,7 +6,7 @@ var config = require('./config');
 
 var app = express();
 
-app.use(compress());
+app.use(compress()); // compression([options])   根据给定的options 参数, 将所有请求的response进行压缩
 
 // 是否处于开发环境
 const isDevMode = (app.get('env') === 'development') ? true : false;

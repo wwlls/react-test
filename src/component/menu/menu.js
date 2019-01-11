@@ -12,6 +12,7 @@ export default class SiderCustom extends Component {
         super(props);
         this.state = { 
             userPic: userPic,
+            collapsed: false,
         };
     } 
 
@@ -56,7 +57,11 @@ export default class SiderCustom extends Component {
                         </Col>
                     </Row>
                 </div>
-                <Sider>
+                <Sider 
+                    breakpoint="lg" 
+                    collapsed={this.state.collapsed}
+                    onCollapse={this.onCollapse}
+                >
                     <Menu
                         onClick={this.menuClick}
                         style={{ width: 240 }}

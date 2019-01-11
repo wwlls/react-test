@@ -8,6 +8,7 @@ import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
+import Api from 'api/api';
 import Title from 'component/title/title';
 import Table from "component/table/table"; // tab子页面
 import Pagination from "component/pagination/pagination";
@@ -110,7 +111,7 @@ class Recharge extends React.Component {
                 Message.error(res.rtn_msg);
             }
         }
-        Utils.postRequest('recharge/getRechargeRecordList', data, callFuc);
+        Utils.postRequest(Api.recharge_getRechargeRecordList, data, callFuc);
     }
 
     //分页

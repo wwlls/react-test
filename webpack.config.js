@@ -95,7 +95,7 @@ module.exports = {
             template: 'index.html', //指定模板路径
             favicon: "./favicon.ico", // 自动把根目录下的favicon.ico图片加入html
             filename: 'index.html', //生成的html存放路径，相对于 output.path
-            inject: true // 是否将js放在body的末尾
+            inject: true, // 是否将js放在body的末尾
         }),
         // 热加载
         new webpack.HotModuleReplacementPlugin(), // Enable HMR
@@ -107,7 +107,8 @@ module.exports = {
         component: __dirname + '/src/component',
         actions: __dirname + '/src/actions',
         static: __dirname + '/src/static',
-        utils:__dirname+'/src/utils'
+        utils:__dirname+'/src/utils',
+        api:__dirname+'/src/api'
       },
     },
     externals:{

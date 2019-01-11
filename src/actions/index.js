@@ -1,5 +1,6 @@
 import Utils from '../utils';
 import { message } from "antd";
+import Api from 'api/api';
 import * as test from './actionType';
 
 export function setImg(src) {
@@ -36,7 +37,7 @@ export const checkMobile = (parmas) => async(dispatch, getState) => {
 				getReducer(res)
 			)
 		}
-		await Utils.postRequest(`login/checkMobile`, parmas, callFuc);
+		await Utils.postRequest(Api.login_checkMobile, parmas, callFuc);
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -53,7 +54,7 @@ export const getVerifyCode = (parmas) => async(dispatch, getState) => {
 				getCode(res)
 			)
 		}
-		await Utils.postRequest(`verifyCode/get`, parmas, callFuc);
+		await Utils.postRequest(Api.verifyCode_get, parmas, callFuc);
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -75,7 +76,7 @@ export const getInfoData = (parmas) => async(dispatch, getState) => {
 				Message.error(res.rtn_msg);
 			}
 		}
-		await Utils.postRequest(`customer/getInfo`, parmas, callFuc);
+		await Utils.postRequest(Api.customer_getInfo, parmas, callFuc);
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -97,7 +98,7 @@ export const accountGetInfoData = (parmas) => async(dispatch, getState) => {
 				Message.error(res.rtn_msg);
 			}
 		}
-		await Utils.postRequest(`account/getInfo`, parmas, callFuc);
+		await Utils.postRequest(Api.account_getInfo, parmas, callFuc);
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -119,7 +120,7 @@ export const getCount = (parmas) => async(dispatch, getstate) => {
 				Message.error(res.rtn_msg);
 			}
 		}
-		await Utils.postRequest(`asset/getCountTotal`, parmas, callFuc);
+		await Utils.postRequest(Api.asset_getCountTotal, parmas, callFuc);
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}
@@ -156,7 +157,7 @@ export const getProductList = (parmas) => async(dispatch, getstate) => {
 				Message.error(res.rtn_msg);
 			}
 		}
-		await Utils.postRequest(`product/getRegularListForOfficialSite`, parmas, callFuc);
+		await Utils.postRequest(Api.product_getRegularListForOfficialSite, parmas, callFuc);
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}
@@ -179,7 +180,7 @@ export const getNoticeMessageList = (parmas) => async(dispatch, getstate) => {
 				Message.error(res.rtn_msg);
 			}
 		}
-		await Utils.postRequest(`home/getNoticeMessageList`, parmas, callFuc);
+		await Utils.postRequest(Api.home_getNoticeMessageList, parmas, callFuc);
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}
@@ -202,7 +203,7 @@ export const getNoticeMessage = (parmas) => async(dispatch, getstate) => {
 				Message.error(res.rtn_msg);
 			}			
 		}
-		await Utils.postRequest(`home/getNoticeMessage`, parmas, callFuc);
+		await Utils.postRequest(Api.home_getNoticeMessage, parmas, callFuc);
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}

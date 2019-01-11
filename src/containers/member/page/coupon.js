@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Row, Col, Button, Tabs, Message } from 'antd';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
+import Api from 'api/api';
 import Title from 'component/title/title';
 import Pagination from "component/pagination/pagination";
 import IsUser from 'static/images/member/isUser.png';
@@ -66,7 +67,7 @@ class Coupon extends React.Component {
     			Message.error(res.rtn_msg);
     		}
         }
-        Utils.postRequest('coupon/getMyCouponList', data, callFuc);
+        Utils.postRequest(Api.coupon_getMyCouponList, data, callFuc);
 	}
 	//获取已使用数据
 	getMyCouponList2() {
@@ -85,7 +86,7 @@ class Coupon extends React.Component {
     			Message.error(res.rtn_msg);
     		}
         }
-        Utils.postRequest('coupon/getMyCouponList', data, callFuc);
+        Utils.postRequest(Api.coupon_getMyCouponList, data, callFuc);
 	}
 	//获取已过期数据
 	getMyCouponList3() {
@@ -104,7 +105,7 @@ class Coupon extends React.Component {
     			Message.error(res.rtn_msg);
     		}
         }
-        Utils.postRequest('coupon/getMyCouponList', data, callFuc);
+        Utils.postRequest(Api.coupon_getMyCouponList, data, callFuc);
 	}
 
 	//分页

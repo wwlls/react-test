@@ -10,6 +10,24 @@
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/store.js",
+      "!**/provider.jsx",
+      "!**/index.js",
+      "!**/webpack.config.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,19 +37,19 @@
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
+    "react": "^16.7.0",
     "react-countup": "^4.0.0-alpha.6",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.7.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-test-renderer": "^16.5.2",
-    "redux": "^4.0.0",
+    "redux": "^4.0.1",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "webpack": "^3.0.0",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^2.11.2"
+    "webpack": "^3.12.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^2.11.3"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.4",
@@ -77,5 +95,10 @@
     "svg-sprite-loader": "^3.8.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^1.0.1"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

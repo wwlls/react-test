@@ -12,7 +12,7 @@ import Dropdown from '../dropdown/dropdown';
 import imgLogo from "static/images/common/header/logo.png";
 import "./header.scss";
 
-export default class Header extends React.Component {
+class Header extends React.Component {
     //子组件路由无法跳转使用 Context
     static contextTypes = {
         router: PropTypes.object
@@ -25,25 +25,12 @@ export default class Header extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            open: 'none',
             top: 0,
             name: '',
             visible: false,
             contact: '确定要退出华赢宝吗？'
         };
-    }
-
-    //二级导航
-    handleMouseUserOver = (event) => {
-        this.setState({
-            open: 'block',
-        }) 
-    }
-    handleMouseOut = () => {
-        this.setState({
-            open: 'none',
-        })
-    }  
+    } 
 
     //退出登录
     handleLogout = () => {
@@ -148,36 +135,8 @@ export default class Header extends React.Component {
                                     <li><NavLink to="/home">首页</NavLink></li>
                                     <li><NavLink className={this.props.active} to="/lend">我要出借</NavLink></li>
                                     <li><NavLink to="/safe">稳健发展</NavLink></li>
-                                    <li onMouseOver={this.handleMouseUserOver} onMouseLeave={this.handleMouseOut} source='news'>
-                                        <NavLink to="/about">信息披露</NavLink>
-                                        <div className="selectNav" style={{display:this.state.open}}>
-                                            <ol>
-                                                <li>
-                                                    <Link to="/about?id=1">关于华赢宝</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/about?id=2">团队介绍</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/about?id=3">业务介绍</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/about?id=4">运营数据</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/about?id=5">媒体报道</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/about?id=6">公司动态</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/about?id=7">从业机构信息</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/about?id=8">相关法律法规披露</Link>
-                                                </li>
-                                            </ol>
-                                        </div>
+                                    <li>
+                                        <Dropdown name="open" />
                                     </li>
                                     <li><NavLink to="/member">我的账户</NavLink></li>
                                 </ul>
@@ -213,11 +172,4 @@ export default class Header extends React.Component {
 //     return bindActionCreators({ getInfoData }, dispatch);
 // }
 // export default connect(mapStateToProps , mapDispatchToProps)(Header)
-// <NavLink to={{
-        //     pathname: "/test",
-        //     search: "?a=123&b=abc",
-        //     state: { c: "456", d: "ABC" }
-        //   }}
-        // >
-        //   测试页面
-        // </NavLink>|
+ export default Header

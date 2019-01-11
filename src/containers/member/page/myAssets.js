@@ -7,6 +7,7 @@ import { accountGetInfoData } from 'actions';
 import { Row, Col, Button, Tabs, Message } from 'antd';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
+import Api from 'api/api';
 import Title from 'component/title/title';
 import Table from "component/table/table"; // tab子页面
 import Pagination from "component/pagination/pagination";
@@ -174,7 +175,7 @@ class MyAssets extends React.Component {
     			Message.error(res.rtn_msg);
     		}
         }
-        Utils.postRequest('asset/getRegularAssetList', data, callFuc);
+        Utils.postRequest(Api.asset_getRegularAssetList, data, callFuc);
 	}
 
 	//分页

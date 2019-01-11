@@ -14,6 +14,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server", //加上--host IP  可以用ip访问
+    "dev": "cross-env NODE_ENV=online node server.js --host 0.0.0.0",  //server.js启动服务
     "start": "webpack --progress --watch --hot",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors"
   },

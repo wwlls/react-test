@@ -8,6 +8,7 @@ import Pagination from '../../component/pagination/pagination';
 import Table from "component/table/table"; // tab子页面
 import Tabs from 'component/tabs/tabs';
 import BackTop from 'component/backTop/backTop';
+import Radio from 'component/radio/radio';
 import CountUp from 'react-countup';
 import Tools from 'utils/tools';
 import imgbanner1 from 'static/images/common/banner/banner1.jpg';
@@ -170,6 +171,7 @@ export default class Member extends React.Component {
                     columns={this.state.columns}
                 />
                 <Tabs panes={this.state.panes} id={this.state.id} callback={this.callback} />
+                <Radio />
                 <BackTop />
              </div>
         );

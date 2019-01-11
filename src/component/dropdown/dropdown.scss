@@ -16,3 +16,28 @@
 		background: none;
 	}
 }
+.selectNav {
+	background-color: #fff;
+	width: 125px;
+    border-radius: 7px;
+    top: -4px;
+    left: -22px;
+    box-shadow: 8px 8px 19px #888888;
+    & li {
+    	float: none;
+    	text-align: center;
+    	padding: 0;
+    	& a {
+    		font-size: 14px;
+			color: $smallColor;
+    		height: 40px;
+    		line-height: 40px;
+    		margin: 0;
+    		padding: 0;
+    		&:hover {
+    			color: $hoverColor;
+    			border-bottom: none;
+    		}
+    	}
+    }
+}

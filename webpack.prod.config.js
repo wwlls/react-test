@@ -119,7 +119,8 @@ module.exports = {
         component: __dirname + '/src/component',
         actions: __dirname + '/src/actions',
         static: __dirname + '/src/static',
-        utils:__dirname+'/src/utils'
+        utils:__dirname+'/src/utils',
+        api:__dirname+'/src/api'
       },
     },
     externals:{
