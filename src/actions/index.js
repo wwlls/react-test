@@ -32,12 +32,11 @@ const getReducer = (data) => ({
 
 export const checkMobile = (parmas) => async(dispatch, getState) => {
 	try {
-		let callFuc = function(res) {
+		await Utils.postRequest(Api.login_checkMobile, parmas).then((res) => {
 			dispatch(
 				getReducer(res)
 			)
-		}
-		await Utils.postRequest(Api.login_checkMobile, parmas, callFuc);
+		});
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -49,12 +48,15 @@ const getCode = (data) => ({
 })
 export const getVerifyCode = (parmas) => async(dispatch, getState) => {
 	try {
-		let callFuc = function(res) {
-			dispatch(
-				getCode(res)
-			)
-		}
-		await Utils.postRequest(Api.verifyCode_get, parmas, callFuc);
+		await Utils.postRequest(Api.verifyCode_get, parmas).then((res) => {
+			if(res.rtn_code === 0) {
+				dispatch(
+					getCode(res)
+				)
+			} else {
+				Message.error(res.rtn_msg);
+			}
+		});
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -67,7 +69,7 @@ const getInfo = (data) => ({
 })
 export const getInfoData = (parmas) => async(dispatch, getState) => {
 	try {
-		let callFuc = function(res) {
+		await Utils.postRequest(Api.customer_getInfo, parmas).then((res) => {
 			if(res.rtn_code === 0) {
 				dispatch(
 					getInfo(res)
@@ -75,8 +77,7 @@ export const getInfoData = (parmas) => async(dispatch, getState) => {
 			} else {
 				Message.error(res.rtn_msg);
 			}
-		}
-		await Utils.postRequest(Api.customer_getInfo, parmas, callFuc);
+		});
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -89,7 +90,7 @@ const accountGetInfo = (data) => ({
 })
 export const accountGetInfoData = (parmas) => async(dispatch, getState) => {
 	try {
-		let callFuc = function(res) {
+		await Utils.postRequest(Api.account_getInfo, parmas).then((res) => {
 			if(res.rtn_code === 0) {
 				dispatch(
 					accountGetInfo(res)
@@ -97,8 +98,7 @@ export const accountGetInfoData = (parmas) => async(dispatch, getState) => {
 			} else {
 				Message.error(res.rtn_msg);
 			}
-		}
-		await Utils.postRequest(Api.account_getInfo, parmas, callFuc);
+		});
     } catch (error) {
         message.error("网络错误，请重试");
     }
@@ -111,7 +111,7 @@ const countData = (data) => ({
 })
 export const getCount = (parmas) => async(dispatch, getstate) => {
 	try {
-		let callFuc = function(res) {
+		await Utils.postRequest(Api.asset_getCountTotal, parmas).then((res) => {
 			if(res.rtn_code === 0) {
 				dispatch(
 					countData(JSON.parse(res.body).countData)
@@ -119,8 +119,7 @@ export const getCount = (parmas) => async(dispatch, getstate) => {
 			} else {
 				Message.error(res.rtn_msg);
 			}
-		}
-		await Utils.postRequest(Api.asset_getCountTotal, parmas, callFuc);
+		});
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}
@@ -135,7 +134,7 @@ const productListData = (data1,data2,data3) => ({
 })
 export const getProductList = (parmas) => async(dispatch, getstate) => {
 	try {
-		let callFuc = function(res) {
+		await Utils.postRequest(Api.product_getRegularListForOfficialSite, parmas).then((res) => {
 			if(res.rtn_code === 0) {
 				let products = JSON.parse(res.body).products;
 				//爆款专区
@@ -152,12 +151,10 @@ export const getProductList = (parmas) => async(dispatch, getstate) => {
 				dispatch(
 					productListData(productsOne,productsTwo,productsThree)
 				)
-				
 			} else {
 				Message.error(res.rtn_msg);
 			}
-		}
-		await Utils.postRequest(Api.product_getRegularListForOfficialSite, parmas, callFuc);
+		});
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}
@@ -171,7 +168,7 @@ const noticeMessageList = (data) => ({
 
 export const getNoticeMessageList = (parmas) => async(dispatch, getstate) => {
 	try {
-		let callFuc = function(res) {
+		await Utils.postRequest(Api.home_getNoticeMessageList, parmas).then((res) => {
 			if(res.rtn_code === 0) {
 				dispatch(
 					noticeMessageList(JSON.parse(res.body))
@@ -179,8 +176,7 @@ export const getNoticeMessageList = (parmas) => async(dispatch, getstate) => {
 			} else {
 				Message.error(res.rtn_msg);
 			}
-		}
-		await Utils.postRequest(Api.home_getNoticeMessageList, parmas, callFuc);
+		});
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}
@@ -194,16 +190,15 @@ const noticeMessage = (data) => ({
 
 export const getNoticeMessage = (parmas) => async(dispatch, getstate) => {
 	try {
-		let callFuc = function(res) {
+		await Utils.postRequest(Api.home_getNoticeMessage, parmas).then((res) => {
 			if(res.rtn_code === 0) {
 				dispatch(
 					noticeMessage(JSON.parse(res.body))
 				)
 			} else {
 				Message.error(res.rtn_msg);
-			}			
-		}
-		await Utils.postRequest(Api.home_getNoticeMessage, parmas, callFuc);
+			}
+		});
 	} catch (error) {
 		message.error("网络错误，请重试");
 	}

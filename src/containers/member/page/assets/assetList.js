@@ -49,8 +49,7 @@ export default class AssetList extends React.Component {
         data.asset_id = assetId;
         data.current_page = this.state.currentPage;
         data.page_size = this.state.pageSize;
-        let callFuc = (res) => {
-            console.log(JSON.parse(res.body))
+        Utils.postRequest('asset/getCreditAssetList', data).then((res) => {
             if(res.rtn_code === 0) {
                 let creditAssets = JSON.parse(res.body).creditAssets;
                 let dataSource = [];
@@ -70,8 +69,7 @@ export default class AssetList extends React.Component {
             } else {
                 Message.error(res.rtn_msg);
             }
-        }
-        Utils.postRequest('asset/getCreditAssetList', data, callFuc);
+        })
     }
 
     //分页

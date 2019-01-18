@@ -56,8 +56,7 @@ class Coupon extends React.Component {
     	data.status = this.state.currentKey1;
     	data.current_page = this.state.currentPage;
     	data.page_size = this.state.pageSize;
-    	let callFuc = (res) => {
-    		console.log(JSON.parse(res.body))
+    	Utils.postRequest(Api.coupon_getMyCouponList, data).then((res) => {
     		if(res.rtn_code === 0) {
     			this.setState({
     				coupons1: JSON.parse(res.body).coupons,
@@ -66,8 +65,7 @@ class Coupon extends React.Component {
     		} else {
     			Message.error(res.rtn_msg);
     		}
-        }
-        Utils.postRequest(Api.coupon_getMyCouponList, data, callFuc);
+    	})
 	}
 	//获取已使用数据
 	getMyCouponList2() {
@@ -75,8 +73,7 @@ class Coupon extends React.Component {
     	data.status = this.state.currentKey2;
     	data.current_page = this.state.currentPage;
     	data.page_size = this.state.pageSize;
-    	let callFuc = (res) => {
-    		console.log(JSON.parse(res.body))
+    	Utils.postRequest(Api.coupon_getMyCouponList, data).then((res) => {
     		if(res.rtn_code === 0) {
     			this.setState({
     				coupons2: JSON.parse(res.body).coupons,
@@ -85,8 +82,7 @@ class Coupon extends React.Component {
     		} else {
     			Message.error(res.rtn_msg);
     		}
-        }
-        Utils.postRequest(Api.coupon_getMyCouponList, data, callFuc);
+    	})
 	}
 	//获取已过期数据
 	getMyCouponList3() {
@@ -94,8 +90,7 @@ class Coupon extends React.Component {
     	data.status = this.state.currentKey3;
     	data.current_page = this.state.currentPage;
     	data.page_size = this.state.pageSize;
-    	let callFuc = (res) => {
-    		console.log(JSON.parse(res.body))
+    	Utils.postRequest(Api.coupon_getMyCouponList, data).then((res) => {
     		if(res.rtn_code === 0) {
     			this.setState({
     				coupons3: JSON.parse(res.body).coupons,
@@ -104,8 +99,7 @@ class Coupon extends React.Component {
     		} else {
     			Message.error(res.rtn_msg);
     		}
-        }
-        Utils.postRequest(Api.coupon_getMyCouponList, data, callFuc);
+    	})
 	}
 
 	//分页

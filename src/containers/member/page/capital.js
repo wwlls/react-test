@@ -74,9 +74,16 @@ class Capital extends React.Component {
         data.end_date = this.state.end_date;
         data.current_page = this.state.currentPage;
         data.page_size = this.state.pageSize;
-        let callFuc = (res) => {
-            console.log(JSON.parse(res.body))
-            if(res.rtn_code === 0) {
+        //获取mock数据
+		// Utils.getRequest('Api.asset_getAccountDetailList', data).then((res) => {
+		// 	console.log(res)
+	 //      this.setState({
+	 //        imageUrl: res.resultList.length > 0 ? res.resultList[0].image_url : ''
+	 //      });
+	 //    });
+
+		Utils.postRequest(Api.asset_getAccountDetailList, data).then((res) => {
+			if(res.rtn_code === 0) {
                 let accountDetails = JSON.parse(res.body).accountDetails;
                 let dataSource = [];
                 for (var i = 0; i < accountDetails.length; i++) {
@@ -95,8 +102,7 @@ class Capital extends React.Component {
             } else {
                 Message.error(res.rtn_msg);
             }
-        }
-        Utils.postRequest(Api.asset_getAccountDetailList, data, callFuc);
+		})
     }
 
     //分页

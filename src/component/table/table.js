@@ -1,6 +1,6 @@
 //table组件
 import React from "react";
-import { Table, Divider, Tag } from 'antd';
+import { Table } from 'antd';
 import './table.scss';
 
 export default class List extends React.Component {
@@ -18,8 +18,9 @@ export default class List extends React.Component {
         const { tableData } = this.props;
         return (
             <Table 
-                columns={this.props.columns} 
+                columns={this.props.columns}
                 dataSource={tableData}  //表格数据渲染
+                locale={{emptyText: '暂无数据'}}   //默认文案设置，目前包括排序、过滤、空数据文案
                 pagination={false}
             />
         );

@@ -1,4 +1,6 @@
 const Api = {
+	//获取token
+	token_get: 'token/get',
 	//当前登录用户信息
 	customer_getInfo: 'customer/getInfo',
 

@@ -149,8 +149,8 @@ class MyAssets extends React.Component {
     	data.status = this.state.currentKey;
     	data.current_page = this.state.currentPage;
     	data.page_size = this.state.pageSize;
-    	let callFuc = (res) => {
-    		if(res.rtn_code === 0) {
+		Utils.postRequest(Api.asset_getRegularAssetList, data).then((res) => {
+			if(res.rtn_code === 0) {
     			let regularAssets = JSON.parse(res.body).regularAssets;
     			let dataSource = [];
     			for (var i = 0; i < regularAssets.length; i++) {
@@ -174,8 +174,7 @@ class MyAssets extends React.Component {
     		} else {
     			Message.error(res.rtn_msg);
     		}
-        }
-        Utils.postRequest(Api.asset_getRegularAssetList, data, callFuc);
+		})
 	}
 
 	//分页

@@ -51,8 +51,8 @@ class RegisterForm extends React.Component {
 	        	} else {
 					data.invite_code = '';
 	        	}
-	        	let callFuc = (res) => {
-            	console.log(res)
+	        	Utils.postRequest(Api.register_normal, data).then((res) => {
+	        		console.log(res)
             		if(res.rtn_code === 0) {
             			let customerMobile = JSON.parse(res.body).customer.mobile;
             			Utils.setStorage('customerMobile' , customerMobile);
@@ -61,8 +61,7 @@ class RegisterForm extends React.Component {
             		} else {
             			Message.error(res.rtn_msg);
             		}
-	            }
-	            Utils.postRequest(Api.register_normal, data, callFuc);
+	        	})
 	      	}
 	    });
 	}
@@ -87,11 +86,6 @@ class RegisterForm extends React.Component {
 	            		Message.error(verifyCodeData.rtn_msg);
 	            	}
 	            });
-	            // let callFuc = (res) => {
-	            // 	console.log(res)
-	            // 	
-	            // }
-	            // Utils.postRequest('verifyCode/get', data, callFuc);
             } else if(checkMobileData.rtn_code === 0) {
 				Message.info('您的账户已存在，请登录');
 			} else if(checkMobileData.rtn_code === 10018) {
@@ -219,7 +213,7 @@ class RegisterForm extends React.Component {
 								        	// trigger: 'onBlur',
 								        	//validateTrigger: 'onBlur'
 								        })(
-							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength="11" placeholder="请输入手机号" />
+							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength={11} placeholder="请输入手机号" />
 							         	 )}
 							        </FormItem>
 							        <FormItem
@@ -231,7 +225,7 @@ class RegisterForm extends React.Component {
 								              	{getFieldDecorator('code', {
 								                	rules: [{ required: true, message: '请输入验证码' }],
 								              	})(
-								                	<Input type="text" maxLength="6" placeholder="请输入验证码" />
+								                	<Input type="text" maxLength={6} placeholder="请输入验证码" />
 								              	)}
 								            </Col>
 							            	<Col span={6}>
@@ -254,7 +248,7 @@ class RegisterForm extends React.Component {
 							            	// trigger: 'onChange',
 							            	//validateTrigger: 'onBlur'
 							          	})(
-							            <Input type="password" name="password" minLength="6" maxLength="16" placeholder="请输入密码" />
+							            <Input type="password" name="password" minLength={6} maxLength={16} placeholder="请输入密码" />
 							          )}
 							        </FormItem>
 							        <FormItem 

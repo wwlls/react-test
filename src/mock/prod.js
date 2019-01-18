@@ -1446,29 +1446,7 @@ const prodData = {
       order_no: '4'
     }]
   },
-  MALLB001: {
-   error_no:'0',
-   resultList:[
-      {
-        branch_no:' ',
-       image_no:' ',
-       memo:'',
-       link_target:'_nojump',
-       status:'8',
-       main_img:' ',
-       subsys_no:'3',
-       link_url:' ',
-       topic_no:'0',
-       adv_location:'mall_index',
-       image_order:'1',
-       serial_no:'100010',
-       publish_datetime:'20180522',
-       image_url:'/uploadimg/MALL/adv/201806/1530170467560.jpg',
-       description:'1231312'
-      }],
-     error_info:'',
-     logger_error_path:'/xpe-products-mall-api/mall/api/CRH-MALLB001.json'
-    },
+ 
   MALLP081: { // 首页套餐查询
     resultList: [
       {

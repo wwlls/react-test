@@ -58,20 +58,20 @@ class Member extends React.Component {
 		this.threeSize(pathname);
 
 		//获取登录后用户信息
-		this.props.getInfoData().then(() => {
-            let { InfoData } = this.props;
-            if(InfoData.rtn_code === 0) {
-            	let customer = JSON.parse(InfoData.body).customer;
-                this.setState({
-                	name: customer.name,
-                    mobile: customer.mobile,
-                    idCard: customer.idCard,
-                    wxAvatar: customer.wxAvatar,
-                });
-                Utils.setStorage('customerName' , customer.name);
-                Utils.setStorage('customerIdCard' , customer.idCard);
-            }
-        });
+		// this.props.getInfoData().then(() => {
+  //           let { InfoData } = this.props;
+  //           if(InfoData.rtn_code === 0) {
+  //           	let customer = JSON.parse(InfoData.body).customer;
+  //               this.setState({
+  //               	name: customer.name,
+  //                   mobile: customer.mobile,
+  //                   idCard: customer.idCard,
+  //                   wxAvatar: customer.wxAvatar,
+  //               });
+  //               Utils.setStorage('customerName' , customer.name);
+  //               Utils.setStorage('customerIdCard' , customer.idCard);
+  //           }
+  //       });
 	}
 
 	componentWillReceiveProps(nextProps) {

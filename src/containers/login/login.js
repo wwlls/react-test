@@ -32,15 +32,12 @@ class LoginForm extends React.Component {
 	handleSubmit = (e) => {
 	    e.preventDefault();
 	    this.props.form.validateFields((err, values) => {
-	    	console.log(err)
 	      	if (!err) {
-	        	console.log('Received values of form: ', values);
 	        	let data = {};
 	        	data.mobile = values.mobile;
 	        	data.passwd = 'hyb_' + md5(values.password);
 	        	data.is_auto = false;
-	        	let callFuc = (res) => {
-            		console.log(res)
+	        	Utils.postRequest(Api.login_checkPasswd, data).then((res) => {
             		if(res.rtn_code === 0) {
             			let customerMobile = JSON.parse(res.body).customer.mobile;
             			Utils.setStorage('customerMobile' , customerMobile);
@@ -52,20 +49,10 @@ class LoginForm extends React.Component {
             				Message.success('登录成功');
             				this.props.history.push('/home');
             			}
-            		} else if(res.rtn_code === 1007){
-            			let error_num = JSON.parse(res.body).error_num;
-            			if(error_num === 1) {
-            				Message.error('登录密码不正确，请重新输入');
-            			} else if(error_num === 2) {
-            				Message.error('密码输入错误达到两次，一小时内您还有一次机会');
-            			} else {
-            				Message.error('账户已被锁定，建议您点击“忘记密码”进行密码重置');
-            			}
             		} else {
             			Message.error(res.rtn_msg);
             		}
-	            }
-	            Utils.postRequest(Api.login_checkPasswd, data, callFuc);
+	        	})
 	      	}
 	    });
 	}
@@ -88,8 +75,8 @@ class LoginForm extends React.Component {
             let data = {};
 			data.mobile = value;
 			this.props.checkMobile(data).then(() => {
+				console.log(data)
 				let { checkMobileData } = this.props;
-				console.log(checkMobileData)
 			   	if(checkMobileData.rtn_code === 0) {
 					Message.info('您的账户已存在，请登录');
 				} else if(checkMobileData.rtn_code === 10010 || checkMobileData.rtn_code === 10013) {
@@ -147,7 +134,7 @@ class LoginForm extends React.Component {
 								        	],
 								        	validateFirst: true,
 								        })(
-							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength="11" placeholder="请输入手机号" />
+							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength={11} placeholder="请输入手机号" />
 							         	 )}
 							        </FormItem>
 							        <FormItem 
@@ -165,7 +152,7 @@ class LoginForm extends React.Component {
 							            	// trigger: 'onChange',
 							            	//validateTrigger: 'onBlur'
 							          	})(
-							            <Input type="password" name="password" minLength="6" maxLength="16" placeholder="请输入密码" />
+							            <Input type="password" name="password" minLength={6} maxLength={16} placeholder="请输入密码" />
 							          )}
 							        </FormItem>
 							        <FormItem>
@@ -192,7 +179,6 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state)
     return {
     	checkMobileData: state.checkMobile,
     }

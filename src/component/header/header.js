@@ -41,7 +41,7 @@ class Header extends React.Component {
     //确定
     handleOk = (e) => {
         let data = {};
-        let callFuc = (res) => {
+        Utils.postRequest('logout', data).then((res) => {
             console.log(res)
             if(res.rtn_code === 0) {
                 Utils.removeSession();
@@ -51,8 +51,7 @@ class Header extends React.Component {
                 Message.success('退出成功');
                 this.context.router.history.push('/home');
             }
-        }
-        Utils.postRequest('logout', data, callFuc);
+        })
     }
     //取消
     handleCancel = (e) => {
@@ -70,7 +69,6 @@ class Header extends React.Component {
         }).then((res)=>{
             if(res.status == 'success'){
                 let data = res.results[0].weather_data[0];
-                console.log(data)
                 this.setState({
                     dayPictureUrl:data.dayPictureUrl,
                     weather:data.weather

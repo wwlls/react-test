@@ -47,21 +47,21 @@ class ForgetForm extends React.Component {
 	        	data.mobile = values.mobile;
 	        	data.verify_code = values.code;
 	        	data.new_passwd = 'hyb_' + md5(values.password);
-	        	let callFuc = (res) => {
-            	console.log(res)
+	        	Utils.postRequest(Api.login_updatePasswd, data).then((res) => {
+	        		console.log(res)
             		if(res.rtn_code === 0) {
             			this.props.history.push('/login');
             		} else {
             			Message.error(res.rtn_msg);
             		}
-	            }
-	            Utils.postRequest(Api.login_updatePasswd, data, callFuc);
+	        	})
 	      	}
 	    });
 	}
 
 	//获取验证码
 	habdelGetCode = () => {
+		alert(1)
 		let form = this.props.form;
         let value = form.getFieldValue('mobile');
         //点击验证码判断手机号
@@ -204,7 +204,7 @@ class ForgetForm extends React.Component {
 								        	// trigger: 'onBlur',
 								        	//validateTrigger: 'onBlur'
 								        })(
-							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength="11" placeholder="请输入手机号" />
+							            	<Input type="text" autoFocus="autoFocus" name="mobile" maxLength={11} placeholder="请输入手机号" />
 							         	 )}
 							        </FormItem>
 							        <FormItem
@@ -216,7 +216,7 @@ class ForgetForm extends React.Component {
 								              	{getFieldDecorator('code', {
 								                	rules: [{ required: true, message: '请输入验证码' }],
 								              	})(
-								                	<Input type="text" maxLength="6" placeholder="请输入验证码" />
+								                	<Input type="text" maxLength={6} placeholder="请输入验证码" />
 								              	)}
 								            </Col>
 							            	<Col span={6}>
@@ -239,7 +239,7 @@ class ForgetForm extends React.Component {
 							            	// trigger: 'onChange',
 							            	//validateTrigger: 'onBlur'
 							          	})(
-							            <Input type="password" name="password" minLength="6" maxLength="16" placeholder="请输入密码" />
+							            <Input type="password" name="password" minLength={6} maxLength={16} placeholder="请输入密码" />
 							          )}
 							        </FormItem>
 							        <FormItem>

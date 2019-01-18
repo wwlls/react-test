@@ -393,6 +393,7 @@ class Home extends React.Component {
 					<a className="android" target="_block" href="http://sj.qq.com/myapp/detail.htm?apkName=com.hyd.huayingbao"></a>
 					<a className="ios" target="_block" href="https://itunes.apple.com/cn/app/%E5%8D%8E%E8%B5%A2%E5%AE%9D-%E6%8A%95%E8%B5%84%E7%9F%AD%E6%9C%9F%E7%90%86%E8%B4%A2%E9%AB%98%E6%94%B6%E7%9B%8A%E8%B6%85%E7%A8%B3%E5%81%A5%E7%9A%84%E6%8E%8C%E4%B8%8A%E7%A5%9E%E5%99%A8/id1135660524?mt=8"></a>
 				</div>
+				
 				<Footer />
 				<BackTop />
 			</div>

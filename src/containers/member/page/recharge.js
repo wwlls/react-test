@@ -88,9 +88,8 @@ class Recharge extends React.Component {
         data.end_date = this.state.end_date;
         data.current_page = this.state.currentPage;
         data.page_size = this.state.pageSize;
-        let callFuc = (res) => {
-            console.log(JSON.parse(res.body))
-            if(res.rtn_code === 0) {
+		Utils.postRequest(Api.recharge_getRechargeRecordList, data).then((res) => {
+			if(res.rtn_code === 0) {
                 let rechargeRecords = JSON.parse(res.body).rechargeRecords;
                 let dataSource = [];
                 for (var i = 0; i < rechargeRecords.length; i++) {
@@ -110,8 +109,7 @@ class Recharge extends React.Component {
             } else {
                 Message.error(res.rtn_msg);
             }
-        }
-        Utils.postRequest(Api.recharge_getRechargeRecordList, data, callFuc);
+		})
     }
 
     //分页
