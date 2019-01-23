@@ -54,6 +54,7 @@ const Utils = {
             this.mockAdapter.onPost(action).reply(200, mockData[action]);
             return axios.post(action, { data });
         } else {
+            //Utils.removeStorage("ZZBSESSIONID"); return;
             let accessToken = Utils.getStorage("ZZBSESSIONID");
             if(action != 'token/get' && (accessToken == '' || accessToken == null || accessToken == undefined)) {
                 Utils.removeSession(); //清除本地数据
@@ -61,19 +62,11 @@ const Utils = {
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
                 Utils.postRequest(Api.token_get, tokenData).then((accessRes) => {
-                        let loading = document.getElementById('ajaxLoading');
-                        loading.style.display = 'none';
-                        let accessToken = JSON.parse(accessRes.body).access_token;
-                        Utils.setStorage("ZZBSESSIONID" , accessToken);
-                        Utils.postRequest(action, data = {}).then(() => {//获取到token后再次请求接口
-                            return new Promise((resolve,reject) => {
-                                axios.post(Config.api + action, data).then((res)=>{
-                                    resolve(res);
-                                })
-                            })
-                        })
-                    });
-                return;
+                    let loading = document.getElementById('ajaxLoading');
+                    loading.style.display = 'none';
+                    let accessToken = JSON.parse(accessRes.body).access_token;
+                    Utils.setStorage("ZZBSESSIONID" , accessToken);
+                });
             }
         }
         return new Promise((resolve,reject) => {
@@ -93,6 +86,7 @@ const Utils = {
                     Utils.postRequest(Api.token_get, tokenData).then((accessRes) => {
                         let accessToken = JSON.parse(accessRes.body).access_token;
                         Utils.setStorage("ZZBSESSIONID" , accessToken);
+
                         Utils.postRequest(action, data = {}).then(() => {//获取到token后再次请求接口
                             axios.post(Config.api + action, data).then((res)=>{
                                 resolve(res);
@@ -204,7 +198,9 @@ const Utils = {
         let key;
         let arr = [];
         for(key in params) {
-            arr.push(key);
+            if(key != 'sign') {
+                arr.push(key);
+            }
             // data = data + key + "=" + value;
         }
         arr.sort();
