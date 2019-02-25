@@ -13,7 +13,9 @@ const isDevMode = (app.get('env') === 'development') ? true : false;
 app.locals.isDevMode = isDevMode;
 
 
-app.use(express.static(__dirname + '/build', {maxAge: 3600 * 1000}));
+app.use(express.static(__dirname + '/build', {
+  maxAge: 3600 * 1000
+}));
 
 
 app.use('/api', proxy(config.api, {
@@ -23,11 +25,11 @@ app.use('/api', proxy(config.api, {
   }
 }));
 
-app.use('*', function (req, res){
+app.use('*', function(req, res) {
   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 })
 
-module.exports = app.listen(config.port, function (err) {
+module.exports = app.listen(config.port, function(err) {
   if (err) {
     console.log(err)
     return
