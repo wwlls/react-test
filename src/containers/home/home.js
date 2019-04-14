@@ -72,6 +72,7 @@ class Home extends React.Component {
 	render() {
 		//获取平台数据
 		const { getCountData } = this.props;
+		console.log(getCountData)
 		const { productListData } = this.props;
 		return (
 			<div className="container">
