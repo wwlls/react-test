@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0",
-    "start": "webpack --progress --watch --hot",
+    "start": "webpack --progress --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
     "test": "jest",
     "test:watch": "npm test -- --watch"
