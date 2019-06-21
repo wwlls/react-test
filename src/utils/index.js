@@ -4,7 +4,7 @@ import md5 from 'md5';
 import JsonP from 'jsonp';
 import Api from 'api/api';
 const Config = require('../../config');
-const mockData = require('../mock/mockData'); // 财富mock数据
+import mockData from '../mock/mockData';    //mock数据
 
 const Utils = {
     mockAdapter: Config.mock ? new MockAdapter(axios) : '',

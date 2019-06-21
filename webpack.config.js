@@ -1,9 +1,9 @@
 const path = require('path');
-var webpack = require('webpack');
-// var pxtorem = require('postcss-pxtorem'); //px自动生成rem
+const webpack = require('webpack');
+// const pxtorem = require('postcss-pxtorem'); //px自动生成rem
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
-var config = require('./config');
+const config = require('./config');
 const PORT = 8090;
 const svgDirs = [
   require.resolve('antd').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
@@ -11,7 +11,7 @@ const svgDirs = [
 ]
 
 module.exports = {
-    entry: ["babel-polyfill", "./src/app.js"], //相对路径 babel-polyfill转义es6兼容ie浏览器
+    entry: ["@babel/polyfill", "./src/app.js"], //相对路径 babel-polyfill转义es6兼容ie浏览器
     output: {
         path: path.resolve(__dirname, 'build'), //打包文件的输出路径
         filename: 'bundle.js',    //用于输出文件的文件名
@@ -28,9 +28,17 @@ module.exports = {
               loader: 'babel-loader',
               options: {
                 cacheDirectory: true,
-                presets: ['env', 'react', 'es2015', 'stage-0'],
-                plugins: [['import', { libraryName: 'antd', style: 'css' }], 'syntax-dynamic-import']
-                //plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }], 'syntax-dynamic-import']
+                presets: [
+                  '@babel/preset-react',
+                  '@babel/preset-env'
+                ],
+                plugins: [
+                  [
+                    'import', { libraryName: 'antd', style: 'css' }
+                  ], 
+                  '@babel/plugin-syntax-dynamic-import'
+                ]
+                //plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }], '@babel/plugin-syntax-dynamic-import']
               }
             }]
           },
@@ -66,7 +74,7 @@ module.exports = {
                       }
                     },
                     'sass-loader'
-                   ]
+                  ]
             },
             {
               // 文件解析
@@ -104,6 +112,7 @@ module.exports = {
     resolve: {
       extensions: [".js", ".jsx", ".less", ".css", ".scss"], //后缀名自动补全
       alias: {
+        config: __dirname + '/config.js',
         component: __dirname + '/src/component',
         actions: __dirname + '/src/actions',
         static: __dirname + '/src/static',

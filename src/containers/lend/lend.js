@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { getProductList } from 'actions';
 import { Icon, Row, Col, Button, Message } from 'antd';
 import Tools from 'utils/tools';
+import Config from 'config';
 import Header from 'component/header/header';
 import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
@@ -30,6 +31,7 @@ class Lend extends React.Component {
 	componentDidMount() {
 		//产品列表方法
 	 	this.props.getProductList();
+	 	document.title = Config.title + '|我的出借';
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {

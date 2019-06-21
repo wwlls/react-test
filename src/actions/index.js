@@ -112,7 +112,6 @@ const countData = (data) => ({
 export const getCount = (parmas) => async(dispatch, getstate) => {
 	try {
 		await Utils.postRequest(Api.asset_getCountTotal, parmas).then((res) => {
-			console.log('pingtai ' + res)
 			if(res.rtn_code === 0) {
 				dispatch(
 					countData(JSON.parse(res.body).countData)

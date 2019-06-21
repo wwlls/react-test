@@ -38,6 +38,7 @@ const tools = {
     */
     isMobile(str) {
         if (/^13\d{9}$/g.test(str) || (/^14[0-9]\d{8}$/g.test(str))
+            || (/^16[0-9]\d{8}$/g.test(str))
             || (/^15[0-9]\d{8}$/g.test(str))
             || (/^18[0-9]\d{8}$/g.test(str))
             || (/^19[0-9]\d{8}$/g.test(str))
@@ -105,6 +106,17 @@ const tools = {
     },
 
     /**
+     * 转换为int型数字
+     */
+    string2Int(va) {
+        if (isNaN(va)) {
+            return 0;
+        } else {
+            return parseInt(va);
+        }
+    },
+
+    /**
      * 金额格式化
      */
     isNumeral(money) {
@@ -135,6 +147,97 @@ const tools = {
     formatIdentity(number) {
         number += '';
         return number.replace(/(\d{4})\d*(\d{4})/g, '$1**********$2')
+    },
+
+    /**
+     * 获取
+     */
+    browser: {
+        isAndroid: function() {
+          return navigator.userAgent.match(/Android/i) ? true : false;
+        },
+        isMobileQQ : function(){
+          var ua = navigator.userAgent;
+          return /(iPad|iPhone|iPod).*? (IPad)?QQ\/([\d\.]+)/.test(ua) || /\bV1_AND_SQI?_([\d\.]+)(.*? QQ\/([\d\.]+))?/.test(ua);
+        },
+        isIphonex: function() {
+             return /iphone/gi.test(navigator.userAgent) && ((screen.height == 812 && screen.width == 375) || (screen.height == 896 && screen.width == 414));
+        },
+        isIOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        },
+        isWx : function() {
+          return navigator.userAgent.match(/micromessenger/i) ? true : false;
+        },
+        isApp: function() {
+              return navigator.userAgent.match(/hyd/i) ? true : false;
+        },
+        getDeviceData: function(key){
+            var deviceArr = navigator.userAgent.split(' ');
+            var deviceObj = {};
+            for (var i = 0; i < deviceArr.length; i++) {
+                deviceObj[deviceArr[i].split('/')[0]] = deviceArr[i].split('/')[1];
+            }
+            // 版本号是客户端自己定义的hyd
+            return deviceObj[key];
+        }
+    },
+
+    //调用app的方法，需要原生客户端提供url
+    linkAppFunc: function(url) {
+        var iFrame = document.createElement('iframe'),aLink = document.createElement("a"), body = document.body;
+        if (common.browser.isWx() && common.browser.isAndroid()) {
+              window.location.href = url;
+        } else if (common.browser.isIOS()) {
+            if (common.browser.isWx()) {
+              window.location.href = url;
+            } else {
+              aLink.href = url;
+              body.appendChild(aLink);
+              aLink.click();
+              body.removeChild(aLink);
+              aLink = null;
+            }
+        } else {
+            iFrame.setAttribute('src', url);
+            iFrame.setAttribute('style', 'display:none;');
+            iFrame.setAttribute('height', '0px');
+            iFrame.setAttribute('width', '0px');
+            iFrame.setAttribute('frameborder', '0');
+            body.appendChild(iFrame);
+            iFrame.parentNode.removeChild(iFrame);
+            iFrame = null;
+        }
+    },
+    // 调用进app某个页面的方法，如果失败的话需要跳转到相对应的下载页面
+    goAppOrHtml: function(appUrl, downUrl) {
+          common.linkAppFunc(appUrl);
+        if (!common.browser.isApp()) {
+             // 下面如果不是在app里面，就去下载页面；后期会在微信里打开，所以先提前加上这个方法
+            var start = Date.now();
+            setTimeout(() => {
+                var timeOutDateTime = new Date();
+                // 如果app启动，浏览器最小化进入后台或者跳出弹出框提示去app，则计时器存在推迟或者变慢的问题,就说明成功，否则的话就说明app没有启动，那么就跳转至下载页面
+                    if (timeOutDateTime - start < 500 + 20) {
+                        // 由于项目原因，情况特殊：20181218,原先是去下载页面，微信的话在下载页面会跳转应用宝；但是由于这次改名成“杭品生活”，应用宝流程走太久，所以这里就先不跳转到下载页面，提示用浏览器打开
+                        if (common.browser.isAndroid()) {
+                        // if (common.browser.isAndroid() && !common.browser.isWx()) {
+                            // 如果是安卓并且不是微信的话就去下载页面下载,否则其他情况都去应用宝
+                            location.href = downUrl || '/app/download';
+                        } else {
+                            location.href = downUrl || 'http://a.app.qq.com/o/simple.jsp?pkgname=net.huayingdai';
+                        }
+                    }
+            }, 500);
+        }
+    },
+    gotoPay: function(appUrl, htmlUrl) {
+        var versionApp = navigator.userAgent.split('hyd/')[1];
+        if (versionApp && versionApp.substring(0,5) >= '3.5.0') {
+          common.linkAppFunc(appUrl);
+        } else {
+            window.location.href = htmlUrl;
+        }
     },
 
     /**

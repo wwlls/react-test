@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Config from 'config';
 import Header from 'component/header/header';
 import SubBanner from 'component/subBanner/subBanner'
 import Anchor  from 'component/anchor/anchor'
@@ -37,6 +38,7 @@ class About extends React.Component {
 	}
 
 	componentDidMount() {
+		document.title = Config.title + '|信息披露';
 	}
 
 	componentWillReceiveProps(nextProps){

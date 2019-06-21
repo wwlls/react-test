@@ -22,5 +22,12 @@
 	接着 rimraf node_modules
 
 	```
+	更新package插件版本号
+	npm install npm-check-updates -g
+	访问项目文件执行
+	1. npm-check-updates
+	2. ncu -u
+
+	```
 	执行 npm test 可以运行一次测试
 	执行 npm run test:watch 可以让每当文件改变时自动执行测试。

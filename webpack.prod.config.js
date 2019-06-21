@@ -1,10 +1,10 @@
 const path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
 // var pxtorem = require('postcss-pxtorem'); //px自动生成rem
 const htmlWebpackPlugin = require('html-webpack-plugin');// 生成html
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 每次打包前清除旧的build文件夹
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // 代码压缩插件，webpack本身自带了，引入这个是为了配置参数
-var config = require('./config');
+const config = require('./config');
 const PORT = 8090;
 const svgDirs = [
   require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
@@ -12,7 +12,7 @@ const svgDirs = [
 ]
 
 module.exports = {
-    entry: ["babel-polyfill", "./src/app.js"], //相对路径 babel-polyfill转义es6兼容ie浏览器
+    entry: ["@babel/polyfill", "./src/app.js"], //相对路径 babel-polyfill转义es6兼容ie浏览器
     output: {
       path: path.resolve(__dirname, 'build'),
       // filename: 'boundle.js'
@@ -30,9 +30,17 @@ module.exports = {
               loader: 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-0',
               options: {
                 cacheDirectory: true,
-                presets: ['env', 'react', 'es2015', 'stage-0'],
-                plugins: [['import', { libraryName: 'antd', style: 'css' }], 'syntax-dynamic-import']
-                //plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }], 'syntax-dynamic-import']
+                presets: [
+                  '@babel/preset-react',
+                  '@babel/preset-env'
+                ],
+                plugins: [
+                  [
+                    'import', { libraryName: 'antd', style: 'css' }
+                  ], 
+                  '@babel/plugin-syntax-dynamic-import'
+                ]
+                //plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }], '@babel/plugin-syntax-dynamic-import']
               }
             }]
           },
@@ -87,7 +95,7 @@ module.exports = {
           ]
     },
     plugins: [
-      new CleanWebpackPlugin(["build"]), // 打包前删除上一次打包留下的旧代码
+      // new CleanWebpackPlugin(["build"]), // 打包前删除上一次打包留下的旧代码
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: {
@@ -116,6 +124,7 @@ module.exports = {
     resolve: {
       extensions: [".js", ".jsx", ".less", ".css", ".scss"], //后缀名自动补全
       alias: {
+        config: __dirname + '/config.js',
         component: __dirname + '/src/component',
         actions: __dirname + '/src/actions',
         static: __dirname + '/src/static',

@@ -7,10 +7,10 @@ import buy from './buy';
 import cfb from './cfb';
 import bankTransfer from './bank-transfer';
 
-const member = require('./member');
+import member from './member';
 
 const mockData = Object.assign(
   member
 );
 
-module.exports = mockData;
+export default mockData;

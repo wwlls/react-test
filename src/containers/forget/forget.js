@@ -9,6 +9,7 @@ import { checkMobile, getVerifyCode } from 'actions';
 import Utils from 'utils/index';
 import Tools from 'utils/tools';
 import Api from 'api/api';
+import Config from 'config';
 import Header from 'component/header/header';
 import Title from 'component/title/title';
 import Footer from 'component/footer/footer';
@@ -127,7 +128,8 @@ class ForgetForm extends React.Component {
 		let customerMobile = Utils.getStorage('customerMobile');
 		if(customerMobile !== '' && customerMobile !== null && customerMobile !== undefined) {
 			this.props.history.push('/home');
-		}
+		};
+		document.title = Config.title + '|忘记密码';
 	}
 
 	//验证手机号
