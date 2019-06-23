@@ -4,8 +4,8 @@ import MockAdapter from 'axios-mock-adapter';
 import md5 from 'md5';
 import JsonP from 'jsonp';
 import Api from 'api/api';
-import Config from '../../config';
-import mockData from '../mock/mockData'; // 财富mock数据
+const Config = require('../../config');
+import mockData from '../mock/mockData';    //mock数据
 
 const Utils = {
     mockAdapter: Config.mock ? new MockAdapter(axios) : '',
@@ -63,7 +63,6 @@ const Utils = {
                 tokenData['app_key'] = Config.app_key;
                 tokenData['device_id'] = Config.device_id;
                 Utils.postRequest(Api.token_get, tokenData).then((accessRes) => {
-                    console.log(accessRes)
                     let loading = document.getElementById('ajaxLoading');
                     loading.style.display = 'none';
                     let accessToken = JSON.parse(accessRes.body).access_token;
@@ -196,7 +195,6 @@ const Utils = {
     },
     //创建签名拼接
     createSign(params) {
-        console.log(params)
         let data = "";
         let key;
         let arr = [];
@@ -214,7 +212,6 @@ const Utils = {
             data = data + "&";
             data = data + key + "=" + encodeURIComponent(value);
         }
-        console.log(data)
         data = data + "&key=" + Config.md5_key;
         return md5(data);
     },

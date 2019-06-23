@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { is, fromJS } from 'immutable';
+import Tools from 'utils/tools';
 import PropTypes from 'prop-types';
 import { getCount, getProductList } from 'actions';
 import CountUp from 'react-countup';
@@ -62,6 +63,10 @@ class Home extends React.Component {
 		this.setState({
 			day: removeTime,
 		})
+
+		if (Tools.browser.isIphonex()) {
+			alert('iphonex')
+		}
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -267,7 +272,7 @@ class Home extends React.Component {
 							<div className="rankTop10">
 								<ul>
 									<li>
-										<Carousel autoplay vertical dots="flase">
+										<Carousel autoplay dots="flase">
 											{
 												getCountData.top10InvestUser !== '' && getCountData.top10InvestUser !== null && getCountData.top10InvestUser !== undefined ?
 													getCountData.top10InvestUser.map((item, index) => {
@@ -403,6 +408,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+	console.log(state.getCount)
   	return {
   		getCountData: state.getCount,
   		productListData: state.getProductList

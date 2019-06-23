@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Config from 'config';
 import Header from 'component/header/header';
 import SubBanner from 'component/subBanner/subBanner'
 import Footer from 'component/footer/footer';
@@ -27,6 +28,7 @@ class Safe extends React.Component {
 	}
 
 	componentDidMount() {
+		document.title = Config.title + '|稳健发展';
 	}
 
 	componentWillReceiveProps(nextProps){

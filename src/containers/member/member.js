@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 import { getInfoData } from 'actions';
 import Utils from 'utils/index';
 import { Layout, Message } from 'antd';
+import Config from 'config';
 import Header from 'component/header/header';
 import Menu from 'component/menu/menu';
 import Breadcrumb from 'component/breadcrumb/breadcrumb';
 import Footer from 'component/footer/footer';
 import BackTop from 'component/backTop/backTop';
 import "./member.scss";
-
 import MyAsset from './page/myAssets';
 import AssetList from './page/assets/assetList';
 import Recharge from './page/recharge';
@@ -72,6 +72,7 @@ class Member extends React.Component {
   //               Utils.setStorage('customerIdCard' , customer.idCard);
   //           }
   //       });
+  		document.title = Config.title + '|我的账号';
 	}
 
 	componentWillReceiveProps(nextProps) {

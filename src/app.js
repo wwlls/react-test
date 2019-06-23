@@ -11,7 +11,7 @@ import qs from 'qs';
 import RouterMap from './router';
 import reducers from './reducers/index';
 import Config from '../config';
-import './static/css/base.css'
+import './static/css/base.css';
 
 // mock是本地模拟环境，Dev是本地开发环境
 if (!Config.mock) {
