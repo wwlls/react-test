@@ -1,9 +1,9 @@
 const path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
 // var pxtorem = require('postcss-pxtorem'); //px自动生成rem
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
-var config = require('./config');
+const config = require('./config');
 const PORT = 8090;
 const svgDirs = [
     require.resolve('antd').replace(/warn\.js$/, ''), // 1. 属于 antd-mobile 内置 svg 文件

@@ -1,3 +1,4 @@
+'use strict';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import md5 from 'md5';

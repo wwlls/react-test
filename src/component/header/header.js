@@ -24,6 +24,8 @@ class Header extends React.Component {
     // }
     constructor(props, context) {
         super(props, context);
+        console.log(props)
+        console.log(context + '=====>222')
         this.state = {
             top: 0,
             name: '',

@@ -12,6 +12,7 @@ const config = {
 	device_id : 'd0ced7059fdb19f83c50d3b5fd831adf',
 	login_page : '/login'
 };
+
 module.exports = config;
 
 //如果访问地址与线上请求接口地址不同域，则需要判断测试环境接口url与线上环境接口url

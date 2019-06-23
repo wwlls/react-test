@@ -1,10 +1,10 @@
 const path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
 // var pxtorem = require('postcss-pxtorem'); //px自动生成rem
 const htmlWebpackPlugin = require('html-webpack-plugin'); // 生成html
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 每次打包前清除旧的build文件夹
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // 代码压缩插件，webpack本身自带了，引入这个是为了配置参数
-var config = require('./config');
+const config = require('./config');
 const PORT = 8090;
 const svgDirs = [
     require.resolve('antd-mobile').replace(/warn\.js$/, ''), // 1. 属于 antd-mobile 内置 svg 文件

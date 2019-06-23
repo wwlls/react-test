@@ -1,10 +1,10 @@
-var express = require('express');
-var proxy = require('express-http-proxy');
-var path = require('path');
-var compress = require('compression');
-var config = require('./config');
+const express = require('express');
+const proxy = require('express-http-proxy');
+const path = require('path');
+const compress = require('compression');
+const config = require('./config');
 
-var app = express();
+vconstar app = express();
 
 app.use(compress()); // compression([options])   根据给定的options 参数, 将所有请求的response进行压缩
 

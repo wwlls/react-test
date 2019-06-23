@@ -2,6 +2,7 @@ import Utils from '../utils';
 import { message } from "antd";
 import Api from 'api/api';
 import * as test from './actionType';
+console.log(test)
 
 export function setImg(src) {
   return {
