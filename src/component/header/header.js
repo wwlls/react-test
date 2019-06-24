@@ -2,6 +2,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Affix, Modal, Message, Button } from 'antd';
+import history from 'utils/history';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -25,7 +26,7 @@ class Header extends React.Component {
     constructor(props, context) {
         super(props, context);
         console.log(props)
-        console.log(context + '=====>222')
+        console.log(context)
         this.state = {
             top: 0,
             name: '',
@@ -51,7 +52,7 @@ class Header extends React.Component {
                     visible: false,
                 });
                 Message.success('退出成功');
-                this.context.router.history.push('/home');
+                history.push('/home');
             }
         })
     }
