@@ -40,6 +40,7 @@
     "antd-mobile": "^2.2.14",
     "axios": "^0.19.0",
     "axios-mock-adapter": "^1.16.0",
+    "http-proxy-middleware": "^0.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-countup": "^4.1.3",

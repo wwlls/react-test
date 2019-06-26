@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 // const pxtorem = require('postcss-pxtorem'); //px自动生成rem
+// const WebpackDevServer = require("webpack-dev-server");
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const config = require('./config');
@@ -129,14 +130,15 @@ module.exports = {
         contentBase:'./build/',  //从项目的根目录提供服务
         port: PORT,   
         proxy: {
-          "/api": {   //context =====  "/api"
+          "/api/": {   //context =====  "/api/"
             target: config.api,
+            // progress: true,
             changeOrigin: true,  //是否跨域
             secure: false,  // 如果是https接口，需要配置这个参数
-            //ws: true,    // 是否代理websockets
-            // "pathRewrite": { //这个是个正则匹配
-            //     "^/api": "/"
-            // }
+            // ws: true,    // 是否代理websockets
+            "pathRewrite": { //这个是个正则匹配
+                "^/api/": ""
+            }
           }
         },
     },

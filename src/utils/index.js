@@ -71,7 +71,7 @@ const Utils = {
             }
         }
         return new Promise((resolve,reject) => {
-            axios.post(Config.api + action, data).then((res)=>{
+            axios.post(Config.server_domain + action, data).then((res)=>{
                 let loading = document.getElementById('ajaxLoading');
                 loading.style.display = 'none';
                 if (res.rtn_code == 1009) {// 未登录
@@ -89,7 +89,7 @@ const Utils = {
                         Utils.setStorage("ZZBSESSIONID" , accessToken);
 
                         Utils.postRequest(action, data = {}).then(() => {//获取到token后再次请求接口
-                            axios.post(Config.api + action, data).then((res)=>{
+                            axios.post(Config.server_domain + action, data).then((res)=>{
                                 resolve(res);
                             })
                         })
