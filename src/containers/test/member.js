@@ -108,7 +108,7 @@ export default class Member extends React.Component {
     }
 
     //获取验证码
-    habdelGetCode = () => {
+    handelGetCode = () => {
         this.setTime();
     };
 
@@ -157,7 +157,7 @@ export default class Member extends React.Component {
                 <CountUp start={0} end={1000000} decimals={2} duration={4}></CountUp>
                 <Cascader />
                 <CarouselPage carouselList={this.state.carouselList} carousel="indexList" open="block" />
-                <CountDown habdelGetCode={this.habdelGetCode} stop={this.state.stop} text={this.state.text} count={this.state.count} disabled={this.state.disabled} getCode='getCode' />
+                <CountDown handelGetCode={this.handelGetCode} stop={this.state.stop} text={this.state.text} count={this.state.count} disabled={this.state.disabled} getCode='getCode' />
                 <VCode />
                 <Map />
                 <Pagination

@@ -6,6 +6,7 @@ import JsonP from 'jsonp';
 import Api from 'api/api';
 const Config = require('../../config');
 import mockData from '../mock/mockData';    //mock数据
+import history from 'utils/history';
 
 const Utils = {
     mockAdapter: Config.mock ? new MockAdapter(axios) : '',
@@ -76,8 +77,8 @@ const Utils = {
                 loading.style.display = 'none';
                 if (res.rtn_code == 1009) {// 未登录
                     Utils.removeSession(); //清除本地数据
-                    window.location.href = Config.login_page;
-                    return;
+                    history.push(Config.login_page);
+                    return false;
                 };
                 if(res.rtn_code == 1002) {// token未获取到
                     Utils.removeSession(); //清除本地数据
@@ -94,7 +95,7 @@ const Utils = {
                             })
                         })
                     });
-                    return;
+                    return false;
                 }
                 resolve(res);
                 //Promise报错

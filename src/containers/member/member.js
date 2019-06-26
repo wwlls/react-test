@@ -47,31 +47,12 @@ class Member extends React.Component {
 	}
 
 	componentDidMount() {
-		//是否登录
-		let customerMobile = Utils.getStorage('customerMobile');
-		if(customerMobile == '' || customerMobile == null || customerMobile == undefined) {
-			this.props.history.push('/login?redirectUri=member');
-			return;
-		}
 		//初始面包屑内容
 		let pathname = this.props.location.pathname;
 		this.threeSize(pathname);
 
 		//获取登录后用户信息
-		// this.props.getInfoData().then(() => {
-  //           let { InfoData } = this.props;
-  //           if(InfoData.rtn_code === 0) {
-  //           	let customer = JSON.parse(InfoData.body).customer;
-  //               this.setState({
-  //               	name: customer.name,
-  //                   mobile: customer.mobile,
-  //                   idCard: customer.idCard,
-  //                   wxAvatar: customer.wxAvatar,
-  //               });
-  //               Utils.setStorage('customerName' , customer.name);
-  //               Utils.setStorage('customerIdCard' , customer.idCard);
-  //           }
-  //       });
+		
   		document.title = Config.title + '|我的账号';
 	}
 

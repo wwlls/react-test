@@ -64,6 +64,16 @@ class Header extends React.Component {
         });
     }
 
+    // 是否登录
+    goLogin = (type, page) => {
+        if(type == '' || type == null || type == undefined) {
+            history.push(`/login?redirectUri=${page}`);
+            return false;
+        } else {
+            history.push(`/member`);
+        }
+    }
+
     componentDidMount() {
         //获取天气信息
         let city = '杭州';
@@ -111,7 +121,7 @@ class Header extends React.Component {
                             ? <div className="floatL">
                                 <Link to="/member">{Tools.formatPhone(customerMobile)}</Link>
                                 <i>/</i>
-                                <a href="javascript:;" onClick={this.handleLogout}>退出</a>
+                                <a href="javascript:;" onClick={() => this.handleLogout()}>退出</a>
                               </div>
                             : <div className="floatL">
                                 <Link to="/register">注册</Link>
@@ -139,7 +149,7 @@ class Header extends React.Component {
                                     <li>
                                         <Dropdown name="open" />
                                     </li>
-                                    <li><NavLink to="/member">我的账户</NavLink></li>
+                                    <li onClick={() => this.goLogin(customerMobile, 'member')}><a href="javascript:;">我的账户</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -152,7 +162,7 @@ class Header extends React.Component {
                   visible={this.state.visible}
                   onCancel={this.handleCancel}
                   footer={[
-                    <Button key="submit" type="primary" onClick={this.handleOk}>确认</Button>
+                    <Button key="submit" type="primary" onClick={() => this.handleOk()}>确认</Button>
                   ]}
                 >
                   <p>{this.state.contact}</p>

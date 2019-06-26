@@ -9,7 +9,7 @@ export default class cascader extends React.Component {
         super(props);
         this.state = {
             addressOptions: CascaderData,
-            defaultValue: ['广东省', '深圳市', '南山区']
+            defaultValue: []
         };
     }
 
@@ -30,7 +30,7 @@ export default class cascader extends React.Component {
         return (
             <div className="cascader">
                	<Cascader options={this.state.addressOptions} placeholder="请选择省市区" value={this.state.defaultValue} onChange={this.onChange} />
-               	<Button onClick={this.handleCascader}>选择</Button>
+               	<Button onClick={() => this.handleCascader()}>选择</Button>
             </div>
         );
     }

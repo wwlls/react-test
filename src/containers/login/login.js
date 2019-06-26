@@ -40,14 +40,13 @@ class LoginForm extends React.Component {
 	        	data.is_auto = false;
 	        	Utils.postRequest(Api.login_checkPasswd, data).then((res) => {
             		if(res.rtn_code === 0) {
+            			Message.success('登录成功');
             			let customerMobile = JSON.parse(res.body).customer.mobile;
             			Utils.setStorage('customerMobile' , customerMobile);
             			let redirectUri = this.props.location.search.split('?redirectUri=')[1];
             			if(redirectUri !== undefined && redirectUri !== '') {
-            				Message.success('登录成功');
             				this.props.history.push('/' + redirectUri);
             			} else {
-            				Message.success('登录成功');
             				this.props.history.push('/home');
             			}
             		} else {
